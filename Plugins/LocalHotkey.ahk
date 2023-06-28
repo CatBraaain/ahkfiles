@@ -6,6 +6,11 @@
 		reload
 		return
 
+	^LButton::
+		Send {LCtrl Up}
+		Send {LButton}
+		return
+
 ;Explorer
 #If WinActive("ahk_class CabinetWClass")
 	; WheelLeft:: Send !{Up}
