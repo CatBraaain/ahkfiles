@@ -14,15 +14,15 @@ UpdateClipArray(Type) {
 }
 
 ^+v::HistoryPaste()
-^1::HistoryPaste()
-^2::HistoryPaste()
-^3::HistoryPaste()
-^4::HistoryPaste()
-^5::HistoryPaste()
-^6::HistoryPaste()
-^7::HistoryPaste()
-^8::HistoryPaste()
-^9::HistoryPaste()
+; ^1::HistoryPaste()
+; ^2::HistoryPaste()
+; ^3::HistoryPaste()
+; ^4::HistoryPaste()
+; ^5::HistoryPaste()
+; ^6::HistoryPaste()
+; ^7::HistoryPaste()
+; ^8::HistoryPaste()
+; ^9::HistoryPaste()
 
 HistoryPaste(){
 	global PasteCnt, ClipArray
