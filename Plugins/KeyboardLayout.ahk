@@ -26,8 +26,8 @@
 +0:: Send {)}
 +q:: Send {BS}
 +w:: Send {Home}
-+e:: Send {Up}
-+r:: Send {End}
+<+e:: Send {Up}
+<+r:: Send {End}
 +t:: Send {{}
 +y:: Send {}}
 +u:: Send {[}
@@ -37,9 +37,10 @@
 +[:: Send {_}
 +]:: Send {BS}
 +a:: Send {Enter}
-+s:: Send {Left}
-+d:: Send {Down}
-+f:: Send {Right}
+<+s:: Send {Left}
+<+d:: Send {Down}
+<+f:: Send {Right}
+<+>+f:: Send +{Right}
 +g:: Send ^{Left}+^{Right}
 +h:: Send {+}
 +j:: Send {(}
