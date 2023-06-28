@@ -14,7 +14,12 @@ WheelLeft:: +^Tab
 
 !sc03a::tenkeytoggle:=!tenkeytoggle
 sc03a::Send {vkF3} ;CapsLock全角半角
-~LAlt::Send {vk1D} ;無変換
+LAlt::
+    if GetKeyState("LAlt","P"){
+        Send {vk1D} ;無変換
+    }
+    Send {LAlt Down}
+    return
 LAlt Up::Send {LAlt Up}
 ~RAlt::Send {vkE8} ;無意味
 
