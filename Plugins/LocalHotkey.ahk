@@ -112,7 +112,8 @@
 
 	^s::
 		Clipboard = ;
-		Send ^c^t
+		Send ^c
+		Send ^t
 		ClipWait
 		Send ^v{Enter}
 		return
