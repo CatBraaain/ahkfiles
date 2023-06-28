@@ -1,4 +1,5 @@
 ﻿#UseHook
+#If (!WinActive(games) OR WinActive(" - Google Chrome")) AND !WinActive(chromeGames)
 1:: Send {Numpad1}
 2:: Send {Numpad2}
 3:: Send {Numpad3}

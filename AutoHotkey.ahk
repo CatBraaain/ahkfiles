@@ -26,7 +26,8 @@ StartClipboardHistory()
 UpdatePluginList()
 
 tenkeytoggle:= false
-games := "diep.io - Google Chrome|Robocraft|Minecraft|HalfDead2|STUG|Krunker|Counter-Strike|CrowFPS|MilkChoco|PortalWars|Monster Hunter|Unrailed!"
+games := "PAYDAY 2|Warlander|Battlefield|Robocraft|Minecraft|HalfDead2|Counter-Strike|CrowFPS|MilkChoco|PortalWars|Monster Hunter|Unrailed!"
+chromeGames := "arras.io - Google Chrome|diep.io - Google Chrome|STUG - MultiPlayer Tank Battle - Google Chrome|Krunker - Google Chrome"
 
 Exit ;Exit Auto-Execute
 
