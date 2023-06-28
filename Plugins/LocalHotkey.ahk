@@ -19,6 +19,13 @@
 ;Excel
 ; #If WinActive("- Excel ahk_exe EXCEL.EXE")
 #If WinActive("- Excel")
+	~LAlt::
+		if GetKeyState("LAlt","P"){
+			Send {vk1D} ;無変換
+		}
+		; Send {LAlt Down}
+		return
+	LAlt Up::Send {LAlt Up}
 	+WheelUp::
 		SetScrollLockState, On
 		SendInput {Left}
@@ -29,11 +36,18 @@
 		SendInput {Right}
 		SetScrollLockState, Off
 		return
+	^a::Send {End}+{Home}
+
+	~F2::return
+	~!1::return
+	~!2::return
 	~^d::return
 	~^q::return
+	~^q UP::return
+	~^+q::return
+	~^+q UP::return
 	~^e::return
-	~^+z::return
-	; ~LAlt::return
+	~^y::return
 	~^;::return
 	LAlt::
 		Send {vk1D}
