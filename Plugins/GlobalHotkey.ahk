@@ -12,8 +12,10 @@ XButton2 Up::Send {LButton}{LCtrl Up}
 WheelRight:: ^Tab
 WheelLeft:: +^Tab
 
-!sc03a::tenkeytoggle:=!tenkeytoggle
-sc03a::Send {vkF3} ;CapsLock全角半角
+; !sc03a::tenkeytoggle:=!tenkeytoggle
+!CapsLock::tenkeytoggle:=!tenkeytoggle
+; sc03a::Send {vkF3} ;CapsLock全角半角
+CapsLock::Send {vkF3} ;CapsLock全角半角
 LAlt::
     if GetKeyState("LAlt","P"){
         Send {vk1D} ;無変換
