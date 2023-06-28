@@ -70,4 +70,3 @@ LAlt Up::Send {LAlt Up}
 :co:Ahk::{F13}AutoHotkey
 :co:Lg::{F13}Logger.log(
 #InputLevel 0
-

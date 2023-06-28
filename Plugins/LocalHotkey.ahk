@@ -435,7 +435,6 @@
 
 #If WinActive("Minecraft")
 	~Tab Up::Send {Esc}
-
 #If WinActive("Robocraft")
 	!WheelDown::
 		flag:=1
