@@ -60,12 +60,13 @@
 		return
 
 ;OS
-#If WinActive("ahk_class Shell_TrayWnd")
+#If WinActive("ahk_class Shell_TrayWnd") OR WinActive("ahk_exe GoogleDriveFS.exe") OR WinActive("新しい通知 ahk_class Windows.UI.Core.CoreWindow")
 	^t::
 	^l::
 		; WinActivate ahk_exe chrome.exe
 		; WinWaitActive ahk_exe chrome.exe
 		Send {Alt Down}{Tab}{Alt Up}
+		Sleep 1
 		Send %A_ThisHotkey%
 		Send {F13}
 		return
@@ -73,6 +74,7 @@
 		; WinActivate ahk_exe chrome.exe
 		; WinWaitActive ahk_exe chrome.exe
 		Send {Alt Down}{Tab}{Alt Up}
+		Sleep 1
 		Send ^l
 		Send {F13}
 		return
