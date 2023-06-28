@@ -5,11 +5,11 @@
 SendMode Input
 
 GoSub MonitorOff
-SetTimer, MonitorOff, 10000
+SetTimer, MonitorOff, 250
 
 RAlt & l::
 	GoSub MonitorOff
-	SetTimer, MonitorOff, 10000
+	SetTimer, MonitorOff, 250
 	return
 RAlt & u::
 	SetTimer, MonitorOff, Off
