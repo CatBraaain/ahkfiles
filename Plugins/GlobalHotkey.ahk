@@ -52,6 +52,7 @@ LAlt Up::Send {LAlt Up}
 ~^w::CloseSaveDialog()
 ^+w::Send !{F4} ;Ctrl+Shift+W→Alt+F4
 ^e::DuplicateRow()
+^+a::Send ^{Left}+^{Right}
 ^d::DeleteRow()
 ^y::return
 ^+z::Send ^y ;Ctrl Shift Z => Ctrl Y
