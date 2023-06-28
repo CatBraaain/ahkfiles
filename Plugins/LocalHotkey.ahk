@@ -292,6 +292,44 @@
 		; ~45:22
 	}
 
+#If WinActive("arras.io - Google Chrome")
+	^s::return
+	q::e
+
+	LAlt & q::!q
+	LAlt & w::!w
+	LAlt & e::!e
+	LAlt & a::!a
+	LAlt & s::!s
+	LAlt & d::!d
+
+	F11::
+		; SendJs("document.body.setAttribute('style','cursor: crosshair;');document.getElementById('canvas').setAttribute('style','cursor: crosshair;')")
+		SendEvent !+{Down}
+		Sleep 100
+		SendEvent {F11}
+		return
+	Esc::
+		SendEvent {F11}
+		SendEvent #{Up}
+		return
+
+	~LAlt::
+		SendEvent {m Up}
+		ToolTip("F1::3309999000`nF2::0069999000`nF3::0099996000`nF4::0009999600")
+		Keywait LAlt
+		ToolTip
+		return
+
+	SetKeyDelay 20
+	<!F1::SendEvent {1 3}{2 3}{4 9}{5 9}{6 9}{7 9} 	;3309999000
+	<!F2::SendEvent {3 6}{4 9}{5 9}{6 9}{7 9} 		;0069999000
+	<!F3::SendEvent {3 9}{4 9}{5 9}{6 9}{7 6} 		;0099996000
+	<!F4::SendEvent {4 9}{5 9}{6 9}{7 9}{8 6} 		;0009999600
+	<!F5::SendEvent {3 4}{4 8}{5 8}{6 8}{7 9}{8 5} 	;0048889500
+
+	;total 42 upgrade point
+
 #If WinActive("sudoku puzzles.* - Google Chrome")
 	RButton::ClickImage("*0 Materials\SudokuPencil.bmp")
 	RButton Up::ClickImage("*0 Materials\SudokuPencil.bmp")
