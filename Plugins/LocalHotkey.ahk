@@ -8,8 +8,8 @@
 
 ;Explorer
 #If WinActive("ahk_class CabinetWClass")
-	WheelLeft:: Send !{Up}
-	WheelRight:: Send !{Left}
+	; WheelLeft:: Send !{Up}
+	; WheelRight:: Send !{Left}
 
 ;Excel
 #If WinActive("Excel ahk_exe EXCEL.EXE")
