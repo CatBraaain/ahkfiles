@@ -17,7 +17,8 @@
 	; WheelRight:: Send !{Left}
 
 ;Excel
-#If WinActive("Excel ahk_exe EXCEL.EXE")
+; #If WinActive("- Excel ahk_exe EXCEL.EXE")
+#If WinActive("- Excel")
 	+WheelUp::
 		SetScrollLockState, On
 		SendInput {Left}
