@@ -423,8 +423,16 @@
 	~^d:: return
 	~^y:: return
 	~^+z:: return
+	~F1::return
+	~F2::return
+	~F3::return
+	~F4::return
+	~F5::return
+	~F6::return
+	~LAlt::return
+	; LAlt & w::Send {w Down}{LButton Down}
+	return
 
-	LAlt & w::Send {w Down}{LButton Down}
 #If WinActive("Minecraft")
 	~Tab Up::Send {Esc}
 
