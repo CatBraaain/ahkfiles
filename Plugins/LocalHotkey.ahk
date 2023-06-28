@@ -24,7 +24,6 @@
 		SendInput {Left}
 		SetScrollLockState, Off
 		return
-
 	+WheelDown::
 		SetScrollLockState, On
 		SendInput {Right}
@@ -187,7 +186,6 @@
 		return
 	^Right::Send +n
 	^Left::Send +p
-
 #If WinActive("diep.io - Google Chrome")
 	^s::return
 	q::e
@@ -280,7 +278,6 @@
 #If WinActive("sudoku puzzles.* - Google Chrome")
 	RButton::ClickImage("*0 Materials\SudokuPencil.bmp")
 	RButton Up::ClickImage("*0 Materials\SudokuPencil.bmp")
-
 #If WinActive("JigsawPuzzles.io - Google Chrome")
 	a::Left
 	w::Up
@@ -319,7 +316,6 @@
 #If WinActive(" – GIMP")
 	^Tab::Send {.}
 	^+Tab::Send {,}
-
 #If WinActive(games)
 	~1:: return
 	~2:: return
@@ -399,14 +395,12 @@
 		}
 		return
 	!WheelUp::flag:=0
-
 #If WinActive("Unrailed!")
 	~F1::return
 	~F2::return
 	~F3::return
 	F4::return
 	~^Space::return
-
 #If WinActive("Hexanaut.io")
 	Space::Click(1300,700)
 #If
