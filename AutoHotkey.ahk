@@ -19,6 +19,7 @@ SetWorkingDir %A_ScriptDir%
 SetTitleMatchMode, RegEx
 SetNumLockState AlwaysOn
 SetCapsLockState AlwaysOff
+SetDefaultMouseSpeed 0
 
 SetMenuTray()
 PrepareForClickCoordHotkey()
