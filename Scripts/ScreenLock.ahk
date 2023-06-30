@@ -4,16 +4,28 @@
 #NoTrayIcon
 SendMode Input
 
+GoSub FocusAssistOn
 GoSub MonitorOff
 SetTimer, MonitorOff, 250
+BlockInput MouseMove
 
-RAlt & l::
+>!l::
+	GoSub FocusAssistOn
 	GoSub MonitorOff
 	SetTimer, MonitorOff, 250
+	BlockInput MouseMove
 	return
-RAlt & u::
+
+>!u::
++>!l::
 	SetTimer, MonitorOff, Off
-	GoSub MonitorOn
+	; GoSub MonitorOn
+	Keywait Alt
+	Keywait Shift
+	Keywait L
+	Keywait U
+	GoSub FocusAssistOff
+	BlockInput MouseMoveOff
 	return
 
 MonitorOff:
@@ -24,3 +36,20 @@ MonitorOn:
 	SendMessage,0x112,0xF170,-1,,Program Manager
 	return
 
+FocusAssistOn:
+	If(!WinActive("アクション センター")){
+		Send #a
+	}
+    WinWaitActive, アクション センター,, 2
+    Send +{Tab}{Left 3}{Up 3}{Right 3}{Down 2}{Space}{Esc}
+	return
+
+FocusAssistOff:
+	If(!WinActive("アクション センター")){
+		Send #a
+	}
+    WinWaitActive, アクション センター,, 2
+    Send +{Tab}{Left 3}{Up 3}{Right 3}{Down 2}{Space 2}{Esc}
+	return
+
+^+Delete::ExitApp
