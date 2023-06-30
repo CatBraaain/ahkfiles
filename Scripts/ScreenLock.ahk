@@ -7,25 +7,22 @@ SendMode Input
 GoSub FocusAssistOn
 GoSub MonitorOff
 SetTimer, MonitorOff, 250
-BlockInput MouseMove
 
 >!l::
 	GoSub FocusAssistOn
 	GoSub MonitorOff
 	SetTimer, MonitorOff, 250
-	BlockInput MouseMove
 	return
 
 >!u::
 +>!l::
 	SetTimer, MonitorOff, Off
-	; GoSub MonitorOn
+	GoSub MonitorOn
 	Keywait Alt
 	Keywait Shift
 	Keywait L
 	Keywait U
 	GoSub FocusAssistOff
-	BlockInput MouseMoveOff
 	return
 
 MonitorOff:
