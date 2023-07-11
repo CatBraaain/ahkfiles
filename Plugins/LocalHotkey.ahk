@@ -137,7 +137,12 @@
 		}
 		return
 
-	!RButton::ClickLoopFlag := 0
+	!RButton::
+		ClickLoopFlag := 0
+		ToolTip("!RButton")
+		KeyWait Alt
+		ToolTip
+		return
 
 	; WheelLeft
 	; WheelLeft:: +^Tab
