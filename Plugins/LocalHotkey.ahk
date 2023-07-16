@@ -88,6 +88,7 @@
 ;Chrome
 #If WinActive("(Google スプレッドシート|Apps Script) - Google Chrome")
 	~^s::return
+	^q::^/
 	!Tab::
 		Send {Esc}
 		Send !{Tab}
@@ -124,6 +125,8 @@
 		Send chrome://settings/searchEngines
 		Send {Enter}
 		return
+
+	^+w::return
 
 	F7::return ;カーソルブラウジング無効化
 
