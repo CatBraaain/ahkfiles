@@ -68,8 +68,8 @@ LAlt Up::Send {LAlt Up}
 !p::Pause
 !a::BthDvc("AirPods Pro",1)
 !+a::BthDvc("AirPods Pro",0)
-!s::SendTo("#s","ahk_class Shell_TrayWnd")
-!+s::Run ms-settings:
+; !s::SendTo("#s","ahk_class Shell_TrayWnd")
+; !+s::Run ms-settings:
 !d::Send #d ;desktop
 !g::ShowApp("Materials\GIMP.lnk", "GIMP (GNU Image Manipulation Program)")
 !k::KeyHistory
@@ -82,12 +82,13 @@ LAlt Up::Send {LAlt Up}
 !Esc::MsgWinTitle()
 !Delete::Suspend
 
-^q::^/
+; ^q::^/
 ~^w::CloseSaveDialog()
 ^+w::Send !{F4} ;Ctrl+Shift+W→Alt+F4
-^e::DuplicateRow()
+; ^e::DuplicateRow()
 ^+a::Send ^{Left}+^{Right}
-^d::DeleteRow()
+^+d::DeleteRow()
+^d::DuplicateRow()
 ^y::return
 ^+z::Send ^y ;Ctrl Shift Z => Ctrl Y
 ^Space::Send {Enter} ;Ctrl+Space→Enter
