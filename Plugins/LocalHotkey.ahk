@@ -42,6 +42,7 @@
 	~!1::return
 	~!2::return
 	~^d::return
+	~^+d::return
 	~^q::return
 	~^q UP::return
 	~^+q::return
