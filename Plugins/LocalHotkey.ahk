@@ -50,15 +50,6 @@
 	~^e::return
 	~^y::return
 	~^;::return
-	LAlt::
-		Send {vk1D}
-		Send {LAlt Down}
-		KeyWait, LAlt
-		return
-
-	LAlt Up::
-		Send {LAlt Up}
-		return
 
 ;OS
 #If WinActive("ahk_class Shell_TrayWnd") OR WinActive("ahk_exe GoogleDriveFS.exe") OR WinActive("新しい通知 ahk_class Windows.UI.Core.CoreWindow")
