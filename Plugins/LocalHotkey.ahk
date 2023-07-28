@@ -51,6 +51,10 @@
 	~^y::return
 	~^;::return
 
+;VBA
+#If WinActive("ahk_class wndclass_desked_gsk")
+	^+z::return
+
 ;OS
 #If WinActive("ahk_class Shell_TrayWnd") OR WinActive("ahk_exe GoogleDriveFS.exe") OR WinActive("新しい通知 ahk_class Windows.UI.Core.CoreWindow")
 	^t::
