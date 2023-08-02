@@ -11,6 +11,11 @@
 		Send {LButton}
 		return
 
+;VSCode
+#If WinActive(" - Visual Studio Code")
+	^WheelLeft:: Send !{Left}
+	^WheelRight:: Send !{Right}
+
 ;Explorer
 #If WinActive("ahk_class CabinetWClass")
 	; WheelLeft:: Send !{Up}
