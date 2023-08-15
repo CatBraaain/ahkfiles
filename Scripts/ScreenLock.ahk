@@ -5,6 +5,7 @@
 SendMode Input
 
 GoSub FocusAssistOn
+Sleep 3000
 GoSub MonitorOff
 SetTimer, MonitorOff, 250
 
