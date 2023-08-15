@@ -15,6 +15,7 @@
 #If WinActive(" - Visual Studio Code")
 	^WheelLeft:: Send !{Left}
 	^WheelRight:: Send !{Right}
+	~^g::Send {F13}
 
 ;Explorer
 #If WinActive("ahk_class CabinetWClass")
