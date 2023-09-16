@@ -4,13 +4,13 @@
 #NoTrayIcon
 SendMode Input
 
-GoSub FocusAssistOn
+; GoSub FocusAssistOn
 Sleep 3000
 GoSub MonitorOff
 SetTimer, MonitorOff, 250
 
 >!l::
-	GoSub FocusAssistOn
+	; GoSub FocusAssistOn
 	GoSub MonitorOff
 	SetTimer, MonitorOff, 250
 	return
@@ -23,7 +23,7 @@ SetTimer, MonitorOff, 250
 	Keywait Shift
 	Keywait L
 	Keywait U
-	GoSub FocusAssistOff
+	; GoSub FocusAssistOff
 	return
 
 MonitorOff:
