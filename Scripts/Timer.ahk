@@ -12,7 +12,7 @@ ListLines, Off
 
 Process, Priority,, Realtime
 SetMenuTray()
-Menu, Tray, Icon, C:\Program Files\AutoHotkey\Materials\TimerIcon.ico
+Menu, Tray, Icon, %A_ScriptDir%\..\Materials\TimerIcon.ico
 
 Gui, +ToolWindow
 Gui, Add, Button, gOnabe Default vOnabe, お鍋
@@ -78,4 +78,4 @@ RemoveToolTip:
 	Tooltip
 return
 
-#Include *i C:\Program Files\AutoHotkey\Plugins\MenuTraySetting.ahk
+#Include, %A_ScriptDir%\..\Plugins\MenuTraySetting.ahk
