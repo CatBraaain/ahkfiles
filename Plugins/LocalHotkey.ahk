@@ -375,6 +375,9 @@
 		MsgBox, The cursor is at X%xpos% Y%ypos%.
 		return
 
+#If WinActive("^Netflix - Google Chrome")
+	q::Left
+	w::Right
 ; #If WinActive("タスクの切り替え")
 ; 	LAlt Up:: Send {LAlt Up}
 ;Other Apps
