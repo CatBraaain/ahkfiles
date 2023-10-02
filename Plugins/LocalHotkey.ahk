@@ -447,8 +447,8 @@
 	; LAlt & w::Send {w Down}{LButton Down}
 	return
 
-#If WinActive("Minecraft")
-	~Tab Up::Send {Esc}
+; #If WinActive("Minecraft")
+; 	~Tab Up::Send {Esc}
 #If WinActive("Robocraft")
 	!WheelDown::
 		flag:=1
