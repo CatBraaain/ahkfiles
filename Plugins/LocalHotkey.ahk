@@ -81,11 +81,12 @@
 		Send {F13}
 		return
 
-#If WinActive("新しい通知 ahk_class Windows.UI.Core.CoreWindow")
-	~LButton:: return
-	~LButton Up::
-		Send {Alt Down}{Tab}{Alt Up}
-		return
+; #If WinActive("新しい通知 ahk_class Windows.UI.Core.CoreWindow")
+; 	~LButton:: return
+; 	~LButton Up::
+; 		Sleep 200
+; 		Send {Alt Down}{Tab}{Alt Up}
+; 		return
 
 ;Chrome
 #If WinActive("(Google スプレッドシート|Apps Script) - Google Chrome")
