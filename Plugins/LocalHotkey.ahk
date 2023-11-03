@@ -479,4 +479,10 @@
 	~^Space::return
 #If WinActive("Hexanaut.io")
 	Space::Click(1300,700)
+#If WinActive("Tanks Arena io: Craft & Combat.* - Google Chrome")
+	n::
+		ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *10 Materials\tanks arena io\Quick Fight.bmp
+		MouseMove FoundX, FoundY, 0
+		Click, %FoundX% %FoundY%
+		return
 #If
