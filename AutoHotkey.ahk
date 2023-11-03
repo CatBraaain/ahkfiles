@@ -25,7 +25,8 @@ SetMenuTray()
 PrepareForClickCoordHotkey()
 StartClipboardHistory()
 UpdatePluginList()
-StartClipCursor()
+MsgNum := StartClipCursor()
+clipCursorToggle := true
 
 tenkeytoggle:= false
 games := "PAYDAY 2|Warlander|Battlefield|Robocraft|Minecraft|HalfDead2|Counter-Strike|CrowFPS|MilkChoco|PortalWars|Monster Hunter|Unrailed!"
