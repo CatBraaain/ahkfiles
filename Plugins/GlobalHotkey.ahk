@@ -75,7 +75,7 @@ LAlt Up::Send {LAlt Up}
 !k::KeyHistory
 !i::ShowImg("Materials\ANSISO BackSlash Mod.png")
 !z::ExtractZip()
-!c::ShowApp("calc.exe","電卓")
+; !c::ShowApp("calc.exe","電卓")
 ; !c::ShowApp("C:\Program Files (x86)\Google\Chrome\Application\chrome.exe","Google Chrome")
 ; !v::ShowApp("C:\Users\PRO\AppData\Local\Programs\Microsoft VS Code\Code.exe","Visual Studio Code")
 !n::ShowApp("notepad.exe","無題 - メモ帳")
