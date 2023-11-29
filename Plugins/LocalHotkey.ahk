@@ -6,11 +6,6 @@
 		reload
 		return
 
-	^LButton::
-		Send {LCtrl Up}
-		Send {LButton}
-		return
-
 ;VSCode
 #If WinActive(" - Visual Studio Code")
 	^WheelLeft:: Send !{Left}
