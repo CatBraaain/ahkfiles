@@ -52,8 +52,8 @@ LAlt Up::Send {LAlt Up}
 
 ; !e::ShowApp("explorer.exe", "ahk_class CabinetWClass")
 !p::Pause
-!b::BthDvc("soundcore Liberty 4",1)
-!+b::BthDvc("soundcore Liberty 4",0)
+!b::ConnectBT("soundcore Liberty 4",1)
+!+b::ConnectBT("soundcore Liberty 4",0)
 !k::KeyHistory
 ; !c::ShowApp("C:\Program Files (x86)\Google\Chrome\Application\chrome.exe","Google Chrome")
 ; !v::ShowApp("C:\Users\PRO\AppData\Local\Programs\Microsoft VS Code\Code.exe","Visual Studio Code")

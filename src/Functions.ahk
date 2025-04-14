@@ -9,7 +9,7 @@ ToolTip(str,delay=0) {
         SetTimer, RemoveToolTip, %delay%
 }
 
-BthDvc(deviceName,toggleOn){
+ConnectBT(deviceName,toggleOn){
     DllCall("LoadLibrary", "str", "Bthprops.cpl", "ptr")
     toggle := toggleOn
     VarSetCapacity(BLUETOOTH_DEVICE_SEARCH_PARAMS, 24+A_PtrSize*2, 0)
@@ -38,17 +38,6 @@ BthDvc(deviceName,toggleOn){
             DllCall("ole32\CLSIDFromString", "wstr", "{0000111e-0000-1000-8000-00805f9b34fb}", "ptr", &Handsfree) ; https://www.bluetooth.com/specifications/assigned-numbers/service-discovery/
             VarSetCapacity(AudioSink, 16)
             DllCall("ole32\CLSIDFromString", "wstr", "{0000110b-0000-1000-8000-00805f9b34fb}", "ptr", &AudioSink)
-
-            ; loop{
-            ; 	hr := DllCall("Bthprops.cpl\BluetoothSetServiceState", "ptr", 0, "ptr", &BLUETOOTH_DEVICE_INFO, "ptr", &Handsfree, "int", toggle)   ; voice
-            ; 	if (hr = 0){
-            ; 		if (toggle = toggleOn)
-            ; 			break
-            ; 		toggle := !toggle
-            ; 	}
-            ; 	if (hr = 87)
-            ; 		toggle := !toggle
-            ; }
 
             loop{
                 hr := DllCall("Bthprops.cpl\BluetoothSetServiceState", "ptr", 0, "ptr", &BLUETOOTH_DEVICE_INFO, "ptr", &AudioSink, "int", toggle) ; music
