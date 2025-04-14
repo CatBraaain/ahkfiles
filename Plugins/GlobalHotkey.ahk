@@ -66,8 +66,8 @@ LAlt Up::Send {LAlt Up}
 !r::Send #r ;run command
 !t::ShowApp("Scripts\Timer.ahk","Scripts\Timer.ahk")
 !p::Pause
-!a::BthDvc("AirPods Pro",1)
-!+a::BthDvc("AirPods Pro",0)
+!b::BthDvc("soundcore Liberty 4",1)
+!+b::BthDvc("soundcore Liberty 4",0)
 ; !s::SendTo("#s","ahk_class Shell_TrayWnd")
 ; !+s::Run ms-settings:
 !d::Send #d ;desktop
