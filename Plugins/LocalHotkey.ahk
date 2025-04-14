@@ -369,7 +369,7 @@
         MsgBox, The cursor is at X%xpos% Y%ypos%.
     return
 
-#If WinActive("^Netflix - Google Chrome")
+#If WinActive("^Netflix - Google Chrome") or WinActive("^Netflix .* ahk_exe firefox.exe")
     q::Left
     w::Right
 ; #If WinActive("タスクの切り替え")
