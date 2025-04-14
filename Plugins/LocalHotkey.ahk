@@ -130,7 +130,7 @@
         Send ^b
     return
 
-#If WinActive("diep.io - Google Chrome")
+#If WinActive("diep.io - Google Chrome") or WinActive("arras.io - Google Chrome")
     ^s::return
     q::e
 
@@ -142,7 +142,6 @@
     LAlt & d::!d
 
     F11::
-        ; SendJs("document.body.setAttribute('style','cursor: crosshair;');document.getElementById('canvas').setAttribute('style','cursor: crosshair;')")
         SendEvent !+{Down}
         Sleep 100
         SendEvent {F11}
@@ -152,18 +151,7 @@
         SendEvent #{Up}
     return
 
-    ; ~LAlt::
-    ; 	SendEvent {m Down}{l Down}
-    ; 	if GetKeyState("LAlt",P){
-    ; 		ToolTip `F1::12277707 overload`,hybrid`nF2::12207777 rocketeer`,tritrapper`nF3::00067767 triplet`nF4::11157765 sprayer`,spread`nF5::00077757 sniper
-    ; 	}
-    ; 	While GetKeyState("LAlt",P){
-    ; 		Sleep 10
-    ; 	}
-    ; 	SendEvent {m Up}{l Up}
-    ; 	ToolTip
-    ; 	return
-
+#If WinActive("diep.io - Google Chrome")
     ~LAlt::
         SendEvent {m Up}
         ToolTip("F1::12277707 overload,hybrid`nF2::12207777 rocketeer,tritrapper`nF3::00067767 triplet`nF4::01157775 sprayer,spread`nF5::00077757 sniper")
@@ -189,50 +177,7 @@
     <!F4::DiepStatus("565688888565656565677777774444432") ;01157775 sprayer,spread
     <!F5::DiepStatus("565688888885656565656444444477777") ;00077757 sniper
 
-    diepmemo(){
-        ; level:status
-        ; ~28:27:27/27
-        ; ~30:28:1/2
-        ; ~45:33:5/15
-
-        ; dead level:new level
-        ; ~11:-1
-        ; ~13:11
-        ; ~15:12
-        ; ~18:13
-        ; ~20:14
-        ; ~23:15
-        ; ~26:16
-        ; ~30:17
-        ; ~33:18
-        ; ~37:19
-        ; ~41:20
-        ; ~44:21
-        ; ~45:22
-    }
-
 #If WinActive("arras.io - Google Chrome")
-    ^s::return
-    q::e
-
-    LAlt & q::!q
-    LAlt & w::!w
-    LAlt & e::!e
-    LAlt & a::!a
-    LAlt & s::!s
-    LAlt & d::!d
-
-    F11::
-        ; SendJs("document.body.setAttribute('style','cursor: crosshair;');document.getElementById('canvas').setAttribute('style','cursor: crosshair;')")
-        SendEvent !+{Down}
-        Sleep 100
-        SendEvent {F11}
-    return
-    Esc::
-        SendEvent {F11}
-        SendEvent #{Up}
-    return
-
     ~LAlt::
         SendEvent {m Up}
         ToolTip("F1::3309999000`nF2::0069999000`nF3::0099996000`nF4::0009999600`nF5:0048889500`nF6:0039999300")
@@ -240,6 +185,7 @@
         ToolTip
     return
 
+    ;total 42 upgrade point
     SetKeyDelay 20
     <!F1::SendEvent {1 3}{2 3}{4 9}{5 9}{6 9}{7 9} 	;3309999000
     <!F2::SendEvent {3 6}{4 9}{5 9}{6 9}{7 9} 		;0069999000
@@ -247,8 +193,6 @@
     <!F4::SendEvent {4 9}{5 9}{6 9}{7 9}{8 6} 		;0009999600
     <!F5::SendEvent {3 4}{4 8}{5 8}{6 8}{7 9}{8 5} 	;0048889500
     <!F6::SendEvent {3 3}{4 9}{5 9}{6 9}{7 9}{8 3} 	;0039999300
-
-;total 42 upgrade point
 
 #If WinActive("JigsawPuzzles.io - Google Chrome")
     a::Left
