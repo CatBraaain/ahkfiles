@@ -19,87 +19,6 @@
     ~^!+f::return
     ~!a::return
     ~!+a::return
-
-;Explorer
-#If WinActive("ahk_class CabinetWClass")
-; WheelLeft:: Send !{Up}
-; WheelRight:: Send !{Left}
-
-;Excel
-; #If WinActive("- Excel ahk_exe EXCEL.EXE")
-#If WinActive("- Excel")
-    ~LAlt::
-        if GetKeyState("LAlt","P"){
-            Send {vk1D} ;無変換
-        }
-    ; Send {LAlt Down}
-    return
-    LAlt Up::Send {LAlt Up}
-    +WheelUp::
-        SetScrollLockState, On
-        SendInput {Left}
-        SetScrollLockState, Off
-    return
-    +WheelDown::
-        SetScrollLockState, On
-        SendInput {Right}
-        SetScrollLockState, Off
-    return
-    ^a::Send {End}+{Home}
-
-    ~F2::return
-    ~!1::return
-    ~!2::return
-    ~^d::return
-    ~^+d::return
-    ~^q::return
-    ~^q UP::return
-    ~^+q::return
-    ~^+q UP::return
-    ~^e::return
-    ~^y::return
-    ~^;::return
-
-;VBA
-#If WinActive("ahk_class wndclass_desked_gsk")
-    ^+z::return
-
-;OS
-#If WinActive("ahk_class Shell_TrayWnd") OR WinActive("ahk_exe GoogleDriveFS.exe") OR WinActive("新しい通知 ahk_class Windows.UI.Core.CoreWindow")
-    ^t::
-    ^l::
-        ; WinActivate ahk_exe chrome.exe
-        ; WinWaitActive ahk_exe chrome.exe
-        Send {Alt Down}{Tab}{Alt Up}
-        Sleep 1
-        Send %A_ThisHotkey%
-        Send {F13}
-    return
-    ^g::
-        ; WinActivate ahk_exe chrome.exe
-        ; WinWaitActive ahk_exe chrome.exe
-        Send {Alt Down}{Tab}{Alt Up}
-        Sleep 1
-        Send ^l
-        Send {F13}
-    return
-
-; #If WinActive("新しい通知 ahk_class Windows.UI.Core.CoreWindow")
-; 	~LButton:: return
-; 	~LButton Up::
-; 		Sleep 200
-; 		Send {Alt Down}{Tab}{Alt Up}
-; 		return
-
-;Chrome
-#If WinActive("(Google スプレッドシート|Apps Script) - Google Chrome")
-    ~^s::return
-    ^q::^/
-    !Tab::
-        Send {Esc}
-        Send !{Tab}
-        IsAltTabMenu := true
-    return
 #If WinActive("ahk_exe chrome.exe")
     ^t::
     ^l::
@@ -152,11 +71,6 @@
         ToolTip
     return
 
-; WheelLeft
-; WheelLeft:: +^Tab
-; WheelRight:: ^Tab
-#If WinActive("ヨドバシ・ドット・コム - Google Chrome")
-    !1::Send %GeneralPW%{Enter}
 #If WinActive("MAP.*HELLO CYCLING")
     WheelUp::Send {+}
     WheelDown::Send {-}
@@ -208,13 +122,6 @@
         Send ^b
     return
 
-#If WinActive("YouTube - Google Chrome")
-    <!1::
-        ; Send {LAlt up}{LWin Up}
-        SendJs("document.querySelector('#movie_player').setVolume(1)")
-    return
-    ^Right::Send +n
-    ^Left::Send +p
 #If WinActive("diep.io - Google Chrome")
     ^s::return
     q::e
@@ -341,36 +248,9 @@
     s::Down
     d::Right
 
-#If WinActive("Manga.* - Google Chrome")
-    Down::WheelDown
-    Up::WheelUp
-    +d::WheelDown
-    +e::WheelUp
-#If WinActive("8ブロッククラッシュ|フリーゲーム投稿サイト unityroom")
-    !a::MouseMove,-1,0,0,R
-    !s::MouseMove,0,1,0,R
-    !d::MouseMove,1,0,0,R
-    !w::MouseMove,0,-1,0,R
-    ; !1::SetTimer ,LoopBattle,1500
-    ; !2::SetTimer ,LoopBattle,Off
-    ; LoopBattle:
-    ; 	MouseClick,LEFT,1535,816,1,0
-    ; 	MouseClick,LEFT,1249,329,1,0
-    ; 	MouseClick,LEFT,1249,381,1,0
-    ; 	MouseClick,LEFT,1249,419,1,0
-    ; 	MouseClick,LEFT,1249,465,1,0
-    ; 	MouseClick,LEFT,1249,507,1,0
-    ; 	return
-    q::
-        MouseGetPos, xpos, ypos
-        MsgBox, The cursor is at X%xpos% Y%ypos%.
-    return
-
 #If WinActive("^Netflix - Google Chrome") or WinActive("^Netflix .* ahk_exe firefox.exe")
     q::Left
     w::Right
-; #If WinActive("タスクの切り替え")
-; 	LAlt Up:: Send {LAlt Up}
 ;Other Apps
 #If WinActive(" – GIMP")
     ^Tab::Send {.}
@@ -434,47 +314,8 @@
     ~F5::return
     ~F6::return
     ~LAlt::return
-    ; LAlt & w::Send {w Down}{LButton Down}
+    ~^Space::return
     return
 
-#If WinActive("Minecraft")
-    ~^Space::return
-
-#If WinActive("Robocraft")
-    !WheelDown::
-        flag:=1
-        Loop{
-            if (flag==1){
-                Send {WheelDown}
-                Sleep 50
-                Send {WheelDown}
-                Sleep 50
-                Send {WheelDown}
-                Sleep 50
-                Send {WheelDown}
-                Sleep 50
-                Send {LButton}
-                Sleep 100
-            }
-            else{
-                break
-            }
-        }
-    return
-    !WheelUp::flag:=0
-#If WinActive("Unrailed!")
-    ~F1::return
-    ~F2::return
-    ~F3::return
-    F4::return
-    ~^Space::return
-#If WinActive("Hexanaut.io")
-	Space::Click(1300,700)
-#If WinActive("Tanks Arena io: Craft & Combat.* - Google Chrome")
-    n::
-        ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *10 Materials\tanks arena io\Quick Fight.bmp
-        MouseMove FoundX, FoundY, 0
-        Click, %FoundX% %FoundY%
-    return
 #If
 
