@@ -7,7 +7,7 @@
     Menu, Tray, Add, Pause
     Menu, Tray, Add, Exit
 
-    Menu, Tray, Icon, Materials\AHK.ico
+    Menu, Tray, Icon, Assets\AHK.ico
 }
 
 Open:

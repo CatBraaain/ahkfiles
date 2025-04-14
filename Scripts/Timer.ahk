@@ -12,7 +12,7 @@ ListLines, Off
 
 Process, Priority,, Realtime
 SetMenuTray()
-Menu, Tray, Icon, %A_ScriptDir%\..\Materials\TimerIcon.ico
+Menu, Tray, Icon, %A_ScriptDir%\..\Assets\TimerIcon.ico
 
 Gui, +ToolWindow
 Gui, Add, Button, gOnabe Default vOnabe, お鍋
