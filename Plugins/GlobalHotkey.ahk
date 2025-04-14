@@ -39,9 +39,7 @@ return
 return
 #InputLevel 0
 
-; !sc03a::tenkeytoggle:=!tenkeytoggle
 !CapsLock::tenkeytoggle:=!tenkeytoggle
-; sc03a::Send {vkF3} ;CapsLock全角半角
 CapsLock::Send {vkF3} ;CapsLock全角半角
 LAlt::
     if GetKeyState("LAlt","P"){
@@ -52,52 +50,26 @@ return
 LAlt Up::Send {LAlt Up}
 ~RAlt::Send {vkE8} ;無意味
 
-; Backspace::
-;     Send {Backspace}
-;     KeyWait, Backspace, T0.2
-;     while ErrorLevel {
-;         Send +^{Left}{Backspace}
-;         KeyWait, Backspace, T0.1
-;     }
-;     KeyWait, Backspace
-;     return
-
-!e::ShowApp("explorer.exe", "ahk_class CabinetWClass")
-!r::Send #r ;run command
-!t::ShowApp("Scripts\Timer.ahk","Scripts\Timer.ahk")
+; !e::ShowApp("explorer.exe", "ahk_class CabinetWClass")
+!+t::ShowApp("Scripts\Timer.ahk","Scripts\Timer.ahk")
 !p::Pause
 !b::BthDvc("soundcore Liberty 4",1)
 !+b::BthDvc("soundcore Liberty 4",0)
-; !s::SendTo("#s","ahk_class Shell_TrayWnd")
-; !+s::Run ms-settings:
-!d::Send #d ;desktop
-!g::ShowApp("Materials\GIMP.lnk", "GIMP (GNU Image Manipulation Program)")
 !k::KeyHistory
-!i::ShowImg("Materials\ANSISO BackSlash Mod.png")
-!z::ExtractZip()
-; !c::ShowApp("calc.exe","電卓")
 ; !c::ShowApp("C:\Program Files (x86)\Google\Chrome\Application\chrome.exe","Google Chrome")
 ; !v::ShowApp("C:\Users\PRO\AppData\Local\Programs\Microsoft VS Code\Code.exe","Visual Studio Code")
-!n::ShowApp("notepad.exe","無題 - メモ帳")
 !Esc::MsgWinTitle()
 !Delete::Suspend
 
-; ^q::^/
 ~^w::CloseSaveDialog()
 ^+w::Send !{F4} ;Ctrl+Shift+W→Alt+F4
 ; ^e::DuplicateRow()
 ^+a::Send ^{Left}+^{Right}
 ^+d::DeleteRow()
 ^d::DuplicateRow()
-^y::return
 ^+z::Send ^y ;Ctrl Shift Z => Ctrl Y
 ^Space::Send {Enter} ;Ctrl+Space→Enter
 ^+Delete::ExitApp
-
->>!Up:: Send {↑}
->>!Down:: Send {↓}
->>!Left:: Send {←}
->>!Right:: Send {→}
 
 ;HotString
 #InputLevel 1
