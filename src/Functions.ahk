@@ -1,20 +1,4 @@
-﻿UpdatePluginList() {
-    Loop, %A_ScriptDir%\Plugins\*.ahk {
-        new_include_list .= "#Include *i " . A_ScriptDir . "\Plugins\" . A_LoopFileName . "`n"
-    }
-
-    file := FileOpen(A_ScriptDir . "\pluginlist.ahk", "r", "utf-8")
-    old_include_list := file.Read(file.Length)
-
-    If (old_include_list != new_include_list) {
-        file := FileOpen(A_ScriptDir . "\pluginlist.ahk", "w", "utf-8")
-        file.Write(new_include_list)
-        file.Close
-        Reload
-    }
-}
-
-RemoveToolTip:
+﻿RemoveToolTip:
     SetTimer, RemoveToolTip, Off
     ToolTip
 return
@@ -124,55 +108,12 @@ DuplicateRow(){
     return
 }
 
-ExtractZip(){ ;clipboard追加
-    curdir := GetActiveExplorerPath()
-    Loop, %curdir%\*.zip
-    ZipDir := A_LoopFileFullPath
-    SplitPath, ZipDir,,,, name_no_ext
-    NewDir := curdir . "\" . name_no_ext
-    FileCreateDir, %NewDir%
-    psh := ComObjCreate("Shell.Application")
-    psh.Namespace(NewDir).CopyHere( psh.Namespace(ZipDir).items, 4|16 )
-    FileDelete % ZipDir
-    return
-    return
-    ToolTip("Dones",2)
-}
-
-GetActiveExplorerPath(){
-    explorerHwnd := WinActive("ahk_class CabinetWClass")
-    if (explorerHwnd){
-        for window in ComObjCreate("Shell.Application").Windows{
-            if (window.hwnd==explorerHwnd){
-                curdir := window.Document.Folder.Self.Path
-            }
-        }
-    }
-    return curdir
-}
-
 MsgWinTitle(){
     WinGetTitle, Title, A
     WinGet, ExStyle, ExStyle, A
     WinGetText, Body, A
     MsgBox % Title . "`n" . ExStyle . "`n" . Body
     return
-}
-
-MsgWinTitle2(){
-    WinGet windows, List
-    Loop %windows%
-    {
-        id := windows%A_Index%
-        WinGetTitle wt, ahk_id %id%
-        r .= wt . "`n"
-        WinGet, ExStyle, ExStyle, ahk_id %id%
-        If(ExStyle=="0x08200000"){
-            msgbox %id%
-            msgbox %wt%
-        }
-    }
-    msgbox %r%
 }
 
 CopySelection(){
