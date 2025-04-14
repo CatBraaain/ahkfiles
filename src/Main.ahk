@@ -10,7 +10,7 @@ ListLines, Off
 #HotkeyInterval, 2000
 #MaxHotkeysPerInterval, 200
 
-#Include, Env.ahk
+#Include, ../Env.ahk
 
 ; SendMode, Input1
 Process, Priority,, Realtime
@@ -24,7 +24,6 @@ SetDefaultMouseSpeed 0
 SetMenuTray()
 PrepareForClickCoordHotkey()
 StartClipboardHistory()
-UpdatePluginList()
 MsgNum := StartClipCursor()
 clipCursorToggle := true
 
@@ -35,12 +34,12 @@ chromeGames := "CrazyGames - Google Chrome|Skillfite.io|Sword Masters - Google C
 toggle := false
 Exit ;Exit Auto-Execute
 
-#Include, %A_ScriptDir%\MyFunctions.ahk
-#Include *i C:\Projects\AutoHotkey\Plugins\ClickCoordHotkey.ahk
-#Include *i C:\Projects\AutoHotkey\Plugins\ClipboardHistory.ahk
-#Include *i C:\Projects\AutoHotkey\Plugins\ClipCursor.ahk
-#Include *i C:\Projects\AutoHotkey\Plugins\GlobalHotkey.ahk
-#Include *i C:\Projects\AutoHotkey\Plugins\KeyboardLayout.ahk
-#Include *i C:\Projects\AutoHotkey\Plugins\LocalHotkey.ahk
-#Include *i C:\Projects\AutoHotkey\Plugins\MenuTraySetting.ahk
-
+#Include %A_ScriptDir%
+#Include Functions.ahk
+#Include ClickCoordHotkey.ahk
+#Include ClipboardHistory.ahk
+#Include ClipCursor.ahk
+#Include GlobalHotkey.ahk
+#Include KeyboardLayout.ahk
+#Include LocalHotkey.ahk
+#Include MenuTraySetting.ahk

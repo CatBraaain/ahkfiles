@@ -3,11 +3,11 @@
         new_include_list .= "#Include *i " . A_ScriptDir . "\Plugins\" . A_LoopFileName . "`n"
     }
 
-    file := FileOpen(A_ScriptDir . "\PluginList.ahk", "r", "utf-8")
+    file := FileOpen(A_ScriptDir . "\pluginlist.ahk", "r", "utf-8")
     old_include_list := file.Read(file.Length)
 
     If (old_include_list != new_include_list) {
-        file := FileOpen(A_ScriptDir . "\PluginList.ahk", "w", "utf-8")
+        file := FileOpen(A_ScriptDir . "\pluginlist.ahk", "w", "utf-8")
         file.Write(new_include_list)
         file.Close
         Reload
