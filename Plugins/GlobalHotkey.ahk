@@ -51,7 +51,6 @@ LAlt Up::Send {LAlt Up}
 ~RAlt::Send {vkE8} ;無意味
 
 ; !e::ShowApp("explorer.exe", "ahk_class CabinetWClass")
-!+t::ShowApp("Scripts\Timer.ahk","Scripts\Timer.ahk")
 !p::Pause
 !b::BthDvc("soundcore Liberty 4",1)
 !+b::BthDvc("soundcore Liberty 4",0)
