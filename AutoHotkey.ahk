@@ -30,7 +30,7 @@ clipCursorToggle := true
 
 tenkeytoggle:= false
 games := "PAYDAY 2|Warlander|Battlefield|Robocraft|Minecraft|HalfDead2|Counter-Strike|CrowFPS|MilkChoco|PortalWars|Monster Hunter|Unrailed!"
-chromeGames := "arras.io - Google Chrome|diep.io - Google Chrome|STUG - MultiPlayer Tank Battle - Google Chrome|Krunker - Google Chrome"
+chromeGames := "CrazyGames - Google Chrome|Skillfite.io|Sword Masters - Google Chrome|arras.io - Google Chrome|diep.io - Google Chrome|STUG - MultiPlayer Tank Battle - Google Chrome|Krunker - Google Chrome"
 
 toggle := false
 Exit ;Exit Auto-Execute
