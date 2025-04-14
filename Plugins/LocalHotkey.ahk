@@ -104,7 +104,8 @@
         Send ^l
         Send {F13}
     return
-    ^f::^g ;find
+    ^f::Send ^f^g ;find
+    ^+f::Send +^g ;find
     ^b::Send ^d ;add bookmark
     ^+b::Send ^+o ;bookmark manager
     ~^r::CloseSaveDialog()
