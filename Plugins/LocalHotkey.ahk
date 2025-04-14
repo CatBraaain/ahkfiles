@@ -133,8 +133,6 @@
         Send {Enter}
     return
 
-    ^+w::return
-
     F7::return ;カーソルブラウジング無効化
 
     !LButton::
