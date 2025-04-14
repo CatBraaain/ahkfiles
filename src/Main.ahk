@@ -12,7 +12,6 @@ ListLines, Off
 
 #Include, ../Env.ahk
 
-; SendMode, Input1
 Process, Priority,, Realtime
 DetectHiddenWindows, On
 SetWorkingDir %A_ScriptDir%
