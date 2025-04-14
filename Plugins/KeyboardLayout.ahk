@@ -26,7 +26,7 @@
     +p:: Send {'}
     +[:: Send {_}
     +]:: Send {BS}
-    +a:: Send {Enter}
+    +a:: Send {BS}
     <+s:: Send {Left}
     <+d:: Send {Down}
     <+f:: Send {Right}
