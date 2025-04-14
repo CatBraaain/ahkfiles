@@ -335,9 +335,6 @@
 
 ;total 42 upgrade point
 
-#If WinActive("sudoku puzzles.* - Google Chrome")
-    RButton::ClickImage("*0 Materials\SudokuPencil.bmp")
-    RButton Up::ClickImage("*0 Materials\SudokuPencil.bmp")
 #If WinActive("JigsawPuzzles.io - Google Chrome")
     a::Left
     w::Up
