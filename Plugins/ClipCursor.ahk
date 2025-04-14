@@ -1,4 +1,4 @@
-!c::
+﻿!c::
     clipCursorToggle := !clipCursorToggle
     if (clipCursorToggle) {
         MsgNum := StartClipCursor()
