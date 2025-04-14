@@ -165,10 +165,10 @@ SendTo(keystroke,target){
 }
 
 ShowApp(exe_path, selector){
-    IfWinExist %selector%
-        WinActivate %selectors%
-Else
-    Run %exe_path%
+    If WinExist(selector)
+        WinActivate %selector%
+    Else
+        Run %Script_Dir%\%exe_path%
     return
 }
 
