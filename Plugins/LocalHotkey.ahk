@@ -1,4 +1,4 @@
-﻿;Auto_Reload
+﻿; Auto_Reload
 #If WinActive(" - AutoHotkey - Visual Studio Code")
     ~^s::
         keywait s
@@ -6,7 +6,7 @@
         reload
     return
 
-;VSCode
+; VSCode
 #If WinActive(" - Visual Studio Code")
     ^WheelLeft:: Send !{Left}
     ^WheelRight:: Send !{Right}
@@ -19,6 +19,13 @@
     ~^!+f::return
     ~!a::return
     ~!+a::return
+
+; GIMP
+#If WinActive(" – GIMP")
+    ^Tab::Send {.}
+    ^+Tab::Send {,}
+
+; Chrome
 #If WinActive("ahk_exe chrome.exe")
     ^t::
     ^l::
@@ -74,6 +81,7 @@
 #If WinActive("MAP.*HELLO CYCLING")
     WheelUp::Send {+}
     WheelDown::Send {-}
+
 #If WinActive("note - Google Chrome")
     !F1:: ;テンプレート貼りつけ
         SendEvent ^a{BS}
@@ -251,10 +259,8 @@
 #If WinActive("^Netflix - Google Chrome") or WinActive("^Netflix .* ahk_exe firefox.exe")
     q::Left
     w::Right
-;Other Apps
-#If WinActive(" – GIMP")
-    ^Tab::Send {.}
-    ^+Tab::Send {,}
+
+; Games
 #If WinActive(games)
     ~1:: return
     ~2:: return
