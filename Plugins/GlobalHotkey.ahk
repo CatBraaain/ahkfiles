@@ -3,14 +3,14 @@ F2::Enter
 F3::Delete
 
 XButton1::
-	Send ^w
+    Send ^w
     CloseSaveDialog()
-    return
+return
 
 XButton2::
     Send {LCtrl Down}{LButton Down}
     ClipCursor(False, 0, 0, 0, 0)
-    return
+return
 XButton2 Up::
     Send {LButton Up}{LCtrl Up}
     CoordMode,Mouse,Screen
@@ -20,7 +20,7 @@ XButton2 Up::
     }else{
         ClipCursor(False, 0, 0, 0, 0)
     }
-    return
+return
 
 WheelRight::Send ^{Tab}
 WheelLeft::Send ^+{Tab}
@@ -31,12 +31,12 @@ WheelLeft::Send ^+{Tab}
     Send {LCtrl Up}
     Send #+{Right}
     Send {LCtrl Down}
-    return
+return
 ^WheelLeft::
     Send {LCtrl Up}
     Send #+{Left}
     Send {LCtrl Down}
-    return
+return
 #InputLevel 0
 
 ; !sc03a::tenkeytoggle:=!tenkeytoggle
@@ -48,7 +48,7 @@ LAlt::
         Send {vk1D} ;無変換
     }
     Send {LAlt Down}
-    return
+return
 LAlt Up::Send {LAlt Up}
 ~RAlt::Send {vkE8} ;無意味
 

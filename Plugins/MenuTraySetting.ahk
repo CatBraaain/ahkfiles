@@ -12,37 +12,38 @@
 
 Open:
     listLines
-    return
+return
 
 WindowSpy:
-    Run "C:\Program Files\AutoHotkey\WindowSpy.ahk"
-    return
+    ; Run "exes\WindowSpy.ahk"
+    Run "C:\Program Files\AutoHotkey\exes\WindowSpy.ahk"
+return
 
 Reload:
-    Reload
-    return
+Reload
+return
 
 Suspend:
-    Suspend toggle
-    if (a_isSuspended = 1)
-        menu, tray, check, Suspend
-    else
-        menu, tray, unCheck, Suspend
-    return
+Suspend toggle
+if (a_isSuspended = 1)
+    menu, tray, check, Suspend
+else
+    menu, tray, unCheck, Suspend
+return
 
 Pause:
-    if (a_isPaused = 1)
-        {
-        pause off
-        menu, tray, unCheck, Pause
-        }
-    else
-        {
-        menu, tray, check, Pause
-        pause on
-        }
-    return
+if (a_isPaused = 1)
+{
+    pause off
+    menu, tray, unCheck, Pause
+}
+else
+{
+    menu, tray, check, Pause
+    pause on
+}
+return
 
 Exit:
-    ExitApp
-    return
+ExitApp
+return

@@ -1,10 +1,10 @@
 ﻿PrepareForClickCoordHotkey(){
-	Global Coords
-	Coords := Object()
-	Loop, 26 {
-	Hotkey, % "^!" Chr(A_Index+96), EnableClickCoordHotkey
-	Hotkey, % "^+!" Chr(A_Index+96), DisableClickCoordHotkey
-	}
+    Global Coords
+    Coords := Object()
+    Loop, 26 {
+        Hotkey, % "^!" Chr(A_Index+96), EnableClickCoordHotkey
+        Hotkey, % "^+!" Chr(A_Index+96), DisableClickCoordHotkey
+    }
 }
 
 DisableClickCoordHotkey:

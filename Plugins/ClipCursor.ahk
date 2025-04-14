@@ -7,33 +7,33 @@
         OnMessage( MsgNum, "" )
         ClipCursor(False)
     }
-    return
+return
 
 ClipCursor( Confine=True, x1=0 , y1=0, x2=1, y2=1 ) {
-	VarSetCapacity(R,16,0),  NumPut(x1,&R+0),NumPut(y1,&R+4),NumPut(x2,&R+8),NumPut(y2,&R+12)
-	Return Confine ? DllCall( "ClipCursor", UInt,&R ) : DllCall( "ClipCursor", UInt, 0 )
+    VarSetCapacity(R,16,0), NumPut(x1,&R+0),NumPut(y1,&R+4),NumPut(x2,&R+8),NumPut(y2,&R+12)
+    Return Confine ? DllCall( "ClipCursor", UInt,&R ) : DllCall( "ClipCursor", UInt, 0 )
 }
 
 StartClipCursor(){
-	Gui +LastFound
-	hWnd := WinExist()
-	DllCall( "RegisterShellHookWindow", UInt,Hwnd )
-	MsgNum := DllCall( "RegisterWindowMessage", Str,"SHELLHOOK" )
-	OnMessage( MsgNum, "ShellMessage" )
+    Gui +LastFound
+    hWnd := WinExist()
+    DllCall( "RegisterShellHookWindow", UInt,Hwnd )
+    MsgNum := DllCall( "RegisterWindowMessage", Str,"SHELLHOOK" )
+    OnMessage( MsgNum, "ShellMessage" )
     return MsgNum
 }
 
 ShellMessage(wParam,lParam){
-	If (wParam=4 OR wParam=16 OR wParam=32772) {
+    If (wParam=4 OR wParam=16 OR wParam=32772) {
         ClipOnActiveMonitor()
         ; SetMouseOnCenter()
-	}
+    }
     ; static HSHELL_WINDOWACTIVATED := 4
     ; static HSHELL_MONITORCHANGED := 16
     ; static HSHELL_RUDEAPPACTIVATED := 32772
-	; https://www.autohotkey.com/board/topic/80644-how-to-hook-on-to-shell-to-receive-its-messages/
-	; https://www.autohotkey.com/board/topic/61753-confining-mouse-to-a-window/
-	; https://www.autohotkey.com/board/topic/66726-method-to-detect-active-window-change/
+    ; https://www.autohotkey.com/board/topic/80644-how-to-hook-on-to-shell-to-receive-its-messages/
+    ; https://www.autohotkey.com/board/topic/61753-confining-mouse-to-a-window/
+    ; https://www.autohotkey.com/board/topic/66726-method-to-detect-active-window-change/
 }
 
 ClipOnActiveMonitor(){
