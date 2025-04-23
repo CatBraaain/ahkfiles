@@ -15,8 +15,8 @@
     +0:: Send {)}
     +q:: Send {BS}
     +w:: Send {Home}
-    <+e:: Send {Up}
-    <+r:: Send {End}
+    +e:: Send {Up}
+    +r:: Send {End}
     +t:: Send {{}
     +y:: Send {}}
     +u:: Send {[}
@@ -26,10 +26,9 @@
     +[:: Send {_}
     +]:: Send {BS}
     +a:: Send ^{Left}
-    <+s:: Send {Left}
-    <+d:: Send {Down}
-    <+f:: Send {Right}
-    <+>+f:: Send +{Right}
+    +s:: Send {Left}
+    +d:: Send {Down}
+    +f:: Send {Right}
     +g:: Send ^{Right}
     +h:: Send {+}
     +j:: Send {(}
@@ -43,10 +42,12 @@
     +b:: Send {^}
     +n:: Send {&}
     +m:: Send {*}
+
     <+Up:: Send {PgUp}
     <+Left:: Send {Home}
     <+Down:: Send {PgDn}
     <+Right:: Send {End}
+
     `; & q:: Send {Q}
     `; & w:: Send {W}
     `; & e:: Send {E}
@@ -73,6 +74,7 @@
     `; & b:: Send {B}
     `; & n:: Send {N}
     `; & m:: Send {M}
+
 #If tenkeytoggle
     2:: Send {*}
     3:: Send {/}
