@@ -26,12 +26,12 @@
     +p:: Send {'}
     +[:: Send {_}
     +]:: Send {BS}
-    +a:: Send {BS}
+    +a:: Send ^{Left}
     <+s:: Send {Left}
     <+d:: Send {Down}
     <+f:: Send {Right}
     <+>+f:: Send +{Right}
-    +g:: Send ^{Left}+^{Right}
+    +g:: Send ^{Right}
     +h:: Send {+}
     +j:: Send {(}
     +k:: Send {)}
