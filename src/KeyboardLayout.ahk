@@ -1,4 +1,4 @@
-﻿#If !(WinActive(games) AND !WinActive(" - Google Chrome")) AND !WinActive(chromeGames)
+﻿#If IsGameWindow()
     [:: Send {-}
     ]:: Send {BS}
     `;:: Send {}
@@ -75,7 +75,7 @@
     `; & n:: Send {N}
     `; & m:: Send {M}
 
-#If GetKeyState("LShift", "P") AND !(WinActive(games) AND !WinActive(" - Google Chrome")) AND !WinActive(chromeGames)
+#If IsGameWindow() AND GetKeyState("LShift", "P")
     Space & w:: Send +{Home}
     Space & e:: Send +{Up}
     Space & r:: Send +{End}
