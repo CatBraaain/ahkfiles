@@ -75,6 +75,20 @@
     `; & n:: Send {N}
     `; & m:: Send {M}
 
+#If GetKeyState("LShift", "P") AND !(WinActive(games) AND !WinActive(" - Google Chrome")) AND !WinActive(chromeGames)
+    Space & w:: Send +{Home}
+    Space & e:: Send +{Up}
+    Space & r:: Send +{End}
+    Space & a:: Send +^{Left}
+    Space & s:: Send +{Left}
+    Space & d:: Send +{Down}
+    Space & f:: Send +{Right}
+    Space & g:: Send +^{Right}
+    Space & Up:: Send +{PgUp}
+    Space & Left:: Send +{Home}
+    Space & Down:: Send +{PgDn}
+    Space & Right:: Send +{End}
+
 #If tenkeytoggle
     2:: Send {*}
     3:: Send {/}
