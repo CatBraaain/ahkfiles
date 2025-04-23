@@ -1,5 +1,5 @@
 ﻿#UseHook
-#If (!WinActive(games) OR WinActive(" - Google Chrome")) AND !WinActive(chromeGames)
+#If !(WinActive(games) AND !WinActive(" - Google Chrome")) AND !WinActive(chromeGames)
     [:: Send {-}
     ]:: Send {BS}
     `;:: Send {}
