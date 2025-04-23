@@ -34,11 +34,14 @@ toggle := false
 Exit ;Exit Auto-Execute
 
 #Include %A_ScriptDir%
-#Include Functions.ahk
-#Include ClickCoordHotkey.ahk
+
+#Include KeyboardHotkey.ahk
+#Include MouseHotkey.ahk
+#Include LocalHotkey.ahk
+
+#Include ClickCoord.ahk
 #Include ClipboardHistory.ahk
 #Include ClipCursor.ahk
-#Include GlobalHotkey.ahk
-#Include KeyboardLayout.ahk
-#Include LocalHotkey.ahk
 #Include MenuTraySetting.ahk
+#Include Utils.ahk
+
