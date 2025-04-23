@@ -85,6 +85,15 @@ CloseSaveDialog(){
     return
 }
 
+CopySelection(){
+    OnClipboardChange("UpdateClipArray",0)
+    OldClipboard := Clipboard
+    Clipboard := ""
+    SendEvent ^c
+    ClipWait
+    return %OldClipboard%
+}
+
 DeleteRow(){
     SendEvent {End}+{Home}+{Home}+{Left}{BS}{Right}
 }
@@ -103,15 +112,6 @@ MsgWinTitle(){
     WinGetText, Body, A
     MsgBox % Title . "`n" . ExStyle . "`n" . Body
     return
-}
-
-CopySelection(){
-    OnClipboardChange("UpdateClipArray",0)
-    OldClipboard := Clipboard
-    Clipboard := ""
-    SendEvent ^c
-    ClipWait
-    return %OldClipboard%
 }
 
 PasteWait(OldClipboard){
