@@ -41,13 +41,10 @@ return
 
 !CapsLock::tenkeytoggle:=!tenkeytoggle
 CapsLock::Send {vkF3} ;CapsLock全角半角
-LAlt::
-    if GetKeyState("LAlt","P"){
-        Send {vk1D} ;無変換
-    }
-    Send {LAlt Down}
+~LAlt::
+    Send {vk1D} ;無変換
+    KeyWait LAlt
 return
-LAlt Up::Send {LAlt Up}
 ~RAlt::Send {vkE8} ;無意味
 
 ; !e::ShowApp("explorer.exe", "ahk_class CabinetWClass")
