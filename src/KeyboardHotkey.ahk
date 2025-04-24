@@ -48,6 +48,19 @@
     <+Down:: Send {PgDn}
     <+Right:: Send {End}
 
+    +!w:: Send +{Home}
+    +!e:: Send +{Up}
+    +!r:: Send +{End}
+    +!a:: Send +^{Left}
+    +!s:: Send +{Left}
+    +!d:: Send +{Down}
+    +!f:: Send +{Right}
+    +!g:: Send +^{Right}
+    +!Up:: Send +{PgUp}
+    +!Left:: Send +{Home}
+    +!Down:: Send +{PgDn}
+    +!Right:: Send +{End}
+
     `; & q:: Send {Q}
     `; & w:: Send {W}
     `; & e:: Send {E}
@@ -74,20 +87,6 @@
     `; & b:: Send {B}
     `; & n:: Send {N}
     `; & m:: Send {M}
-
-#If !IsGameWindow() AND GetKeyState("LShift", "P")
-    Space & w:: Send +{Home}
-    Space & e:: Send +{Up}
-    Space & r:: Send +{End}
-    Space & a:: Send +^{Left}
-    Space & s:: Send +{Left}
-    Space & d:: Send +{Down}
-    Space & f:: Send +{Right}
-    Space & g:: Send +^{Right}
-    Space & Up:: Send +{PgUp}
-    Space & Left:: Send +{Home}
-    Space & Down:: Send +{PgDn}
-    Space & Right:: Send +{End}
 
 #If IsTenkeyMode
     2:: Send {*}
