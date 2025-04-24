@@ -1,12 +1,10 @@
-﻿; Auto_Reload
-#If WinActive(" - AutoHotkey - Visual Studio Code")
+﻿#If WinActive(" - AutoHotkey - Visual Studio Code")
     ~^s::
         keywait s
         keywait Ctrl
         reload
     return
 
-; VSCode
 #If WinActive(" - Visual Studio Code")
     ^WheelLeft:: Send !{Left}
     ^WheelRight:: Send !{Right}
@@ -20,12 +18,10 @@
     ~!a::return
     ~!+a::return
 
-; GIMP
 #If WinActive(" – GIMP")
     ^Tab::Send {.}
     ^+Tab::Send {,}
 
-; Chrome
 #If WinActive("ahk_exe chrome.exe")
     ^t::
     ^l::
@@ -204,7 +200,6 @@
     q::Left
     w::Right
 
-; Games
 #If WinActive(games)
     ~1:: return
     ~2:: return
