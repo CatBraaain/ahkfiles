@@ -200,7 +200,7 @@
     q::Left
     w::Right
 
-#If WinActive(games)
+#If WinActive(Games)
     ~1:: return
     ~2:: return
     ~3:: return

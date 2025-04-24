@@ -24,7 +24,7 @@ Reload
 return
 
 Suspend:
-Suspend toggle
+Suspend ; Toggle Mode
 if (a_isSuspended = 1)
     menu, tray, check, Suspend
 else

@@ -89,7 +89,7 @@
     Space & Down:: Send +{PgDn}
     Space & Right:: Send +{End}
 
-#If tenkeytoggle
+#If IsTenkeyMode
     2:: Send {*}
     3:: Send {/}
     q:: Send {-}
@@ -111,7 +111,7 @@ F1::Backspace
 F2::Enter
 F3::Delete
 
-!CapsLock::tenkeytoggle:=!tenkeytoggle
+!CapsLock::IsTenkeyMode:=!IsTenkeyMode
 CapsLock::Send {vkF3} ;CapsLock全角半角
 ~LAlt::
     Send {vk1D} ;無変換
