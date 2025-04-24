@@ -12,7 +12,6 @@
     ~^e::return
     ~^d::return
     ~^+d::return
-    ~!c::return
     ~^!f::return
     ~^!+f::return
     ~!a::return
