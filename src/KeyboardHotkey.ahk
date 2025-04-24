@@ -1,4 +1,4 @@
-﻿#If IsGameWindow()
+﻿#If !IsGameWindow()
     [:: Send {-}
     ]:: Send {BS}
     `;:: Send {}
@@ -75,7 +75,7 @@
     `; & n:: Send {N}
     `; & m:: Send {M}
 
-#If IsGameWindow() AND GetKeyState("LShift", "P")
+#If !IsGameWindow() AND GetKeyState("LShift", "P")
     Space & w:: Send +{Home}
     Space & e:: Send +{Up}
     Space & r:: Send +{End}
