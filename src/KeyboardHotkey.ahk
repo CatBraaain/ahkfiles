@@ -1,4 +1,5 @@
-﻿#If !IsGameWindow()
+﻿; https://kts.sakaiweb.com/virtualkeycodes.html
+#If !IsGameWindow()
     [:: Send {-}
     ]:: Send {BS}
     `;:: Send {}
