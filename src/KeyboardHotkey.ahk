@@ -111,8 +111,8 @@ F1::Backspace
 F2::Enter
 F3::Delete
 
-!CapsLock::IsTenkeyMode:=!IsTenkeyMode
-CapsLock::Send {vkF3} ;CapsLock全角半角
+!sc03a::IsTenkeyMode:=!IsTenkeyMode
+sc03a::Send {vkF3} ;CapsLock全角半角
 ~LAlt::
     Send {vk1D} ;無変換
     KeyWait LAlt
