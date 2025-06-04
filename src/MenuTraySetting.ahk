@@ -16,7 +16,7 @@ return
 
 WindowSpy:
     ; Run "exes\WindowSpy.ahk"
-    Run "C:\Program Files\AutoHotkey\exes\WindowSpy.ahk"
+    Run "C:\Program Files\AutoHotkey\WindowSpy.ahk"
 return
 
 Reload:
