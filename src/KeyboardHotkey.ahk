@@ -14,7 +14,7 @@
     +8:: Send {*}
     +9:: Send {(}
     +0:: Send {)}
-    +q:: Send {BS}
+    +q:: Send {Esc}
     +w:: Send {Home}
     +e:: Send {Up}
     +r:: Send {End}
@@ -36,9 +36,9 @@
     +k:: Send {)}
     +l:: Send {=}
     +':: Send {:}
-    +z:: Send {@}
-    +x:: Send {#}
-    +c:: Send {$}
+    +z:: Send {BS}
+    +x:: Send {Enter}
+    +c:: Send {Delete}
     +v:: Send {`%}
     +b:: Send {^}
     +n:: Send {&}
@@ -90,21 +90,16 @@
     `; & m:: Send {M}
 
 #If IsTenkeyMode
-    2:: Send {*}
-    3:: Send {/}
-    q:: Send {-}
-    w:: Send {Numpad7}
-    e:: Send {Numpad8}
-    r:: Send {Numpad9}
-    a:: Send {+}
-    s:: Send {Numpad4}
-    d:: Send {Numpad5}
-    f:: Send {Numpad6}
-    z:: Send {Enter}
-    x:: Send {Numpad1}
-    c:: Send {Numpad2}
-    v:: Send {Numpad3}
-    Space:: Send {Numpad0}
+    a:: Send {Numpad1}
+    s:: Send {Numpad2}
+    d:: Send {Numpad3}
+    f:: Send {Numpad4}
+    g:: Send {Numpad5}
+    h:: Send {Numpad6}
+    j:: Send {Numpad7}
+    k:: Send {Numpad8}
+    l:: Send {Numpad9}
+    `;:: Send {Numpad0}
 
 #If
 F1::Backspace
