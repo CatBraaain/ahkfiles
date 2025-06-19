@@ -21,59 +21,6 @@
     ^Tab::Send {.}
     ^+Tab::Send {,}
 
-#If WinActive("ahk_exe chrome.exe")
-    ^t::
-    ^l::
-    ^n::
-    ^+n::
-        Send %A_ThisHotkey%
-        Send {F13}
-    return
-    ^g::
-        Send ^l
-        Send {F13}
-    return
-    ^+g::return
-    ^f::Send ^f^g ;find
-    ^+f::Send +^g ;find
-    ^b::Send ^d ;add bookmark
-    ^+b::Send ^+o ;bookmark manager
-    ~^r::CloseSaveDialog()
-
-    ^s::
-        Clipboard = ;
-        Send ^c
-        Send ^t
-        ClipWait
-        Send ^v{Enter}
-    return
-
-    ^+s::
-        Send ^t
-        Send {F13}
-        Send chrome://settings/searchEngines
-        Send {Enter}
-    return
-
-    F7::return ;カーソルブラウジング無効化
-
-    !LButton::
-        ClickLoopFlag := 1
-        Loop{
-            If(!ClickLoopFlag){
-                break
-            }
-            Send {LButton}
-        }
-    return
-
-    !RButton::
-        ClickLoopFlag := 0
-        ToolTip("!RButton")
-        KeyWait Alt
-        ToolTip
-    return
-
 #If WinActive("MAP.*HELLO CYCLING")
     WheelUp::Send {+}
     WheelDown::Send {-}
@@ -199,6 +146,59 @@
 #If WinActive("^Netflix - Google Chrome") or WinActive("^Netflix .* ahk_exe firefox.exe")
     q::Left
     w::Right
+
+#If WinActive("ahk_exe chrome.exe")
+    ^t::
+    ^l::
+    ^n::
+    ^+n::
+        Send %A_ThisHotkey%
+        Send {F13}
+    return
+    ^g::
+        Send ^l
+        Send {F13}
+    return
+    ^+g::return
+    ^f::Send ^f^g ;find
+    ^+f::Send +^g ;find
+    ^b::Send ^d ;add bookmark
+    ^+b::Send ^+o ;bookmark manager
+    ~^r::CloseSaveDialog()
+
+    ^s::
+        Clipboard = ;
+        Send ^c
+        Send ^t
+        ClipWait
+        Send ^v{Enter}
+    return
+
+    ^+s::
+        Send ^t
+        Send {F13}
+        Send chrome://settings/searchEngines
+        Send {Enter}
+    return
+
+    F7::return ;カーソルブラウジング無効化
+
+    !LButton::
+        ClickLoopFlag := 1
+        Loop{
+            If(!ClickLoopFlag){
+                break
+            }
+            Send {LButton}
+        }
+    return
+
+    !RButton::
+        ClickLoopFlag := 0
+        ToolTip("!RButton")
+        KeyWait Alt
+        ToolTip
+    return
 
 #If WinActive(Games)
     ~1:: return
