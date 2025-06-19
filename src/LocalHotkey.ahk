@@ -72,6 +72,7 @@
     <!5::
         Send ^b
     return
+    ~^b::return
 
 #If WinActive("diep.io - Google Chrome") or WinActive("arras.io - Google Chrome")
     ^s::return
