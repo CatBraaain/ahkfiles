@@ -26,19 +26,19 @@
     +p:: Send {'}
     +[:: Send {_}
     +]:: Send {BS}
-    +a:: Send ^{Left}
+    +a:: Send {Left 2}
     +s:: Send {Left}
     +d:: Send {Down}
     +f:: Send {Right}
-    +g:: Send ^{Right}
+    +g:: Send {Right 2}
     +h:: Send {+}
     +j:: Send {(}
     +k:: Send {)}
     +l:: Send {=}
     +':: Send {:}
-    +z:: Send {BS}
-    +x:: Send {Enter}
-    +c:: Send {Delete}
+    +z:: return
+    +x:: Send {BS}
+    +c:: Send {Enter}
     +v:: Send {`%}
     +b:: Send {^}
     +n:: Send {&}
@@ -52,11 +52,11 @@
     +!w:: Send +{Home}
     +!e:: Send +{Up}
     +!r:: Send +{End}
-    +!a:: Send +^{Left}
+    +!a:: Send +{Left 2}
     +!s:: Send +{Left}
     +!d:: Send +{Down}
     +!f:: Send +{Right}
-    +!g:: Send +^{Right}
+    +!g:: Send +{Right 2}
     +!Up:: Send +{PgUp}
     +!Left:: Send +{Home}
     +!Down:: Send +{PgDn}
