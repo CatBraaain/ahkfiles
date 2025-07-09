@@ -21,7 +21,7 @@ SetCapsLockState AlwaysOff
 SetDefaultMouseSpeed 0
 
 SetMenuTray()
-PrepareForClickCoordHotkey()
+; PrepareForClickCoordHotkey()
 StartClipboardHistory()
 ShellHookMsgId := StartClipCursor()
 ShouldClipCursor := true
