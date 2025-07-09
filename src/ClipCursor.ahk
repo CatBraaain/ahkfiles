@@ -1,4 +1,4 @@
-﻿!c::
+﻿^!c::
     ShouldClipCursor := !ShouldClipCursor
     if (ShouldClipCursor) {
         ShellHookMsgId := StartClipCursor()
