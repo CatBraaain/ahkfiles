@@ -19,6 +19,7 @@ SetTitleMatchMode, RegEx
 SetNumLockState AlwaysOn
 SetCapsLockState AlwaysOff
 SetDefaultMouseSpeed 0
+SetBatchLines 10ms
 
 SetMenuTray()
 ; PrepareForClickCoordHotkey()
