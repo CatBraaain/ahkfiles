@@ -8,7 +8,7 @@
 #If WinActive(" - Visual Studio Code")
     ^WheelLeft:: Send !{Left}
     ^WheelRight:: Send !{Right}
-    ~^g::Send {F13}
+    ~^g::Send {vk1A}
     ~^e::return
     ~^d::return
     ~^+d::return
@@ -154,11 +154,11 @@
     ^n::
     ^+n::
         Send %A_ThisHotkey%
-        Send {F13}
+        Send {vk1A}
     return
     ^g::
         Send ^l
-        Send {F13}
+        Send {vk1A}
     return
     ^+g::return
     ^f::Send ^f^g ;find
@@ -177,7 +177,7 @@
 
     ^+s::
         Send ^t
-        Send {F13}
+        Send {vk1A}
         Send chrome://settings/searchEngines
         Send {Enter}
     return

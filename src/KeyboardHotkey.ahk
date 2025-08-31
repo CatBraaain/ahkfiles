@@ -120,7 +120,7 @@ return
         Send {Alt Down}{Shift Down}{Tab}
     else
         Send {Alt Down}{Tab}
-    Send {F13}
+    Send {vk1A}
 return
 #if AltTabMenu
     LAlt Up::Send {LAlt Up}{vk1A}
@@ -148,6 +148,6 @@ return
 
 ;HotString
 #InputLevel 1
-:ox:nme:: SendInput {F13}{Text}%EMAIL%
+:ox:nme:: SendInput {vk1A}{Text}%EMAIL%
 #InputLevel 0
 
