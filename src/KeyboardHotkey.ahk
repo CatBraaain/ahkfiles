@@ -108,23 +108,24 @@ F3::Delete
 
 !sc03a::IsTenkeyMode:=!IsTenkeyMode
 sc03a::Send {vkF3} ;CapsLock全角半角
-~LAlt::
+LAlt::
     Send {vk1D} ;無変換
+    Send {LAlt Down}
     KeyWait LAlt
+    Send {LAlt Up}
 return
 ~RAlt::Send {vkE8} ;無意味
 
-!Tab::
-    AltTabMenu := true
-    If GetKeyState("Shift","P")
-        Send {Alt Down}{Shift Down}{Tab}
-    else
-        Send {Alt Down}{Tab}
-    Send {vk1A}
+~!Tab::IsOnAltTabWindow:=1
+~!+Tab::IsOnAltTabWindow:=1
+LAlt Up::
+    if(IsOnAltTabWindow){
+        IsOnAltTabWindow:=0
+        Send {LAlt Up}
+        Sleep 50
+        Send {vk1A}
+    }
 return
-#if AltTabMenu
-    LAlt Up::Send {LAlt Up}{vk1A}
-#if
 
 ; !e::ShowApp("explorer.exe", "ahk_class CabinetWClass")
 !p::Pause
