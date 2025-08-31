@@ -114,6 +114,18 @@ sc03a::Send {vkF3} ;CapsLock全角半角
 return
 ~RAlt::Send {vkE8} ;無意味
 
+!Tab::
+    AltTabMenu := true
+    If GetKeyState("Shift","P")
+        Send {Alt Down}{Shift Down}{Tab}
+    else
+        Send {Alt Down}{Tab}
+    Send {F13}
+return
+#if AltTabMenu
+    LAlt Up::Send {LAlt Up}{vk1A}
+#if
+
 ; !e::ShowApp("explorer.exe", "ahk_class CabinetWClass")
 !p::Pause
 !b::ConnectBT("soundcore Liberty 4",1)
