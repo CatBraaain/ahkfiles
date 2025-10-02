@@ -120,7 +120,7 @@ F3::Delete
 !sc03a::IsTenkeyMode:=!IsTenkeyMode
 sc03a::Send {vkF3} ;CapsLock全角半角
 LAlt::
-    Send {vk1D} ;無変換
+    Send {vk1C} ;変換
     Send {LAlt Down}
     KeyWait LAlt
     Send {LAlt Up}
