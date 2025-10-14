@@ -14,7 +14,7 @@
     +8:: Send {*}
     +9:: Send {(}
     +0:: Send {)}
-    +q:: Send ^{Left}
+    +q:: Send {Esc}
     +w:: Send {Home}
     +e:: Send {Up}
     +r:: Send {End}
@@ -26,7 +26,7 @@
     +p:: Send {'}
     +[:: Send {_}
     +]:: Send {BS}
-    +a:: Send {Esc}
+    +a:: Send ^{Left}
     +s:: Send {Left}
     +d:: Send {Down}
     +f:: Send {Right}
