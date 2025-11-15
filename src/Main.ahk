@@ -29,7 +29,7 @@ ShouldClipCursor := true
 
 IsTenkeyMode:= false
 Games := "PAYDAY 2|Warlander|Battlefield|Robocraft|Minecraft|HalfDead2|Counter-Strike|CrowFPS|MilkChoco|PortalWars|Monster Hunter|Unrailed!"
-ChromeGames := "CrazyGames - Google Chrome|Skillfite.io|Sword Masters - Google Chrome|arras.io - Google Chrome|diep.io - Google Chrome|STUG - MultiPlayer Tank Battle - Google Chrome|Krunker - Google Chrome"
+ChromeGames := "CrazyGames - Google Chrome|Skillfite.io|Sword Masters - Google Chrome|arras.io - Google Chrome|diep.io - Google Chrome|STUG - MultiPlayer Tank Battle - Google Chrome|Krunker - Google Chrome|Ships 3D - Google Chrome"
 
 Exit ;Exit Auto-Execute
 
