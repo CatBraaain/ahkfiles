@@ -161,5 +161,7 @@ return
 ;HotString
 #InputLevel 1
 :ox:nme:: SendInput {vk1A}{Text}%EMAIL%
+:o?:/ndash::–
+:o?:/mdash::—
 #InputLevel 0
 
