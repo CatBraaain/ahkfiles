@@ -95,15 +95,6 @@ PasteStr(Str){
     return
 }
 
-SendJs(JsStr){
-    SendEvent ^l
-    Sleep 200
-    PasteStr("javascript")
-    PasteStr(": " . JsStr)
-    SendEvent {Enter}
-    return
-}
-
 SendTo(keystroke,target){
     WinActivate, %target%
     WinWaitActive, %target%
