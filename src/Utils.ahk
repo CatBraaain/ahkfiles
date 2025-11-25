@@ -108,7 +108,7 @@ DuplicateRow(){
 
 IsGameWindow(){
     global Games, ChromeGames
-    return (WinActive(Games) AND !WinActive(" - Google Chrome")) OR WinActive(ChromeGames)
+    return (WinActive(Games) AND !WinActive(" - Google Chrome")) OR WinActive(ChromeGames . " - Google Chrome")
 }
 
 MsgWinTitle(){
