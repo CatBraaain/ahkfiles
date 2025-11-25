@@ -40,4 +40,3 @@ HistoryPaste(){
         OnClipboardChange("UpdateClipArray",1)
     }
 }
-

@@ -179,4 +179,3 @@ ShowImg(ImgPath){
     Gui, Show, Hide, Window
     return
 }
-
