@@ -1,4 +1,4 @@
-﻿; https://kts.sakaiweb.com/virtualkeycodes.html
+﻿; https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
 #If !IsGameWindow()
     [:: Send {-}
     ]:: Send {BS}
@@ -144,21 +144,18 @@ return
 !+b::ConnectBT("soundcore Liberty 4",0)
 !k::KeyHistory
 ; !c::ShowApp("C:\Program Files (x86)\Google\Chrome\Application\chrome.exe","Google Chrome")
-; !v::ShowApp("C:\Users\PRO\AppData\Local\Programs\Microsoft VS Code\Code.exe","Visual Studio Code")
 !Esc::MsgWinTitle()
 !Delete::Suspend
 
 ~^w::CloseSaveDialog()
-^+w::Send !{F4} ;Ctrl+Shift+W→Alt+F4
-; ^e::DuplicateRow()
+^+w::Send !{F4}
 ^+a::Send ^{Left}+^{Right}
 ^+d::DeleteRow()
 ^d::DuplicateRow()
-^+z::Send ^y ;Ctrl Shift Z => Ctrl Y
-^Space::Send {Enter} ;Ctrl+Space→Enter
+^+z::Send ^y
+^Space::Send {Enter}
 ^+Delete::ExitApp
 
-;HotString
 #InputLevel 1
 :ox:nme:: SendInput {vk1A}{Text}%EMAIL%
 :o?:/ndash::–
