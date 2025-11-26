@@ -118,7 +118,7 @@ F2::Enter
 F3::Delete
 
 !vk14:: IsTenkeyMode := !IsTenkeyMode
-vk14:: Send("{vkF3}") ; vk14 is CapsLock ,vkF3 is ime-toggle
+vk14:: Send("{vkF3}") ; vk14 is CapsLock, vkF3 is ime-toggle
 LAlt:: {
     Send("{vk1C}")
     Send("{LAlt Down}")

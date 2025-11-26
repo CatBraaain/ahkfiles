@@ -28,7 +28,7 @@ WheelUp:: Send("{+}")
 WheelDown:: Send("{-}")
 
 #HotIf WinActive("note - Google Chrome")
-!F1:: {  ;テンプレート貼りつけ
+!F1:: { ; Paste template
     Send("^a{BS}")
     Send("目的^!2{End}{Enter 2}")
     Send("スクリプト^!2{End}{Enter}^!\{Enter 2}")
@@ -38,17 +38,17 @@ WheelDown:: Send("{-}")
 }
 
 ^vkF4::
-!vk19:: Send("^!0")  ;解除
+!vk19:: Send("^!0") ; Normal
 ^1::
-<!1:: Send("^!2") ;大見出し
+<!1:: Send("^!2") ; Heading1
 ^2::
-<!2:: Send("^!3") ;小見出し
+<!2:: Send("^!3") ; Heading2
 ^3::
-<!3:: Send("^!\") ;コード
+<!3:: Send("^!\") ; CodeBlock
 ^4::
-<!4:: Send("^+>") ;引用
+<!4:: Send("^+>") ; BlockQuote
 ^5::
-<!5:: Send("^b") ;強調
+<!5:: Send("^b") ; Bold
 ~^b:: return
 
 #HotIf WinActive("diep.io - Google Chrome") or WinActive("arras.io - Google Chrome")
@@ -94,11 +94,11 @@ DiepStatus(inputstr) {
     SendEvent(str)
     SendEvent("{m Down}{l Down}")
 }
-<!F1:: DiepStatus("565688888885656565656444444432132") ;12277707 overload,hybrid
-<!F2:: DiepStatus("565688888885675675675675677713232") ;12207777 rocketeer,tritrapper
-<!F3:: DiepStatus("565688888885656565656444444777777") ;00067767 triplet
-<!F4:: DiepStatus("565688888565656565677777774444432") ;01157775 sprayer,spread
-<!F5:: DiepStatus("565688888885656565656444444477777") ;00077757 sniper
+<!F1:: DiepStatus("565688888885656565656444444432132") ; 12277707 overload,hybrid
+<!F2:: DiepStatus("565688888885675675675675677713232") ; 12207777 rocketeer,tritrapper
+<!F3:: DiepStatus("565688888885656565656444444777777") ; 00067767 triplet
+<!F4:: DiepStatus("565688888565656565677777774444432") ; 01157775 sprayer,spread
+<!F5:: DiepStatus("565688888885656565656444444477777") ; 00077757 sniper
 
 #HotIf WinActive("arras.io - Google Chrome")
 ~LAlt:: {
@@ -109,12 +109,12 @@ DiepStatus(inputstr) {
 }
 ;total 42 upgrade point
 SetKeyDelay(20)
-<!F1:: SendEvent("{1 3}{2 3}{4 9}{5 9}{6 9}{7 9}") 	;3309999000
-<!F2:: SendEvent("{3 6}{4 9}{5 9}{6 9}{7 9}") 		;0069999000
-<!F3:: SendEvent("{3 9}{4 9}{5 9}{6 9}{7 6}") 		;0099996000
-<!F4:: SendEvent("{4 9}{5 9}{6 9}{7 9}{8 6}") 		;0009999600
-<!F5:: SendEvent("{3 4}{4 8}{5 8}{6 8}{7 9}{8 5}") 	;0048889500
-<!F6:: SendEvent("{3 3}{4 9}{5 9}{6 9}{7 9}{8 3}") 	;0039999300
+<!F1:: SendEvent("{1 3}{2 3}{4 9}{5 9}{6 9}{7 9}") 	; 3309999000
+<!F2:: SendEvent("{3 6}{4 9}{5 9}{6 9}{7 9}") 		; 0069999000
+<!F3:: SendEvent("{3 9}{4 9}{5 9}{6 9}{7 6}") 		; 0099996000
+<!F4:: SendEvent("{4 9}{5 9}{6 9}{7 9}{8 6}") 		; 0009999600
+<!F5:: SendEvent("{3 4}{4 8}{5 8}{6 8}{7 9}{8 5}") 	; 0048889500
+<!F6:: SendEvent("{3 3}{4 9}{5 9}{6 9}{7 9}{8 3}") 	; 0039999300
 
 #HotIf WinActive("JigsawPuzzles.io - Google Chrome")
 a::Left
@@ -139,10 +139,10 @@ w::Right
     Send("{vk1A}")
 }
 ^+g:: return
-^f:: Send("^f^g") ;find
-^+f:: Send("+^g") ;find
-^b:: Send("^d") ;add bookmark
-^+b:: Send("^+o") ;bookmark manager
+^f:: Send("^f^g") ; find
+^+f:: Send("+^g") ; find
+^b:: Send("^d") ; add bookmark
+^+b:: Send("^+o") ; bookmark manager
 ~^r:: CloseSaveDialog()
 
 ^s:: {
@@ -160,7 +160,7 @@ w::Right
     Send("{Enter}")
 }
 
-F7:: return ;カーソルブラウジング無効化
+F7:: return ; Disables cursor browsing
 
 !LButton:: {
     global ClickLoopFlag := 1
