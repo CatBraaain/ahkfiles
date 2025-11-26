@@ -1,4 +1,4 @@
-﻿RemoveToolTip() {
+RemoveToolTip() {
     SetTimer(RemoveToolTip, 0)
     ToolTip("")
 }

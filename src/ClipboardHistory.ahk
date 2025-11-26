@@ -1,4 +1,4 @@
-﻿StartClipboardHistory() {
+StartClipboardHistory() {
     global History := []
     OnClipboardChange(UpdateClipArray, 1)
     Hotkey("^+v", HistoryPaste)

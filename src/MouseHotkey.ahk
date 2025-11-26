@@ -1,4 +1,4 @@
-﻿XButton1:: {
+XButton1:: {
     Send("^w")
     CloseSaveDialog()
 }

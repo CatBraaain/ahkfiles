@@ -1,4 +1,4 @@
-﻿#SingleInstance Force
+#SingleInstance Force
 #UseHook
 
 #Include "../Env.ahk"

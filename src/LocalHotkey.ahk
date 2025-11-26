@@ -1,4 +1,4 @@
-﻿#Include "Utils.ahk"
+#Include "Utils.ahk"
 
 #HotIf WinActive(" - AutoHotkey - Visual Studio Code")
 ~^s:: {

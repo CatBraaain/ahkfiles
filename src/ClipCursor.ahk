@@ -1,4 +1,4 @@
-﻿^!c:: {
+^!c:: {
     global ShouldClipCursor := !ShouldClipCursor
     global ShellHookMsgId
     if (ShouldClipCursor) {

@@ -1,4 +1,4 @@
-﻿; https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
+; https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
 #HotIf !IsGameWindow()
 [:: Send("{-}")
 ]:: Send("{BS}")
