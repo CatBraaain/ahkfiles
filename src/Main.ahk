@@ -30,8 +30,6 @@ SetMenuTray()
 StartClipboardHistory()
 global ShellHookMsgId := StartClipCursor()
 
-; ListLines(false)
-
 Exit() ; Exit Auto-Execute
 
 #Include "GlobalHotkey.ahk"

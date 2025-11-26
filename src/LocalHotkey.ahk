@@ -1,8 +1,10 @@
-﻿#HotIf WinActive(" - AutoHotkey - Visual Studio Code")
+﻿#Include "Utils.ahk"
+
+#HotIf WinActive(" - AutoHotkey - Visual Studio Code")
 ~^s:: {
     KeyWait("s")
-    KeyWait("Ctrl")
     Reload()
+    KeyWait("Ctrl")
 }
 
 #HotIf WinActive(" - Visual Studio Code")
@@ -27,25 +29,12 @@ WheelDown:: Send("{-}")
 
 #HotIf WinActive("note - Google Chrome")
 !F1:: {  ;テンプレート貼りつけ
-    SendEvent("^a{BS}")
-    OnClipboardChange(UpdateClipArray, 0)
-    Old_ClipBoard := ClipboardAll()
-    A_Clipboard := ""
-    A_Clipboard := "目的`n`nスクリプト`n`nスクリプト解説`n`n参考`n`nあとがき"
-    ClipWait()
-    SendEvent("^v")
-    SendEvent("{Enter}")
-    A_Clipboard := Old_ClipBoard
-    OnClipboardChange(UpdateClipArray, 1)
-    SendEvent("{PgUp 2}")
-    Sleep(200)
-    SendEvent("^!2{End}")
-    Sleep(200)
-    SendEvent("{Enter}")
-    SendEvent("{Down}^!2{End}{Enter}^!\{Enter 2}")
-    SendEvent("{Down}^!2{End}{Enter}^!\{Enter 2}")
-    SendEvent("{Down}^!2{End}{Enter}")
-    SendEvent("{Down}^!2{End}{Enter}")
+    Send("^a{BS}")
+    Send("目的^!2{End}{Enter 2}")
+    Send("スクリプト^!2{End}{Enter}^!\{Enter 2}")
+    Send("スクリプト解説^!2{End}{Enter}^!\{Enter 2}")
+    Send("参考^!2{End}{Enter 2}")
+    Send("あとがき^!2{End}{Enter}")
 }
 
 ^vkF4::

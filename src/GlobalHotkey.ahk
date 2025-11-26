@@ -2,7 +2,7 @@
 #HotIf !IsGameWindow()
 [:: Send("{-}")
 ]:: Send("{BS}")
-`;:: Send("{}")
+`;:: return
 ':: Send("{`;}")
 +1:: Send("{!}")
 +2:: Send("{@}")
@@ -36,7 +36,7 @@
 +k:: Send("{)}")
 +l:: Send("{=}")
 +':: Send("{:}")
-+z:: return
++z:: Send("{Click}")
 +x:: Send("{BS}")
 +c:: Send("{Enter}")
 +v:: Send("{`%}")
@@ -117,15 +117,15 @@ F1::Backspace
 F2::Enter
 F3::Delete
 
-!sc03a:: IsTenkeyMode := !IsTenkeyMode
-sc03a:: Send("{vkF3}") ;CapsLock全角半角
+!vk14:: IsTenkeyMode := !IsTenkeyMode
+vk14:: Send("{vkF3}") ; vk14 is CapsLock ,vkF3 is ime-toggle
 LAlt:: {
     Send("{vk1C}")
     Send("{LAlt Down}")
     KeyWait("LAlt")
     Send("{LAlt Up}")
 }
-~RAlt:: Send("{vkE8}") ;無意味
+~RAlt:: Send("{vk99}") ; Send an unassigned key to avoid changing focus
 
 ~!Tab:: global IsOnAltTabWindow := true
 ~!+Tab:: global IsOnAltTabWindow := true

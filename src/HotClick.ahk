@@ -11,20 +11,20 @@ SetupHotClick() {
 
 SetHotClickOnCurrentPlace(HotkeyName) {
     global Coords
-    TheKey := SubStr(A_ThisHotkey, 3)
-    Hotkey(TheKey, ClickCoord, "On")
+    theKey := SubStr(HotkeyName, 3)
+    Hotkey(theKey, ClickCoord, "On")
     MouseGetPos(&MouseX, &MouseY)
-    Coords[TheKey] := Map("X", MouseX, "Y", MouseY)
+    Coords[HotkeyName] := Map("X", MouseX, "Y", MouseY)
 }
 
 UnsetHotClick(HotkeyName) {
-    TheKey := SubStr(A_ThisHotkey, 4)
+    theKey := SubStr(HotkeyName, 4)
     try {
-        Hotkey(TheKey, "Off")
+        Hotkey(theKey, "Off")
     }
 }
 
 ClickCoord(HotkeyName) {
     global Coords
-    ClickEx(Coords[A_ThisHotkey]["X"], Coords[A_ThisHotkey]["Y"])
+    ClickEx(Coords[HotkeyName]["X"], Coords[HotkeyName]["Y"])
 }
