@@ -34,13 +34,16 @@ CloseSaveDialog() {
     }
 }
 
-CopySelection() {
+GetSelectionStr() {
     OnClipboardChange(UpdateClipArray, 0)
-    OldClipboard := A_Clipboard
+    clipboardBk := ClipboardAll()
     A_Clipboard := ""
-    SendEvent("^c")
-    Errorlevel := !ClipWait()
-    return OldClipboard
+    Send("^c")
+    ClipWait()
+    selectionStr := A_Clipboard
+    A_Clipboard := clipboardBk
+    OnClipboardChange(UpdateClipArray, 1)
+    return selectionStr
 }
 
 DeleteRow() {
@@ -48,10 +51,9 @@ DeleteRow() {
 }
 
 DuplicateRow() {
-    SendEvent("{End}+{Home}") ;+{Home}{Left}
-    OldClipboard := CopySelection()
-    Send("{Right}{Enter}^v")
-    PasteWait(OldClipboard)
+    SendEvent("{End}+{Home}")
+    selectionStr := GetSelectionStr()
+    Send("{Right}{Enter}" . selectionStr)
 }
 
 IsGameWindow() {
@@ -64,27 +66,6 @@ MsgWinTitle() {
     ExStyle := WinGetExStyle("A")
     Body := WinGetText("A")
     MsgBox(Title . "`n" . ExStyle . "`n" . Body)
-}
-
-PasteWait(OldClipboard) {
-    while DllCall("user32\GetOpenClipboardWindow", "Ptr")
-        Sleep(20)
-    ToolTip("waiting")
-    Sleep(20)
-    ToolTip()
-    A_Clipboard := ""
-    A_Clipboard := OldClipboard
-    OnClipboardChange(UpdateClipArray, 1)
-}
-
-PasteStr(Str) {
-    OnClipboardChange(UpdateClipArray, 0)
-    OldClipboard := ClipboardAll()
-    A_Clipboard := ""
-    A_Clipboard := Str
-    ClipWait()
-    SendEvent("^v")
-    PasteWait(OldClipboard)
 }
 
 SendTo(keystroke, target) {
