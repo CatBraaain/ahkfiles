@@ -26,6 +26,7 @@ global ChromeGames :=
     "CrazyGames|Skillfite.io|Sword Masters|arras.io|diep.io|STUG - MultiPlayer Tank Battle|Krunker|Ships 3D"
 
 SetMenuTray()
+; SetupHotClick()
 StartClipboardHistory()
 global ShellHookMsgId := StartClipCursor()
 
@@ -33,12 +34,12 @@ global ShellHookMsgId := StartClipCursor()
 
 Exit() ; Exit Auto-Execute
 
-#Include "KeyboardHotkey.ahk"
+#Include "GlobalHotkey.ahk"
 #Include "MouseHotkey.ahk"
 #Include "LocalHotkey.ahk"
 
-; #Include "ClickCoord.ahk"
 #Include "ClipboardHistory.ahk"
 #Include "ClipCursor.ahk"
+#Include "HotClick.ahk"
 #Include "MenuTraySetting.ahk"
 #Include "Utils.ahk"
