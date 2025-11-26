@@ -11,11 +11,8 @@ ToolTipEx(str, delay := 0) {
 
 ClickEx(ClickX, ClickY) {
     MouseGetPos(&MouseX, &MouseY)
-    BlockInput("MouseMove")
-    MouseMove(ClickX, ClickY, 0)
-    Click()
+    Click(ClickX, ClickY)
     MouseMove(MouseX, MouseY, 0)
-    BlockInput("MouseMoveOff")
 }
 
 ClickImage(ImagePath) {
