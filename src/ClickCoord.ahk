@@ -1,26 +1,28 @@
-﻿PrepareForClickCoordHotkey(){
-    Global Coords
+﻿PrepareForClickCoordHotkey() {
+    global Coords
     Coords := Object()
-    Loop, 26 {
-        Hotkey, % "^!" Chr(A_Index+96), EnableClickCoordHotkey
-        Hotkey, % "^+!" Chr(A_Index+96), DisableClickCoordHotkey
+    loop 26 {
+        Hotkey("^!" Chr(A_Index + 96), EnableClickCoordHotkey)
+        Hotkey("^+!" Chr(A_Index + 96), DisableClickCoordHotkey)
     }
 }
 
-DisableClickCoordHotkey:
-    TheKey := SubStr(A_ThisHotkey,4)
-    Try {
-        Hotkey, % TheKey, Off
+DisableClickCoordHotkey() {
+    TheKey := SubStr(A_ThisHotkey, 4)
+    try {
+        Hotkey(TheKey, "Off")
     }
-return
+}
 
-EnableClickCoordHotkey:
-    TheKey := SubStr(A_ThisHotkey,3)
-    Hotkey, % TheKey, ClickCoord, On
-    MouseGetPos MouseX, MouseY
-    Coords[TheKey] := Object("X",MouseX,"Y",MouseY)
-return
+EnableClickCoordHotkey() {
+    global Coords
+    TheKey := SubStr(A_ThisHotkey, 3)
+    Hotkey(TheKey, ClickCoord, "On")
+    MouseGetPos(&MouseX, &MouseY)
+    Coords[TheKey] := Map("X", MouseX, "Y", MouseY)
+}
 
-ClickCoord:
-    Click(Coords[A_ThisHotkey]["X"],Coords[A_ThisHotkey]["Y"])
-return
+ClickCoord() {
+    global Coords
+    Click(Coords[A_ThisHotkey]["X"], Coords[A_ThisHotkey]["Y"])
+}

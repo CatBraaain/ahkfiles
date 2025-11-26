@@ -1,57 +1,61 @@
-﻿^!c::
-    ShouldClipCursor := !ShouldClipCursor
+﻿^!c:: {
+    global ShouldClipCursor := !ShouldClipCursor
+    global ShellHookMsgId
     if (ShouldClipCursor) {
         ShellHookMsgId := StartClipCursor()
         ClipOnActiveMonitor()
     } else {
-        OnMessage( ShellHookMsgId, "" )
+        OnMessage(ShellHookMsgId, OnShellHook, 0)
         ClipCursor(False)
     }
-return
-
-StartClipCursor(){
-    Gui +LastFound ; create hidden window as message receiver
-    msgReceiverWindowHandle := WinExist()
-    DllCall( "RegisterShellHookWindow", UInt, msgReceiverWindowHandle )
-    shellHookMsgId := DllCall( "RegisterWindowMessage", Str, "SHELLHOOK" )
-    OnMessage( shellHookMsgId, "OnShellHook" )
-    return shellHookMsgId
 }
 
-ClipCursor( shouldClip=True, x1=0 , y1=0, x2=1, y2=1 ) {
-    VarSetCapacity(R,16,0), NumPut(x1,&R+0),NumPut(y1,&R+4),NumPut(x2,&R+8),NumPut(y2,&R+12)
-    Return shouldClip ? DllCall( "ClipCursor", UInt,&R ) : DllCall( "ClipCursor", UInt, 0 )
+StartClipCursor() {
+    global InvisibleWindow := Gui()
+    DllCall("RegisterShellHookWindow", "UInt", InvisibleWindow.Hwnd)
+    global ShellHookMsgId := DllCall("RegisterWindowMessage", "Str", "SHELLHOOK")
+    OnMessage(ShellHookMsgId, OnShellHook)
+    return ShellHookMsgId
 }
 
-OnShellHook(wParam,lParam){
-    ; static HSHELL_WINDOWACTIVATED := 4
-    ; static HSHELL_MONITORCHANGED := 16
-    ; static HSHELL_RUDEAPPACTIVATED := 32772
-    If (wParam=4 OR wParam=16 OR wParam=32772) {
+ClipCursor(shouldClip := True, x1 := 0, y1 := 0, x2 := 1, y2 := 1) {
+    R := Buffer(16, 0), NumPut("UPtr", x1, R.Ptr + 0), NumPut("UPtr", y1, R.Ptr + 4), NumPut("UPtr", x2, R.Ptr + 8),
+    NumPut("UPtr", y2, R.Ptr + 12)
+    return shouldClip ? DllCall("ClipCursor", "UInt", R.Ptr) : DllCall("ClipCursor", "UInt", 0)
+}
+
+OnShellHook(wParam, lParam, msg, hwnd) {
+    HSHELL_WINDOWACTIVATED := 4
+    HSHELL_MONITORCHANGED := 16
+    HSHELL_RUDEAPPACTIVATED := 32772
+    if (
+        wParam = HSHELL_WINDOWACTIVATED
+        or wParam = HSHELL_MONITORCHANGED
+        or wParam = HSHELL_RUDEAPPACTIVATED
+    ) {
         ClipOnActiveMonitor()
         ; SetMouseOnCenter()
     }
 }
 
-ClipOnActiveMonitor(){
-    monitorIndex := GetActiveMonitorIndex()
-    SysGet, monitor, Monitor, %monitorIndex%
-    ClipCursor(True, monitorLeft, monitorTop, monitorRight, monitorBottom)
+ClipOnActiveMonitor() {
+    index := GetActiveMonitorIndex()
+    MonitorGet(index, &left, &top, &right, &bottom)
+    ClipCursor(True, left, top, right, bottom)
 }
 
-GetActiveMonitorIndex(){
-    SysGet, monitorCount, MonitorCount
-    Loop %monitorCount%{
-        SysGet, monitor, Monitor, %A_Index%
-        WinGetPos, x, y, w, h, a
+GetActiveMonitorIndex() {
+    count := MonitorGetCount()
+    loop count {
+        MonitorGet(A_Index, &left, &top, &right, &bottom)
+        WinGetPos(&x, &y, &w, &h, "a")
         isWindowCenterInMonitor := True
-            AND monitorLeft <= x+w/2
-            AND x+w/2 <= monitorRight
-            AND monitorTop <= y+h/2
-            AND y+h/2 < monitorBottom
-        if (isWindowCenterInMonitor){
-            ; return %A_Index%
-            return %monitor%
+            AND left <= x + w / 2
+            AND x + w / 2 <= right
+            AND top <= y + h / 2
+            AND y + h / 2 < bottom
+        if (isWindowCenterInMonitor) {
+            return A_Index
         }
     }
 }

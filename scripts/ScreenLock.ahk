@@ -1,53 +1,29 @@
-﻿#SingleInstance force
-#Persistent
-#Noenv
+﻿#SingleInstance Force
 #NoTrayIcon
-SendMode Input
 
-; GoSub FocusAssistOn
-Sleep 3000
-GoSub MonitorOff
-SetTimer, MonitorOff, 250
+MonitorOff()
+SetTimer(MonitorOff, 250)
 
->!l::
-    ; GoSub FocusAssistOn
-    GoSub MonitorOff
-    SetTimer, MonitorOff, 250
-return
+>!l:: {
+    MonitorOff()
+    SetTimer(MonitorOff, 250)
+}
 
->!u::
-+>!l::
-    SetTimer, MonitorOff, Off
-    GoSub MonitorOn
-    Keywait Alt
-    Keywait Shift
-    Keywait L
-    Keywait U
-; GoSub FocusAssistOff
-return
++>!l:: {
+    SetTimer(MonitorOff, 0)
+    MonitorOn()
+    KeyWait("Alt")
+    KeyWait("Shift")
+    KeyWait("L")
+    KeyWait("U")
+}
 
-MonitorOff:
-    SendMessage,0x112,0xF170,2,,Program Manager
-return
+MonitorOff() {
+    SendMessage(0x112, 0xF170, 2, , "Program Manager")
+}
 
-MonitorOn:
-    SendMessage,0x112,0xF170,-1,,Program Manager
-return
+MonitorOn() {
+    SendMessage(0x112, 0xF170, -1, , "Program Manager")
+}
 
-FocusAssistOn:
-    If(!WinActive("アクション センター")){
-        Send #a
-    }
-    WinWaitActive, アクション センター,, 2
-    Send +{Tab}{Left 3}{Up 3}{Right 3}{Down 2}{Space}{Esc}
-return
-
-FocusAssistOff:
-    If(!WinActive("アクション センター")){
-        Send #a
-    }
-    WinWaitActive, アクション センター,, 2
-    Send +{Tab}{Left 3}{Up 3}{Right 3}{Down 2}{Space 2}{Esc}
-return
-
-^+Delete::ExitApp
+^+Delete:: ExitApp()

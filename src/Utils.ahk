@@ -1,125 +1,122 @@
-﻿RemoveToolTip:
-    SetTimer, RemoveToolTip, Off
-    ToolTip
-return
+﻿RemoveToolTip() {
+    SetTimer(RemoveToolTip, 0)
+    ToolTip("")
+}
 
-ToolTip(str,delay=0) {
-    ToolTip, %str%, A_ScreenWidth//2, A_ScreenHeight//2
+ToolTipEx(str, delay := 0) {
+    ToolTip(str, A_ScreenWidth // 2, A_ScreenHeight // 2)
     if delay
-        SetTimer, RemoveToolTip, %delay%
+        SetTimer(RemoveToolTip, delay)
 }
 
-Click(ClickX,ClickY){
-    MouseGetPos MouseX, MouseY
-    BlockInput, MouseMove
-    MouseMove ClickX, ClickY, 0
-    Click
-    MouseMove MouseX, MouseY, 0
-    BlockInput, MouseMoveOff
+ClickEx(ClickX, ClickY) {
+    MouseGetPos(&MouseX, &MouseY)
+    BlockInput("MouseMove")
+    MouseMove(ClickX, ClickY, 0)
+    Click()
+    MouseMove(MouseX, MouseY, 0)
+    BlockInput("MouseMoveOff")
 }
 
-ClickImage(ImagePath){
-    ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, %ImagePath%
+ClickImage(ImagePath) {
+    ImageSearch(&FoundX, &FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, ImagePath)
     Click(FoundX, FoundY)
 }
 
-CloseSaveDialog(){
-    if(A_PriorHotkey==A_ThisHotkey){
-        WinGetClass, ClassStr, A
-        WinGetTitle, TitleStr, A
+CloseSaveDialog() {
+    if (A_PriorHotkey == A_ThisHotkey) {
+        ClassStr := WinGetClass("A")
+        TitleStr := WinGetTitle("A")
 
-        If(ClassStr == "#32770"){
-            Send {n}
+        if (ClassStr == "#32770") {
+            Send("{n}")
         }
-        If(Instr(TitleStr,"このサイトを") OR Instr(TitleStr,"場所が利用できません")){
-            Send {Enter}
+        if (InStr(TitleStr, "このサイトを") OR InStr(TitleStr, "場所が利用できません")) {
+            Send("{Enter}")
         }
     }
-    return
 }
 
-CopySelection(){
-    OnClipboardChange("UpdateClipArray",0)
-    OldClipboard := Clipboard
-    Clipboard := ""
-    SendEvent ^c
-    ClipWait
-    return %OldClipboard%
+CopySelection() {
+    OnClipboardChange(UpdateClipArray, 0)
+    OldClipboard := A_Clipboard
+    A_Clipboard := ""
+    SendEvent("^c")
+    Errorlevel := !ClipWait()
+    return OldClipboard
 }
 
-DeleteRow(){
-    SendEvent {End}+{Home}+{Home}+{Left}{BS}{Right}
+DeleteRow() {
+    SendEvent("{End}+{Home}+{Home}+{Left}{BS}{Right}")
 }
 
-DuplicateRow(){
-    SendEvent {End}+{Home} ;+{Home}{Left}
+DuplicateRow() {
+    SendEvent("{End}+{Home}") ;+{Home}{Left}
     OldClipboard := CopySelection()
-    Send {Right}{Enter}^v
+    Send("{Right}{Enter}^v")
     PasteWait(OldClipboard)
-    return
 }
 
-IsGameWindow(){
+IsGameWindow() {
     global Games, ChromeGames
     return (WinActive(Games) AND !WinActive(" - Google Chrome")) OR WinActive(ChromeGames . " - Google Chrome")
 }
 
-MsgWinTitle(){
-    WinGetTitle, Title, A
-    WinGet, ExStyle, ExStyle, A
-    WinGetText, Body, A
-    MsgBox % Title . "`n" . ExStyle . "`n" . Body
-    return
+MsgWinTitle() {
+    Title := WinGetTitle("A")
+    ExStyle := WinGetExStyle("A")
+    Body := WinGetText("A")
+    MsgBox(Title . "`n" . ExStyle . "`n" . Body)
 }
 
-PasteWait(OldClipboard){
+PasteWait(OldClipboard) {
     while DllCall("user32\GetOpenClipboardWindow", "Ptr")
-        Sleep 20
-    tooltip waiting
-    Sleep 20
-    tooltip
-    Clipboard := ""
-    Clipboard := OldClipboard
-    OnClipboardChange("UpdateClipArray",1)
-    return
+        Sleep(20)
+    ToolTip("waiting")
+    Sleep(20)
+    ToolTip()
+    A_Clipboard := ""
+    A_Clipboard := OldClipboard
+    OnClipboardChange(UpdateClipArray, 1)
 }
 
-PasteStr(Str){
-    OnClipboardChange("UpdateClipArray",0)
-    OldClipboard := ClipboardAll
-    Clipboard := ""
-    Clipboard := Str
-    ClipWait
-    SendEvent ^v
+PasteStr(Str) {
+    OnClipboardChange(UpdateClipArray, 0)
+    OldClipboard := ClipboardAll()
+    A_Clipboard := ""
+    A_Clipboard := Str
+    ClipWait()
+    SendEvent("^v")
     PasteWait(OldClipboard)
-    return
 }
 
-SendTo(keystroke,target){
-    WinActivate, %target%
-    WinWaitActive, %target%
-    Send %keystroke%
-    return
+SendTo(keystroke, target) {
+    WinActivate(target)
+    WinWaitActive(target)
+    Send(keystroke)
 }
 
-ShowApp(exe_path, selector){
-    If WinExist(selector)
-        WinActivate %selector%
-    Else
-        Run %Script_Dir%\%exe_path%
-    return
+ShowApp(exe_path, selector) {
+    if WinExist(selector)
+        WinActivate(selector)
+    else
+        Run(A_ScriptDir . "\" . exe_path)
 }
 
-ShowImg(ImgPath){
-    Gui, +LastFound -Caption +E0x20
-    Gui,Color,888888
-    WinSet,Transcolor, 888888 126
-    Gui,Margin,0,0
-    Gui, Add, Picture, w1200 h800 BackGroundTrans, %ImgPath%
-    Gui, Show,, Window
+ShowImg(ImgPath) {
+    global ImageWindow := Gui()
+    ImageWindow.Opt("+LastFound -Caption +E0x20")
+    ImageWindow.BackColor := 888888
+    WinSetTranscolor("888888 126")
+    ImageWindow.MarginX := 0
+    ImageWindow.MarginY := 0
+    ImageWindow.Add("Picture", "w1200 h800 BackGroundTrans", ImgPath)
+    ImageWindow.Title := "Window"
+    ImageWindow.Show()
 
-    KeyWait % SubStr(A_ThisHotkey,StrLen(A_ThisHotkey))
+    KeyWait(SubStr(A_ThisHotkey, (StrLen(A_ThisHotkey)) < 1 ? (StrLen(A_ThisHotkey)) - 1 : (StrLen(A_ThisHotkey))))
 
-    Gui, Show, Hide, Window
+    ImageWindow.Title := "Window"
+    ImageWindow.Show("Hide")
     return
 }
