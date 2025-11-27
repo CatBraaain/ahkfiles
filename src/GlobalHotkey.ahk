@@ -124,6 +124,7 @@ LAlt:: {
     Send("{LAlt Down}")
     KeyWait("LAlt")
     Send("{LAlt Up}")
+    Send("{vk99}") ; Send an unassigned key to avoid changing focus
 }
 ~RAlt:: Send("{vk99}") ; Send an unassigned key to avoid changing focus
 
