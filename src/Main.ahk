@@ -1,4 +1,6 @@
-﻿#NoEnv
+﻿#Requires AutoHotkey v1.1
+
+#NoEnv
 SetBatchLines, -1
 ListLines, Off
 #Persistent
