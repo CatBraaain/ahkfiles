@@ -1,11 +1,12 @@
-global ShouldClipCursor := true
-global ShellHookMsgId := StartClipCursor()
-
 ^!c:: {
-    global ShouldClipCursor := !ShouldClipCursor
+    static shouldClipCursor := true
+    shouldClipCursor := !shouldClipCursor
     global ShellHookMsgId
-    if (ShouldClipCursor) {
-        ShellHookMsgId := StartClipCursor()
+    if (ShellHookMsgId == "") {
+        return
+    }
+    if (shouldClipCursor) {
+        StartClipCursor()
         ClipOnActiveMonitor()
     } else {
         OnMessage(ShellHookMsgId, OnShellHook, 0)
@@ -14,8 +15,8 @@ global ShellHookMsgId := StartClipCursor()
 }
 
 StartClipCursor() {
-    global InvisibleWindow := Gui()
-    DllCall("RegisterShellHookWindow", "UInt", InvisibleWindow.Hwnd)
+    static shellHookWindow := Gui()
+    DllCall("RegisterShellHookWindow", "UInt", shellHookWindow.Hwnd)
     global ShellHookMsgId := DllCall("RegisterWindowMessage", "Str", "SHELLHOOK")
     OnMessage(ShellHookMsgId, OnShellHook)
     return ShellHookMsgId

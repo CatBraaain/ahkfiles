@@ -88,7 +88,7 @@ ShowApp(exe_path, selector) {
 }
 
 ShowImg(ImgPath) {
-    global ImageWindow := Gui()
+    static ImageWindow := Gui()
     ImageWindow.Opt("+LastFound -Caption +E0x20")
     ImageWindow.BackColor := 888888
     WinSetTranscolor("888888 126")

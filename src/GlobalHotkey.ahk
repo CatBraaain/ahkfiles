@@ -163,6 +163,6 @@ LAlt Up:: {
 
 #InputLevel 1
 :ox:nme:: SendInput("{vk1A}{Text}" . EMAIL)
-:o?:/ndash::–
-:o?:/mdash::—
+:ox?:/ndash:: Send("–")
+:ox?:/mdash:: Send("—")
 #InputLevel 0
