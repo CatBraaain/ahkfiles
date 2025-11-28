@@ -52,11 +52,13 @@ GetActiveMonitorIndex() {
     loop count {
         MonitorGet(A_Index, &left, &top, &right, &bottom)
         WinGetPos(&x, &y, &w, &h, "a")
-        isWindowCenterInMonitor := True
-            AND left <= x + w / 2
-            AND x + w / 2 <= right
-            AND top <= y + h / 2
-            AND y + h / 2 < bottom
+        center := { x: x + w / 2, y: y + h / 2 }
+        isWindowCenterInMonitor := (
+            left <= center.x
+            && center.x <= right
+            && top <= center.y
+            && center.y < bottom
+        )
         if (isWindowCenterInMonitor) {
             return A_Index
         }
