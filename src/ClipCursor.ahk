@@ -43,8 +43,10 @@ OnShellHook(wParam, lParam, msg, hwnd) {
 
 ClipOnActiveMonitor() {
     index := GetActiveMonitorIndex()
-    MonitorGet(index, &left, &top, &right, &bottom)
-    ClipCursor(True, left, top, right, bottom)
+    if (index !== "") {
+        MonitorGet(index, &left, &top, &right, &bottom)
+        ClipCursor(True, left, top, right, bottom)
+    }
 }
 
 GetActiveMonitorIndex() {
@@ -63,4 +65,5 @@ GetActiveMonitorIndex() {
             return A_Index
         }
     }
+    return ""
 }
