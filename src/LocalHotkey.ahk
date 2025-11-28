@@ -180,7 +180,7 @@ F7:: return ; Disables cursor browsing
     ToolTip()
 }
 
-#HotIf WinActive(Games)
+#HotIf IsGameWindow()
 ~1:: return
 ~2:: return
 ~3:: return
