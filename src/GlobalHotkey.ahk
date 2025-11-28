@@ -1,3 +1,6 @@
+#Include "Utils.ahk"
+#Include "../Env.ahk"
+
 ; https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
 #HotIf !IsGameWindow()
 [:: Send("{-}")
@@ -117,6 +120,7 @@ F1::Backspace
 F2::Enter
 F3::Delete
 
+global IsTenkeyMode := false
 !vk14:: IsTenkeyMode := !IsTenkeyMode
 vk14:: Send("{vkF3}") ; vk14 is CapsLock, vkF3 is ime-toggle
 LAlt:: {
@@ -128,6 +132,7 @@ LAlt:: {
 }
 ~RAlt:: Send("{vk99}") ; Send an unassigned key to avoid changing focus
 
+global IsOnAltTabWindow := false
 ~!Tab:: global IsOnAltTabWindow := true
 ~!+Tab:: global IsOnAltTabWindow := true
 LAlt Up:: {

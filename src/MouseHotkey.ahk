@@ -1,3 +1,6 @@
+#Include "Utils.ahk"
+#Include "ClipCursor.ahk"
+
 XButton1:: {
     Send("^w")
     CloseSaveDialog()

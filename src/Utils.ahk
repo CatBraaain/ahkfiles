@@ -1,3 +1,6 @@
+#Include "Utils.ahk"
+#Include "ClipboardHistory.ahk"
+
 RemoveToolTip() {
     SetTimer(RemoveToolTip, 0)
     ToolTip("")
@@ -57,7 +60,10 @@ DuplicateRow() {
 }
 
 IsGameWindow() {
-    global Games, ChromeGames
+    Games :=
+        "PAYDAY 2|Warlander|Battlefield|Robocraft|Minecraft|HalfDead2|Counter-Strike|CrowFPS|MilkChoco|PortalWars|Monster Hunter|Unrailed!"
+    ChromeGames :=
+        "CrazyGames|Skillfite.io|Sword Masters|arras.io|diep.io|STUG - MultiPlayer Tank Battle|Krunker|Ships 3D"
     return (WinActive(Games) AND !WinActive(" - Google Chrome")) OR WinActive(ChromeGames . " - Google Chrome")
 }
 

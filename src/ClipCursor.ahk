@@ -1,3 +1,6 @@
+global ShouldClipCursor := true
+global ShellHookMsgId := StartClipCursor()
+
 ^!c:: {
     global ShouldClipCursor := !ShouldClipCursor
     global ShellHookMsgId

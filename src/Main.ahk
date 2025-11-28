@@ -7,7 +7,6 @@
 
 InstallKeybdHook()
 InstallMouseHook()
-
 A_HotkeyInterval := 2000
 A_MaxHotkeysPerInterval := 200
 ProcessSetPriority("Realtime")
@@ -19,21 +18,6 @@ SetCapsLockState("AlwaysOff")
 SetScrollLockState("AlwaysOff")
 SetDefaultMouseSpeed(0)
 
-global ShouldClipCursor := true
-global IsOnAltTabWindow := false
-global IsTenkeyMode := false
-global Games :=
-    "PAYDAY 2|Warlander|Battlefield|Robocraft|Minecraft|HalfDead2|Counter-Strike|CrowFPS|MilkChoco|PortalWars|Monster Hunter|Unrailed!"
-global ChromeGames :=
-    "CrazyGames|Skillfite.io|Sword Masters|arras.io|diep.io|STUG - MultiPlayer Tank Battle|Krunker|Ships 3D"
-
-SetMenuTray()
-; SetupHotClick()
-StartClipboardHistory()
-global ShellHookMsgId := StartClipCursor()
-
-Exit() ; Exit Auto-Execute
-
 #Include "GlobalHotkey.ahk"
 #Include "MouseHotkey.ahk"
 #Include "LocalHotkey.ahk"
@@ -41,5 +25,9 @@ Exit() ; Exit Auto-Execute
 #Include "ClipboardHistory.ahk"
 #Include "ClipCursor.ahk"
 #Include "HotClick.ahk"
-#Include "MenuTraySetting.ahk"
+#Include "MenuTray.ahk"
 #Include "Utils.ahk"
+
+SetMenuTray()
+; SetupHotClick()
+StartClipboardHistory()
