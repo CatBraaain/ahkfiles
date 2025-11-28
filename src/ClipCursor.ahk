@@ -1,31 +1,23 @@
 ^!c:: {
     static shouldClipCursor := true
     shouldClipCursor := !shouldClipCursor
-    global ShellHookMsgId
-    if (ShellHookMsgId == "") {
-        return
-    }
-    if (shouldClipCursor) {
-        StartClipCursor()
+    ActiveMonitorClipCursor(shouldClipCursor)
+}
+
+ActiveMonitorClipCursor(enable := true) {
+    static shellHookMsgId := ""
+    if (enable == true) {
+        static shellHookWindow := Gui()
+        DllCall("RegisterShellHookWindow", "UInt", shellHookWindow.Hwnd)
+        static shellHookMsgId := DllCall("RegisterWindowMessage", "Str", "SHELLHOOK")
+        OnMessage(shellHookMsgId, OnShellHook)
         ClipOnActiveMonitor()
     } else {
-        OnMessage(ShellHookMsgId, OnShellHook, 0)
-        ClipCursor(False)
+        if (shellHookMsgId !== "") {
+            OnMessage(shellHookMsgId, OnShellHook, 0)
+            ClipCursor(False)
+        }
     }
-}
-
-StartClipCursor() {
-    static shellHookWindow := Gui()
-    DllCall("RegisterShellHookWindow", "UInt", shellHookWindow.Hwnd)
-    global ShellHookMsgId := DllCall("RegisterWindowMessage", "Str", "SHELLHOOK")
-    OnMessage(ShellHookMsgId, OnShellHook)
-    return ShellHookMsgId
-}
-
-ClipCursor(shouldClip := True, x1 := 0, y1 := 0, x2 := 1, y2 := 1) {
-    R := Buffer(16, 0), NumPut("UPtr", x1, R.Ptr + 0), NumPut("UPtr", y1, R.Ptr + 4), NumPut("UPtr", x2, R.Ptr + 8),
-    NumPut("UPtr", y2, R.Ptr + 12)
-    return shouldClip ? DllCall("ClipCursor", "UInt", R.Ptr) : DllCall("ClipCursor", "UInt", 0)
 }
 
 OnShellHook(wParam, lParam, msg, hwnd) {
@@ -67,4 +59,10 @@ GetActiveMonitorIndex() {
         }
     }
     return ""
+}
+
+ClipCursor(shouldClip := True, x1 := 0, y1 := 0, x2 := 1, y2 := 1) {
+    R := Buffer(16, 0), NumPut("UPtr", x1, R.Ptr + 0), NumPut("UPtr", y1, R.Ptr + 4), NumPut("UPtr", x2, R.Ptr + 8),
+    NumPut("UPtr", y2, R.Ptr + 12)
+    return shouldClip ? DllCall("ClipCursor", "UInt", R.Ptr) : DllCall("ClipCursor", "UInt", 0)
 }

@@ -8,7 +8,7 @@ XButton1:: {
 
 XButton2:: {
     Send("{LCtrl Down}{LButton Down}")
-    ClipCursor(False, 0, 0, 0, 0)
+    ClipCursor(False)
 }
 
 XButton2 Up:: {
@@ -18,7 +18,7 @@ XButton2 Up:: {
     if (0 <= MouseX AND MouseX <= A_ScreenWidth AND 0 <= MouseY AND MouseY <= A_ScreenHeight) {
         ClipCursor(True, 0, 0, A_ScreenWidth, A_ScreenHeight)
     } else {
-        ClipCursor(False, 0, 0, 0, 0)
+        ClipCursor(False)
     }
 }
 
