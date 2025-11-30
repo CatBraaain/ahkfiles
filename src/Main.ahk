@@ -23,7 +23,7 @@ SetDefaultMouseSpeed(0)
 #Include "LocalHotkey.ahk"
 
 #Include "ClipboardHistory.ahk"
-#Include "ClipCursor.ahk"
+#Include "MonitorCursorGuard.ahk"
 #Include "HotClick.ahk"
 #Include "MenuTray.ahk"
 #Include "Utils.ahk"
