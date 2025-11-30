@@ -26,5 +26,5 @@ UnsetHotClick(HotkeyName) {
 
 ClickCoord(HotkeyName) {
     global Coords
-    ClickEx(Coords[HotkeyName]["X"], Coords[HotkeyName]["Y"])
+    QuickClick(Coords[HotkeyName]["X"], Coords[HotkeyName]["Y"])
 }

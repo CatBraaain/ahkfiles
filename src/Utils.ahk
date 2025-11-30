@@ -1,18 +1,12 @@
 #Include "Utils.ahk"
 #Include "ClipboardHistory.ahk"
 
-RemoveToolTip() {
-    SetTimer(RemoveToolTip, 0)
-    ToolTip("")
-}
-
 ToolTipEx(str, delay := 0) {
     ToolTip(str, A_ScreenWidth // 2, A_ScreenHeight // 2)
-    if delay
-        SetTimer(RemoveToolTip, delay)
+    SetTimer(() => (ToolTip(""), SetTimer(unset, 0)), delay)
 }
 
-ClickEx(ClickX, ClickY) {
+QuickClick(ClickX, ClickY) {
     MouseGetPos(&MouseX, &MouseY)
     Click(ClickX, ClickY)
     MouseMove(MouseX, MouseY, 0)
