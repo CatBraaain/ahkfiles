@@ -2,12 +2,11 @@
 
 ^!c:: {
     static shouldClipCursor := true
-    shouldClipCursor := !shouldClipCursor
-    AutoMonitorCursorGuard(shouldClipCursor)
+    AutoMonitorCursorGuard(shouldClipCursor := !shouldClipCursor)
 }
 
 AutoMonitorCursorGuard(enable := true) {
-    static windowActivatedHook := ShellHook(
+    static cursorGuardHook := ShellHook(
         [
             HSHELL_WINDOWACTIVATED,
             HSHELL_MONITORCHANGED,
@@ -16,9 +15,9 @@ AutoMonitorCursorGuard(enable := true) {
         SetMonitorCursorGuard
     )
     if (enable) {
-        windowActivatedHook.Enables(true)
+        cursorGuardHook.Enables(true)
     } else {
-        windowActivatedHook.Enables(false)
+        cursorGuardHook.Enables(false)
         ClipCursor(False)
     }
 }
