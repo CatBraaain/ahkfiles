@@ -27,8 +27,9 @@ SetDefaultMouseSpeed(0)
 #Include "HotClick.ahk"
 #Include "MenuTray.ahk"
 #Include "Utils.ahk"
+#Include "WinHook.ahk"
 
 SetMenuTray()
 ; SetupHotClick()
 StartClipboardHistory()
-ActiveMonitorClipCursor()
+AutoMonitorCursorGuard()

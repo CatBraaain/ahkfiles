@@ -1,40 +1,29 @@
+#Include WinHook.ahk
+
 ^!c:: {
     static shouldClipCursor := true
     shouldClipCursor := !shouldClipCursor
-    ActiveMonitorClipCursor(shouldClipCursor)
+    AutoMonitorCursorGuard(shouldClipCursor)
 }
 
-ActiveMonitorClipCursor(enable := true) {
-    static shellHookMsgId := ""
-    if (enable == true) {
-        static shellHookWindow := Gui()
-        DllCall("RegisterShellHookWindow", "UInt", shellHookWindow.Hwnd)
-        static shellHookMsgId := DllCall("RegisterWindowMessage", "Str", "SHELLHOOK")
-        OnMessage(shellHookMsgId, OnShellHook)
-        ClipOnActiveMonitor()
+AutoMonitorCursorGuard(enable := true) {
+    static windowActivatedHook := ShellHook(
+        [
+            HSHELL_WINDOWACTIVATED,
+            HSHELL_MONITORCHANGED,
+            HSHELL_RUDEAPPACTIVATED
+        ],
+        SetMonitorCursorGuard
+    )
+    if (enable) {
+        windowActivatedHook.Enables(true)
     } else {
-        if (shellHookMsgId !== "") {
-            OnMessage(shellHookMsgId, OnShellHook, 0)
-            ClipCursor(False)
-        }
+        windowActivatedHook.Enables(false)
+        ClipCursor(False)
     }
 }
 
-OnShellHook(wParam, lParam, msg, hwnd) {
-    HSHELL_WINDOWACTIVATED := 4
-    HSHELL_MONITORCHANGED := 16
-    HSHELL_RUDEAPPACTIVATED := 32772
-    if (
-        wParam = HSHELL_WINDOWACTIVATED
-        or wParam = HSHELL_MONITORCHANGED
-        or wParam = HSHELL_RUDEAPPACTIVATED
-    ) {
-        ClipOnActiveMonitor()
-        ; SetMouseOnCenter()
-    }
-}
-
-ClipOnActiveMonitor() {
+SetMonitorCursorGuard() {
     index := GetActiveMonitorIndex()
     if (index !== "") {
         MonitorGet(index, &left, &top, &right, &bottom)
