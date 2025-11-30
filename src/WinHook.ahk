@@ -1,4 +1,4 @@
-#include Array.ahk
+#include ArrayExtension.ahk
 
 HSHELL_WINDOWCREATED := 1
 HSHELL_WINDOWDESTROYED := 2
