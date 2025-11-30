@@ -67,34 +67,3 @@ MsgWinTitle() {
     Body := WinGetText("A")
     MsgBox(Title . "`n" . ExStyle . "`n" . Body)
 }
-
-SendTo(keystroke, target) {
-    WinActivate(target)
-    WinWaitActive(target)
-    Send(keystroke)
-}
-
-ShowApp(exe_path, selector) {
-    if WinExist(selector)
-        WinActivate(selector)
-    else
-        Run(A_ScriptDir . "\" . exe_path)
-}
-
-ShowImg(ImgPath) {
-    static ImageWindow := Gui()
-    ImageWindow.Opt("+LastFound -Caption +E0x20")
-    ImageWindow.BackColor := 888888
-    WinSetTranscolor("888888 126")
-    ImageWindow.MarginX := 0
-    ImageWindow.MarginY := 0
-    ImageWindow.Add("Picture", "w1200 h800 BackGroundTrans", ImgPath)
-    ImageWindow.Title := "Window"
-    ImageWindow.Show()
-
-    KeyWait(SubStr(A_ThisHotkey, (StrLen(A_ThisHotkey)) < 1 ? (StrLen(A_ThisHotkey)) - 1 : (StrLen(A_ThisHotkey))))
-
-    ImageWindow.Title := "Window"
-    ImageWindow.Show("Hide")
-    return
-}
