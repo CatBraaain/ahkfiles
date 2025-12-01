@@ -66,3 +66,14 @@ MsgWinTitle() {
     Body := WinGetText("A")
     MsgBox(Title . "`n" . ExStyle . "`n" . Body)
 }
+
+TryInvoke(FnTry, FnCatch := unset) {
+    try {
+        return FnTry()
+    } catch as e {
+        if IsSet(FnCatch) {
+            return FnCatch(e)
+        } else {
+        }
+    }
+}
