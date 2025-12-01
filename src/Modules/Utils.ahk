@@ -1,5 +1,3 @@
-#Include "ClipboardHistory.ahk"
-
 ToolTipEx(str, delay := 0) {
     ToolTip(str, A_ScreenWidth // 2, A_ScreenHeight // 2)
     SetTimer(() => (ToolTip(""), SetTimer(unset, 0)), delay)
@@ -31,14 +29,12 @@ CloseSaveDialog() {
 }
 
 GetSelectionStr() {
-    OnClipboardChange(UpdateClipArray, 0)
     clipboardBk := ClipboardAll()
     A_Clipboard := ""
     Send("^c")
     ClipWait()
     selectionStr := A_Clipboard
     A_Clipboard := clipboardBk
-    OnClipboardChange(UpdateClipArray, 1)
     return selectionStr
 }
 
