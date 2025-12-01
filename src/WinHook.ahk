@@ -21,7 +21,7 @@ HSHELL_RUDEAPPACTIVATED := (HSHELL_WINDOWACTIVATED | HSHELL_HIGHBIT)
 
 class ShellHook {
     static ShellHookMsgId := DllCall("RegisterWindowMessage", "Str", "SHELLHOOK")
-    static ShellHookWindow := Gui("", "ShellHookClassGui")
+    static ShellHookWindow := Gui()
     static _ := DllCall("RegisterShellHookWindow", "UInt", this.ShellHookWindow.Hwnd)
 
     __New(Events, Callback) {
