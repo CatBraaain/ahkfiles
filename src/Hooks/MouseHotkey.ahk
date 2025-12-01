@@ -1,5 +1,5 @@
-#Include "Utils.ahk"
-#Include "MonitorCursorGuard.ahk"
+#Include "../Modules/Utils.ahk"
+#Include "../Modules/MonitorCursorGuard.ahk"
 
 XButton1:: {
     Send("^w")

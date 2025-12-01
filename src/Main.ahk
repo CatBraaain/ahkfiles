@@ -18,15 +18,15 @@ SetCapsLockState("AlwaysOff")
 SetScrollLockState("AlwaysOff")
 SetDefaultMouseSpeed(0)
 
-#Include "GlobalHotkey.ahk"
-#Include "MouseHotkey.ahk"
-#Include "LocalHotkey.ahk"
+#Include "Hooks/GlobalHotkey.ahk"
+#Include "Hooks/MouseHotkey.ahk"
+#Include "Hooks/LocalHotkey.ahk"
 
-#Include "ClipboardHistory.ahk"
-#Include "HankakuOnFocus.ahk"
-#Include "HotClick.ahk"
-#Include "MenuTray.ahk"
-#Include "MonitorCursorGuard.ahk"
+#Include "Modules/ClipboardHistory.ahk"
+#Include "Modules/HankakuOnFocus.ahk"
+#Include "Modules/HotClick.ahk"
+#Include "Modules/MenuTray.ahk"
+#Include "Modules/MonitorCursorGuard.ahk"
 
 SetMenuTray()
 ; SetupHotClick()

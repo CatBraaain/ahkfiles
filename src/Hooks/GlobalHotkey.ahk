@@ -1,5 +1,5 @@
-#Include "Utils.ahk"
-#Include "../Env.ahk"
+#Include "../Modules/Utils.ahk"
+#Include "../../Env.ahk"
 
 ; https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
 #HotIf !IsGameWindow()
