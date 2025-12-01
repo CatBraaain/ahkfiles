@@ -1,25 +1,29 @@
 StartClipboardHistory() {
-    global History := []
-    OnClipboardChange(UpdateClipArray, 1)
-    Hotkey("^+v", HistoryPaste)
+    global ClipboardHistory := []
+    OnClipboardChange(UpdateClipboardHistory)
+    Hotkey("^+v", (HotkeyName) => PasteFromClipboardHistory(1))
     ; loop 9 {
-    ;     Hotkey("^+" . A_Index, HistoryPaste)
+    ;     Hotkey("^+" . A_Index, (HotkeyName)=>PasteFromClipboardHistory(A_Index))
     ; }
 }
 
-UpdateClipArray(Type) {
-    global PasteCnt, History
-    PasteCnt := 1
-    History.InsertAt(1, A_Clipboard)
-    if (History.Length > 50) {
-        History.Pop()
+UpdateClipboardHistory(DataType) {
+    static DATA_TYPE_EMPTY := 0
+    static DATA_TYPE_TEXT := 1
+    static DATA_TYPE_BINARY := 2
+
+    global ClipboardHistory
+    if (DataType := DATA_TYPE_TEXT) {
+        ClipboardHistory.InsertAt(1, A_Clipboard)
+        if (ClipboardHistory.Length > 50) {
+            ClipboardHistory.Pop()
+        }
     }
 }
 
-HistoryPaste(HotkeyName) {
-    global PasteCnt, History
-    PasteCnt := HotkeyName == "^+v" ? PasteCnt + 1 : SubStr(HotkeyName, 2)
-    if (PasteCnt <= History.Length) {
-        Send(History[PasteCnt])
+PasteFromClipboardHistory(i) {
+    global ClipboardHistory
+    if (i <= ClipboardHistory.Length) {
+        Send(ClipboardHistory[i])
     }
 }
