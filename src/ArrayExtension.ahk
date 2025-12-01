@@ -9,3 +9,19 @@ ArrayIncludes(Arr, Value) {
     }
     return false
 }
+
+Array.Prototype.DefineProp("ForEach", { Call: ArrayForEach })
+ArrayForEach(Arr, Callback) {
+    for (i, item in Arr) {
+        Callback(item, i, Arr)
+    }
+}
+
+Array.Prototype.DefineProp("Map", { Call: ArrayMap })
+ArrayMap(Arr, Callback) {
+    result := []
+    for (i, item in Arr) {
+        result.push(Callback(item, i, Arr))
+    }
+    return result
+}
