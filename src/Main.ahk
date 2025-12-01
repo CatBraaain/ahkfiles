@@ -23,12 +23,10 @@ SetDefaultMouseSpeed(0)
 #Include "LocalHotkey.ahk"
 
 #Include "ClipboardHistory.ahk"
-#Include "MonitorCursorGuard.ahk"
 #Include "HankakuOnFocus.ahk"
 #Include "HotClick.ahk"
 #Include "MenuTray.ahk"
-#Include "Utils.ahk"
-#Include "WinHook.ahk"
+#Include "MonitorCursorGuard.ahk"
 
 SetMenuTray()
 ; SetupHotClick()
