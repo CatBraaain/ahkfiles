@@ -1,4 +1,4 @@
-#include ArrayExtension.ahk
+#include "ArrayExtension.ahk"
 #Include "Utils.ahk"
 
 HSHELL_WINDOWCREATED := 1

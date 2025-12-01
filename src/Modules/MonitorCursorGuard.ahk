@@ -1,4 +1,4 @@
-#Include WinHook.ahk
+#Include "WinHook.ahk"
 
 ^!c:: {
     static shouldClipCursor := true
