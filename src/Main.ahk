@@ -24,6 +24,7 @@ SetDefaultMouseSpeed(0)
 
 #Include "ClipboardHistory.ahk"
 #Include "MonitorCursorGuard.ahk"
+#Include "HankakuOnFocus.ahk"
 #Include "HotClick.ahk"
 #Include "MenuTray.ahk"
 #Include "Utils.ahk"
@@ -33,3 +34,4 @@ SetMenuTray()
 ; SetupHotClick()
 StartClipboardHistory()
 AutoMonitorCursorGuard()
+HankakuOnFocus()

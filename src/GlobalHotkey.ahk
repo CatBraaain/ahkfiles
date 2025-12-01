@@ -132,19 +132,6 @@ LAlt:: {
 }
 ~RAlt:: Send("{vk99}") ; Send an unassigned key to avoid changing focus
 
-global IsOnAltTabWindow := false
-~!Tab:: global IsOnAltTabWindow := true
-~!+Tab:: global IsOnAltTabWindow := true
-LAlt Up:: {
-    global IsOnAltTabWindow
-    if (IsOnAltTabWindow) {
-        IsOnAltTabWindow := false
-        Send("{LAlt Up}")
-        Sleep(50)
-        Send("{vk1A}")
-    }
-}
-
 ; !e:: ShowApp("explorer.exe", "ahk_class CabinetWClass")
 !p:: Pause()
 !k:: KeyHistory
