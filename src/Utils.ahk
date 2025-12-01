@@ -57,7 +57,7 @@ IsGameWindow() {
         "PAYDAY 2|Warlander|Battlefield|Robocraft|Minecraft|HalfDead2|Counter-Strike|CrowFPS|MilkChoco|PortalWars|Monster Hunter|Unrailed!"
     ChromeGames :=
         "CrazyGames|Skillfite.io|Sword Masters|arras.io|diep.io|STUG - MultiPlayer Tank Battle|Krunker|Ships 3D"
-    return (WinActive(Games) AND !WinActive(" - Google Chrome")) OR WinActive(ChromeGames . " - Google Chrome")
+    return (WinActive(Games) && !WinActive(" - Google Chrome")) || WinActive(ChromeGames . " - Google Chrome")
 }
 
 MsgWinTitle() {

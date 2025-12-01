@@ -15,7 +15,7 @@ XButton2 Up:: {
     Send("{LButton Up}{LCtrl Up}")
     CoordMode("Mouse", "Screen")
     MouseGetPos(&MouseX, &MouseY)
-    if (0 <= MouseX AND MouseX <= A_ScreenWidth AND 0 <= MouseY AND MouseY <= A_ScreenHeight) {
+    if (0 <= MouseX && MouseX <= A_ScreenWidth && 0 <= MouseY && MouseY <= A_ScreenHeight) {
         ClipCursor(True, 0, 0, A_ScreenWidth, A_ScreenHeight)
     } else {
         ClipCursor(False, 0, 0, 0, 0)
