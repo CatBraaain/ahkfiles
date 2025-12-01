@@ -42,6 +42,6 @@ class ShellHook {
     }
 
     Enables(enable := true) {
-        r := OnMessage(ShellHook.ShellHookMsgId, this.CallbackWrapper, enable ? 1 : 0)
+        OnMessage(ShellHook.ShellHookMsgId, this.CallbackWrapper, enable ? 1 : 0)
     }
 }
