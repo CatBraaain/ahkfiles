@@ -27,8 +27,12 @@ class ShellHook {
     __New(Events, Callback) {
         Events := Events is Array ? Events : [Events]
         CallbackWrapper(wParam, lParam, msg, hwnd) {
-            winQuery := "ahk_id " lParam
-            isAhkGui := WinExist(winQuery) ? WinGetTitle(winQuery) == A_ScriptName : false
+            try {
+                winQuery := "ahk_id " lParam
+                isAhkGui := WinGetTitle(winQuery) == A_ScriptName
+            } catch {
+                isAhkGui := false
+            }
             isTargetReceiver := hwnd == ShellHook.ShellHookWindow.Hwnd
             isTargetEvent := Events.Includes(wParam)
             if (!isAhkGui && isTargetReceiver && isTargetEvent) {
