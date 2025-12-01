@@ -1,4 +1,3 @@
-#Include "Utils.ahk"
 #Include "ClipboardHistory.ahk"
 
 ToolTipEx(str, delay := 0) {
