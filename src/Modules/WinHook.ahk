@@ -1,5 +1,4 @@
 #include "ArrayExtension.ahk"
-#Include "Utils.ahk"
 
 HSHELL_WINDOWCREATED := 1
 HSHELL_WINDOWDESTROYED := 2
@@ -29,7 +28,11 @@ class ShellHook {
         Events := Events is Array ? Events : [Events]
         CallbackWrapper(wParam, lParam, msg, hwnd) {
             winQuery := "ahk_id " lParam
-            isAhkGui := TryInvoke(() => (WinGetTitle(winQuery) == A_ScriptName), (e) => false)
+            try {
+                isAhkGui := WinGetTitle(winQuery) == A_ScriptName
+            } catch {
+                isAhkGui := false
+            }
             isTargetReceiver := hwnd == ShellHook.ShellHookWindow.Hwnd
             isTargetEvent := Events.Includes(wParam)
             if (!isAhkGui && isTargetReceiver && isTargetEvent) {
