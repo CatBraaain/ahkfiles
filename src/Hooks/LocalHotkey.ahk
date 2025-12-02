@@ -1,6 +1,6 @@
 #Include "../Modules/Utils.ahk"
 
-#HotIf WinActive(" - AutoHotkey - Visual Studio Code")
+#HotIf WinActive(" - MyAutoHotkey - Visual Studio Code")
 ~^s:: {
     KeyWait("s")
     Reload()
