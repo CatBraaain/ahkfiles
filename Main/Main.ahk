@@ -18,9 +18,9 @@ SetCapsLockState("AlwaysOff")
 SetScrollLockState("AlwaysOff")
 SetDefaultMouseSpeed(0)
 
-#Include "Hooks/GlobalHotkey.ahk"
-#Include "Hooks/MouseHotkey.ahk"
-#Include "Hooks/LocalHotkey.ahk"
+#Include "HotKeys/GlobalHotkey.ahk"
+#Include "HotKeys/MouseHotkey.ahk"
+#Include "HotKeys/LocalHotkey.ahk"
 
 #Include "Modules/ClipboardHistory.ahk"
 #Include "Modules/HankakuOnFocus.ahk"
