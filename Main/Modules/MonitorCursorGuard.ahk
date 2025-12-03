@@ -33,17 +33,22 @@ SetMonitorCursorGuard() {
 GetActiveMonitorIndex() {
     count := MonitorGetCount()
     loop count {
-        MonitorGet(A_Index, &left, &top, &right, &bottom)
-        WinGetPos(&x, &y, &w, &h, "a")
-        center := { x: x + w / 2, y: y + h / 2 }
-        isWindowCenterInMonitor := (
-            left <= center.x
-            && center.x <= right
-            && top <= center.y
-            && center.y < bottom
-        )
-        if (isWindowCenterInMonitor) {
-            return A_Index
+        try {
+
+            MonitorGet(A_Index, &left, &top, &right, &bottom)
+            WinGetPos(&x, &y, &w, &h, "a")
+            center := { x: x + w / 2, y: y + h / 2 }
+            isWindowCenterInMonitor := (
+                left <= center.x
+                && center.x <= right
+                && top <= center.y
+                && center.y < bottom
+            )
+            if (isWindowCenterInMonitor) {
+                return A_Index
+            }
+        } catch {
+            ;
         }
     }
     return ""
