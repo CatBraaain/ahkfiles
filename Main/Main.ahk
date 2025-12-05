@@ -23,7 +23,7 @@ SetDefaultMouseSpeed(0)
 #Include "HotKeys/LocalHotkey.ahk"
 
 #Include "Modules/ClipboardHistory.ahk"
-#Include "Modules/HankakuOnFocus.ahk"
+#Include "Modules/AutoHankaku.ahk"
 #Include "Modules/HotClick.ahk"
 #Include "Modules/MenuTray.ahk"
 #Include "Modules/MonitorCursorGuard.ahk"
@@ -32,4 +32,4 @@ SetMenuTray()
 ; SetupHotClick()
 StartClipboardHistory()
 AutoMonitorCursorGuard()
-HankakuOnFocus()
+AutoHankaku()
