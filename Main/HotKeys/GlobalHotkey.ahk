@@ -124,15 +124,13 @@ global IsTenkeyMode := false
 !vk14:: IsTenkeyMode := !IsTenkeyMode
 vk14:: Send("{vkF3}") ; vk14 is CapsLock, vkF3 is ime-toggle
 
-#HotIf !WinActive("Windows Sandbox")
-    LAlt:: {
-        Send("{vk1C}")
-        Send("{LAlt Down}")
-        KeyWait("LAlt")
-        Send("{LAlt Up}")
-        Send("{vk99}") ; Send an unassigned key to avoid changing focus
-    }
-#HotIf
+LAlt:: {
+    Send("{vk1C}")
+    Send("{LAlt Down}")
+    KeyWait("LAlt")
+    Send("{LAlt Up}")
+    Send("{vk99}") ; Send an unassigned key to avoid changing focus
+}
 ~RAlt:: Send("{vk99}") ; Send an unassigned key to avoid changing focus
 
 ; !e:: ShowApp("explorer.exe", "ahk_class CabinetWClass")

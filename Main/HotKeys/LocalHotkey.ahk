@@ -241,4 +241,7 @@
     ~LAlt:: return
     ~^Space:: return
 
+#HotIf WinActive("Windows Sandbox")
+    ~LAlt:: return
+
 #HotIf
