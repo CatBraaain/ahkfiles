@@ -50,9 +50,9 @@ DuplicateRow() {
 
 IsGameWindow() {
     Games :=
-        "PAYDAY 2|Warlander|Battlefield|Robocraft|Minecraft|HalfDead2|Counter-Strike|CrowFPS|MilkChoco|PortalWars|Monster Hunter|Unrailed!"
+        "(PAYDAY 2|Warlander|Battlefield|Robocraft|Minecraft|HalfDead2|Counter-Strike|CrowFPS|MilkChoco|PortalWars|Monster Hunter|Unrailed!)"
     ChromeGames :=
-        "CrazyGames|Skillfite.io|Sword Masters|arras.io|diep.io|STUG - MultiPlayer Tank Battle|Krunker|Ships 3D"
+        "(CrazyGames|Skillfite.io|Sword Masters|arras.io|diep.io|STUG - MultiPlayer Tank Battle|Krunker|Ships 3D)"
     return (WinActive(Games) && !WinActive(" - Google Chrome")) || WinActive(ChromeGames . " - Google Chrome")
 }
 
