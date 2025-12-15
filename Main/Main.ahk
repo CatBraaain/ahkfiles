@@ -17,6 +17,7 @@ SetNumLockState("AlwaysOn")
 SetCapsLockState("AlwaysOff")
 SetScrollLockState("AlwaysOff")
 SetDefaultMouseSpeed(0)
+KeyHistory(100) ; limit 0 to 500
 
 #Include "HotKeys/GlobalHotkey.ahk"
 #Include "HotKeys/MouseHotkey.ahk"
