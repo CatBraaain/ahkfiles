@@ -62,17 +62,6 @@
     LAlt & s::!s
     LAlt & d::!d
 
-    F11:: {
-        WinRestore("A")
-        nonViewPortHeight := 173
-        WinMove(, , 3200, 1800 + nonViewPortHeight, "A") ; set view-port-ratio 16:9
-        Send("{Esc}{F11}")
-    }
-    Esc:: {
-        SendEvent("{F11}")
-        WinMaximize("A")
-    }
-
 #HotIf WinActive("diep.io - Google Chrome")
     ~LAlt:: {
         SendEvent("{m Up}")
