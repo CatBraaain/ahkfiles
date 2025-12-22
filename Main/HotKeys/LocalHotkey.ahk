@@ -29,12 +29,14 @@
 
 #HotIf WinActive("note - Google Chrome")
     !F1:: { ; Paste template
-        Send("^a{BS}")
-        Send("目的^!2{End}{Enter 2}")
-        Send("スクリプト^!2{End}{Enter}^!\{Enter 2}")
-        Send("スクリプト解説^!2{End}{Enter}^!\{Enter 2}")
-        Send("参考^!2{End}{Enter 2}")
-        Send("あとがき^!2{End}{Enter}")
+        Send(
+            "^a{BS}"
+            "目的^!2{End}{Enter 2}"
+            "スクリプト^!2{End}{Enter}^!\{Enter 2}"
+            "スクリプト解説^!2{End}{Enter}^!\{Enter 2}"
+            "参考^!2{End}{Enter 2}"
+            "あとがき^!2{End}{Enter}"
+        )
     }
 
     ^vkF4::
@@ -66,7 +68,11 @@
     ~LAlt:: {
         SendEvent("{m Up}")
         ToolTip(
-            "F1::12277707 overload,hybrid`nF2::12207777 rocketeer,tritrapper`nF3::00067767 triplet`nF4::01157775 sprayer,spread`nF5::00077757 sniper"
+            "F1::12277707 overload,hybrid`n"
+            "F2::12207777 rocketeer,tritrapper`n"
+            "F3::00067767 triplet`n"
+            "F4::01157775 sprayer,spread`n"
+            "F5::00077757 sniper"
         )
         KeyWait("LAlt")
         ToolTip()
@@ -93,7 +99,14 @@
 #HotIf WinActive("arras.io - Google Chrome")
     ~LAlt:: {
         SendEvent("{m Up}")
-        ToolTip("F1::3309999000`nF2::0069999000`nF3::0099996000`nF4::0009999600`nF5:0048889500`nF6:0039999300")
+        ToolTip(
+            "F1::3309999000`n"
+            "F2::0069999000`n"
+            "F3::0099996000`n"
+            "F4::0009999600`n"
+            "F5:0048889500`n"
+            "F6:0039999300"
+        )
         KeyWait("LAlt")
         ToolTip()
     }
