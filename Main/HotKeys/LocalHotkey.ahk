@@ -68,9 +68,9 @@
     ~LAlt:: {
         SendEvent("{m Up}")
         ToolTip(
-            "F1::12277707 overload,hybrid`n"
-            "F2::12207777 rocketeer,tritrapper`n"
-            "F3::00067767 triplet`n"
+            "F1::12277707 overload,hybrid,shotgun`n"
+            "F2::12207777 rocketeer,tritrapper,firework`n"
+            "F3::00067767 triplet,streamliner`n"
             "F4::01157775 sprayer,spread`n"
             "F5::00077757 sniper"
         )
