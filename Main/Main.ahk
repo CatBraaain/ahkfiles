@@ -1,6 +1,7 @@
 ﻿#Requires AutoHotkey >=2.0 <3.0
 
 #SingleInstance Force
+#Warn All
 #UseHook
 
 #Include "../Env.ahk"
