@@ -3,21 +3,23 @@
 #SingleInstance Force
 #NoTrayIcon
 
-MonitorOff()
-SetTimer(MonitorOff, 250)
+EscapableMonitorOff()
+SetTimer(EscapableMonitorOff, 1000)
 
 >!l:: {
-    MonitorOff()
-    SetTimer(MonitorOff, 250)
+    EscapableMonitorOff()
+    SetTimer(EscapableMonitorOff, 1000)
 }
 
-+>!l:: {
-    SetTimer(MonitorOff, 0)
-    MonitorOn()
-    KeyWait("Alt")
-    KeyWait("Shift")
-    KeyWait("L")
-    KeyWait("U")
+EscapableMonitorOff() {
+    ; At startup, the hotkey/keyhook registration can be delayed due to system load.
+    ; Only modifier keys without using InstallKeybdHook() can be detected immediately.
+    IsEscaping := GetKeyState("RAlt") and GetKeyState("RShift")
+    if (!IsEscaping) {
+        MonitorOff()
+    } else {
+        SetTimer(EscapableMonitorOff, 0)
+    }
 }
 
 MonitorOff() {
