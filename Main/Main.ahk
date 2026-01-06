@@ -2,7 +2,6 @@
 
 #SingleInstance Force
 #Warn All
-#UseHook
 
 #Include "../Env.ahk"
 
