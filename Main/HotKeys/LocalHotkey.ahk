@@ -125,6 +125,13 @@
     s::Down
     d::Right
 
+#HotIf WinActive("Tanks 3D - Google Chrome")
+    q:: {
+        SendEvent("m")
+        KeyWait("q")
+        SendEvent("m")
+    }
+
 #HotIf WinActive("^Netflix - Google Chrome") or WinActive("^Netflix .* ahk_exe firefox.exe")
     q::Left
     w::Right
