@@ -149,7 +149,7 @@
         Send("{vk1A}")
     }
     ^+g:: return
-    ^f:: Send("^f^g") ; find
+    ^f:: Send("{vk1A}^f^g") ; find
     ^+f:: Send("+^g") ; find
     ^b:: Send("^d") ; add bookmark
     ^+b:: Send("^+o") ; bookmark manager
