@@ -20,9 +20,9 @@ SetScrollLockState("AlwaysOff")
 SetDefaultMouseSpeed(0)
 KeyHistory(100) ; limit 0 to 500
 
+#Include "HotKeys/LocalHotkey.ahk"
 #Include "HotKeys/GlobalHotkey.ahk"
 #Include "HotKeys/MouseHotkey.ahk"
-#Include "HotKeys/LocalHotkey.ahk"
 
 #Include "Modules/ClipboardHistory.ahk"
 #Include "Modules/AutoHankaku.ahk"
