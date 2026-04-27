@@ -127,9 +127,30 @@
 
 #HotIf WinActive("Tanks 3D - Google Chrome")
     q:: {
-        SendEvent("m")
+        Send("m")
         KeyWait("q")
-        SendEvent("m")
+        Send("m")
+    }
+
+#HotIf WinActive("Redcoats.io - Google Chrome")
+    Tab:: {
+        Send("m")
+        KeyWait("Tab")
+        Send("m")
+    }
+    lastWeapon := 0
+    ~3:: global lastWeapon := 3
+    *q:: ToggleWeapon()
+    *e:: ToggleWeapon()
+    ToggleWeapon() {
+        global lastWeapon
+        if (lastWeapon != 1) {
+            Send(1)
+            lastWeapon := 1
+        } else {
+            Send(2)
+            lastWeapon := 2
+        }
     }
 
 #HotIf WinActive("^Netflix - Google Chrome") or WinActive("^Netflix .* ahk_exe firefox.exe")
