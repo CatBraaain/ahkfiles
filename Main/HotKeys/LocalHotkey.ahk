@@ -23,36 +23,6 @@
     ^Tab:: Send("{.}")
     ^+Tab:: Send("{,}")
 
-#HotIf WinActive("MAP.*HELLO CYCLING")
-    WheelUp:: Send("{+}")
-    WheelDown:: Send("{-}")
-
-#HotIf WinActive("note - Google Chrome")
-    !F1:: { ; Paste template
-        Send(
-            "^a{BS}"
-            "目的^!2{End}{Enter 2}"
-            "スクリプト^!2{End}{Enter}^!\{Enter 2}"
-            "スクリプト解説^!2{End}{Enter}^!\{Enter 2}"
-            "参考^!2{End}{Enter 2}"
-            "あとがき^!2{End}{Enter}"
-        )
-    }
-
-    ^vkF4::
-    !vk19:: Send("^!0") ; Normal
-    ^1::
-    <!1:: Send("^!2") ; Heading1
-    ^2::
-    <!2:: Send("^!3") ; Heading2
-    ^3::
-    <!3:: Send("^!\") ; CodeBlock
-    ^4::
-    <!4:: Send("^+>") ; BlockQuote
-    ^5::
-    <!5:: Send("^b") ; Bold
-    ~^b:: return
-
 #HotIf WinActive("diep.io - Google Chrome") or WinActive("arras.io - Google Chrome")
     ^s:: return
     q::e
@@ -131,6 +101,11 @@
         KeyWait("q")
         Send("m")
     }
+    Tab:: {
+        Send("m")
+        KeyWait("Tab")
+        Send("m")
+    }
 
 #HotIf WinActive("Redcoats.io - Google Chrome")
     Tab:: {
@@ -138,6 +113,7 @@
         KeyWait("Tab")
         Send("m")
     }
+    LShift::c
     lastWeapon := 0
     ~3:: global lastWeapon := 3
     *q:: ToggleWeapon()
@@ -152,10 +128,6 @@
             lastWeapon := 2
         }
     }
-
-#HotIf WinActive("^Netflix - Google Chrome") or WinActive("^Netflix .* ahk_exe firefox.exe")
-    q::Left
-    w::Right
 
 #HotIf WinActive("ahk_exe chrome.exe")
     ^t::
