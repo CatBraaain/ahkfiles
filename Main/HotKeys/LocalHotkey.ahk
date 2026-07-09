@@ -107,7 +107,7 @@
         Send("m")
     }
 
-#HotIf WinActive("Redcoats.io - Google Chrome")
+#HotIf WinActive("Redcoats.io - Google Chrome|Salty Seas - Google Chrome")
     Tab:: {
         Send("m")
         KeyWait("Tab")
@@ -116,8 +116,14 @@
     LShift::c
     lastWeapon := 0
     ~3:: global lastWeapon := 3
-    *q:: ToggleWeapon()
-    *e:: ToggleWeapon()
+    *q:: {
+        ToggleWeapon()
+        KeyWait("q")
+    }
+    *e:: {
+        ToggleWeapon()
+        KeyWait("e")
+    }
     ToggleWeapon() {
         global lastWeapon
         if (lastWeapon != 1) {
