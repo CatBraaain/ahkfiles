@@ -125,11 +125,9 @@ global IsTenkeyMode := false
 !vk14:: global IsTenkeyMode := !IsTenkeyMode
 vk14:: Send("{vkF3}") ; vk14 is CapsLock, vkF3 is ime-toggle
 
-LAlt:: {
-    Send("{vk1C}")
-    Send("{LAlt Down}")
+~LAlt:: {
+    Send("{vk1C}") ; ime-convert
     KeyWait("LAlt")
-    Send("{LAlt Up}")
     Send("{vk99}") ; Send an unassigned key to avoid changing focus
 }
 ~RAlt:: Send("{vk99}") ; Send an unassigned key to avoid changing focus
