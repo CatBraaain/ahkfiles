@@ -18,9 +18,18 @@ CloseSaveDialog() {
     if (A_PriorHotkey == A_ThisHotkey) {
         ClassStr := WinGetClass("A")
         TitleStr := WinGetTitle("A")
+        try {
+            ControlStr := ControlGetText("Button1", "A")
+        } catch {
+            ControlStr := ""
+        }
 
         if (ClassStr == "#32770") {
-            Send("{n}")
+            if (ControlStr == "&Terminate") {
+                Send("{Enter}")
+            } else if (ControlStr == "&Save") {
+                Send("{n}")
+            }
         }
         if (InStr(TitleStr, "このサイトを") OR InStr(TitleStr, "場所が利用できません")) {
             Send("{Enter}")
