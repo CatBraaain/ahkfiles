@@ -2,7 +2,7 @@
 #Include "../../Env.ahk"
 
 ; https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
-#HotIf !IsGameWindow()
+#HotIf !WinActive("ahk_class TscShellContainerClass") && !IsGameWindow()
     [:: Send("{-}")
     ]:: Send("{BS}")
     `;:: return
@@ -45,7 +45,7 @@
     9:: Send("{Numpad9}")
     0:: Send("{Numpad0}")
 
-#HotIf !IsGameWindow() and GetKeyState("Shift", "P")
+#HotIf !WinActive("ahk_class TscShellContainerClass") && !IsGameWindow() and GetKeyState("Shift", "P")
     +1:: Send("{!}")
     +2:: Send("{@}")
     +3:: Send("{#}")
@@ -104,7 +104,7 @@
     +!Down:: Send("+{PgDn}")
     +!Right:: Send("+{End}")
 
-#HotIf IsTenkeyMode
+#HotIf !WinActive("ahk_class TscShellContainerClass") && IsTenkeyMode
     a:: Send("{Numpad1}")
     s:: Send("{Numpad2}")
     d:: Send("{Numpad3}")
@@ -116,40 +116,42 @@
     l:: Send("{Numpad9}")
     `;:: Send("{Numpad0}")
 
+#HotIf !WinActive("ahk_class TscShellContainerClass")
+    F1::Backspace
+    F2::Enter
+    F3::Delete
+
+    global IsTenkeyMode := false
+    !vk14:: global IsTenkeyMode := !IsTenkeyMode
+    vk14:: Send("{vkF3}") ; vk14 is CapsLock, vkF3 is ime-toggle
+
+    ~LAlt:: {
+        Send("{vk1C}") ; ime-convert
+        KeyWait("LAlt")
+        Send("{vk99}") ; Send an unassigned key to avoid changing focus
+    }
+    ~RAlt:: Send("{vk99}") ; Send an unassigned key to avoid changing focus
+
+    ; !e:: ShowApp("explorer.exe", "ahk_class CabinetWClass")
+    !p:: Pause()
+    !k:: KeyHistory
+    ; !c:: ShowApp("C:\Program Files (x86)\Google\Chrome\Application\chrome.exe", "Google Chrome")
+    !Esc:: MsgWinTitle()
+    !Delete:: Suspend()
+
+    ~^w:: CloseSaveDialog()
+    ^+w:: Send("!{F4}")
+    ^+a:: Send("^{Left}+^{Right}")
+    ^+d:: DeleteRow()
+    ^d:: DuplicateRow()
+    ^+z:: Send("^y")
+    ^Space:: Send("{Enter}")
+    ^+Delete:: ExitApp()
+
+    #InputLevel 1
+    :ox:nme:: SendInput("{vk1A}{Text}" . EMAIL)
+    :ox?:/ndash:: Send("–")
+    :ox?:/mdash:: Send("—")
+    #InputLevel 0
+
 #HotIf
-F1::Backspace
-F2::Enter
-F3::Delete
-
-global IsTenkeyMode := false
-!vk14:: global IsTenkeyMode := !IsTenkeyMode
-vk14:: Send("{vkF3}") ; vk14 is CapsLock, vkF3 is ime-toggle
-
-~LAlt:: {
-    Send("{vk1C}") ; ime-convert
-    KeyWait("LAlt")
-    Send("{vk99}") ; Send an unassigned key to avoid changing focus
-}
-~RAlt:: Send("{vk99}") ; Send an unassigned key to avoid changing focus
-
-; !e:: ShowApp("explorer.exe", "ahk_class CabinetWClass")
-!p:: Pause()
-!k:: KeyHistory
-; !c:: ShowApp("C:\Program Files (x86)\Google\Chrome\Application\chrome.exe", "Google Chrome")
-!Esc:: MsgWinTitle()
-!Delete:: Suspend()
-
-~^w:: CloseSaveDialog()
-^+w:: Send("!{F4}")
-^+a:: Send("^{Left}+^{Right}")
-^+d:: DeleteRow()
-^d:: DuplicateRow()
-^+z:: Send("^y")
-^Space:: Send("{Enter}")
-^+Delete:: ExitApp()
-
-#InputLevel 1
-:ox:nme:: SendInput("{vk1A}{Text}" . EMAIL)
-:ox?:/ndash:: Send("–")
-:ox?:/mdash:: Send("—")
-#InputLevel 0
