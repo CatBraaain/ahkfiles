@@ -1,6 +1,6 @@
 #Include "../Modules/Utils.ahk"
 
-#HotIf WinActive(" - ahkfiles - Visual Studio Code")
+#HotIf WinActive(" - ahkfiles .*- Visual Studio Code")
     ~^s:: {
         KeyWait("s")
         Reload()
