@@ -10,7 +10,7 @@
 #HotIf WinActive(" - Visual Studio Code") or WinActive("ahk_exe Zed.exe")
     ^WheelLeft:: Send("!{Left}")
     ^WheelRight:: Send("!{Right}")
-    ~^g:: Send("{vk1A}")
+    ~^g:: Send("{vk1D}")
     ~^e:: return
     ~^d:: return
     ~^+d:: return
@@ -141,14 +141,14 @@
     ^n::
     ^+n:: {
         Send(A_ThisHotkey)
-        Send("{vk1A}")
+        Send("{vk1D}")
     }
     ^g:: {
         Send("^l")
-        Send("{vk1A}")
+        Send("{vk1D}")
     }
     ^+g:: return
-    ^f:: Send("{vk1A}^f^g") ; find
+    ^f:: Send("{vk1D}^f^g") ; find
     ^+f:: Send("+^g") ; find
     ^b:: Send("^d") ; add bookmark
     ^+b:: Send("^+o") ; bookmark manager
@@ -164,7 +164,7 @@
 
     ^+s:: {
         Send("^t")
-        Send("{vk1A}")
+        Send("{vk1D}")
         Send("chrome://settings/searchEngines")
         Send("{Enter}")
     }

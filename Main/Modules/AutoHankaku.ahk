@@ -8,7 +8,7 @@ AutoHankaku() {
             HSHELL_WINDOWACTIVATED,
             HSHELL_RUDEAPPACTIVATED
         ],
-        () => Send("{vk1A}")
+        () => Send("{vk1D}")
     )
     hankakuHook.Enables(true)
 }

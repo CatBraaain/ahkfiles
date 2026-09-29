@@ -149,7 +149,7 @@
     ^+Delete:: ExitApp()
 
     #InputLevel 1
-    :ox:nme:: SendInput("{vk1A}{Text}" . EMAIL)
+    :ox:nme:: SendInput("{vk1D}{Text}" . EMAIL)
     :ox?:/ndash:: Send("–")
     :ox?:/mdash:: Send("—")
     #InputLevel 0
