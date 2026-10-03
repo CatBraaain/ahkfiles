@@ -24,6 +24,6 @@ UpdateClipboardHistory(DataType) {
 PasteFromClipboardHistory(i) {
     global ClipboardHistory
     if (i <= ClipboardHistory.Length) {
-        Send(ClipboardHistory[i])
+        SendText(ClipboardHistory[i])
     }
 }

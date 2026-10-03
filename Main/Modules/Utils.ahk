@@ -54,7 +54,8 @@ DeleteRow() {
 DuplicateRow() {
     SendEvent("{End}+{Home}")
     selectionStr := GetSelectionStr()
-    Send("{Right}+{Enter}" . selectionStr)
+    Send("{Right}+{Enter}")
+    SendText(selectionStr)
 }
 
 IsGameWindow() {
