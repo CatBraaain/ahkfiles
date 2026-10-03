@@ -1,5 +1,7 @@
 #Include "../Modules/Utils.ahk"
 
+ClickLoopFlag := 0
+
 #HotIf WinActive(" - ahkfiles .*- Visual Studio Code") or WinActive("ahkfiles ahk_exe Zed.exe")
     ~^s:: {
         KeyWait("s")
@@ -172,9 +174,12 @@
     F7:: return ; Disables cursor browsing
 
     !LButton:: {
-        global ClickLoopFlag := 1
+        global ClickLoopFlag
+        startHwnd := WinActive("ahk_exe chrome.exe")
+        ClickLoopFlag := startHwnd != 0
         loop {
-            if (!ClickLoopFlag) {
+            if (!ClickLoopFlag or !WinActive("ahk_id " startHwnd)) {
+                ClickLoopFlag := 0
                 break
             }
             Send("{LButton}")
@@ -182,6 +187,7 @@
         return
     }
 
+#HotIf WinActive("ahk_exe chrome.exe") or ClickLoopFlag
     !RButton:: {
         global ClickLoopFlag := 0
         ToolTip("!RButton")
