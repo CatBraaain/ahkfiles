@@ -55,7 +55,10 @@ GetActiveMonitorIndex() {
 }
 
 ClipCursor(shouldClip := True, x1 := 0, y1 := 0, x2 := 1, y2 := 1) {
-    R := Buffer(16, 0), NumPut("UPtr", x1, R.Ptr + 0), NumPut("UPtr", y1, R.Ptr + 4), NumPut("UPtr", x2, R.Ptr + 8),
-    NumPut("UPtr", y2, R.Ptr + 12)
-    return shouldClip ? DllCall("ClipCursor", "UInt", R.Ptr) : DllCall("ClipCursor", "UInt", 0)
+    if (!shouldClip) {
+        return DllCall("ClipCursor", "Ptr", 0)
+    }
+    R := Buffer(16, 0), NumPut("Int", x1, R, 0), NumPut("Int", y1, R, 4), NumPut("Int", x2, R, 8),
+    NumPut("Int", y2, R, 12)
+    return DllCall("ClipCursor", "Ptr", R)
 }
