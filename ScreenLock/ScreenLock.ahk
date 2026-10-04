@@ -3,31 +3,15 @@
 #SingleInstance Force
 #NoTrayIcon
 
-EscapableMonitorOff()
-SetTimer(EscapableMonitorOff, 1000)
+SetDisplayIdleTimeoutSeconds(1)
 
->!l:: {
-    EscapableMonitorOff()
-    SetTimer(EscapableMonitorOff, 1000)
-}
-
-EscapableMonitorOff() {
-    ; At startup, the hotkey/keyhook registration can be delayed due to system load.
-    ; Only modifier keys without using InstallKeybdHook() can be detected immediately.
-    IsEscaping := GetKeyState("RAlt") and GetKeyState("RShift")
-    if (!IsEscaping) {
-        MonitorOff()
-    } else {
-        SetTimer(EscapableMonitorOff, 0)
-    }
-}
-
-MonitorOff() {
-    SendMessage(0x112, 0xF170, 2, , "Program Manager")
-}
-
-MonitorOn() {
-    SendMessage(0x112, 0xF170, -1, , "Program Manager")
-}
+>!l:: SetDisplayIdleTimeoutSeconds(1)
++>!l:: SetDisplayIdleTimeoutSeconds(0)
 
 ^+Delete:: ExitApp()
+
+SetDisplayIdleTimeoutSeconds(seconds) {
+    RunWait(A_ComSpec . " /c powercfg /setacvalueindex SCHEME_CURRENT SUB_VIDEO VIDEOIDLE " . seconds, , "Hide")
+    RunWait(A_ComSpec . " /c powercfg /setdcvalueindex SCHEME_CURRENT SUB_VIDEO VIDEOIDLE " . seconds, , "Hide")
+    RunWait(A_ComSpec . " /c powercfg /setactive SCHEME_CURRENT", , "Hide")
+}
