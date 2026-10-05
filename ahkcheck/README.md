@@ -15,6 +15,9 @@ ahkcheck fmt [path ...]
 
 # Print lint findings only
 ahkcheck lint [path ...]
+
+# Print help
+ahkcheck -h | --help
 ```
 
 You can also invoke the same CLI directly by folder path with Bun 1.4.2:

@@ -156,6 +156,25 @@ describe("cli: errors", () => {
   });
 });
 
+describe("cli: help", () => {
+  it.each([[["--help"]], [["-h"]], [["lint", "--help"]], [["fmt", "-h"]]])(
+    "prints usage and exits 0 for %j without touching paths",
+    (args) => {
+      const r = runCli(args, dir);
+      expect(r.exitCode).toBe(0);
+      expect(r.stderr).toEqual([]);
+      expect(r.stdout).toContain("Usage:");
+      expect(r.stdout.join("\n")).toContain("ahkcheck fmt [path ...]");
+    },
+  );
+
+  it("ignores invalid paths when help is requested", () => {
+    const r = runCli(["--help", "missing.ahk"], dir);
+    expect(r.exitCode).toBe(0);
+    expect(r.stderr).toEqual([]);
+  });
+});
+
 describe("cli: BOM and line endings", () => {
   it("preserves UTF-8 BOM while normalizing CRLF through fmt", () => {
     const bom = "\uFEFF";
@@ -217,6 +236,13 @@ describe("cli: matching invocation entries", () => {
       expect(readFileSync(join(dir, "a.ahk"))).toEqual(binaryBytes);
     },
   );
+
+  it("matches bin and folder help output", () => {
+    const binary = invokeCli("bin", ["--help"]);
+    expect(binary.exit).toBe(0);
+    expect(binary.stdout).toContain("Usage:");
+    expect(invokeCli("folder", ["--help"])).toEqual(binary);
+  });
 });
 
 describe.each(["bin", "folder"] as const)("cli: executable %s contract", (entry) => {

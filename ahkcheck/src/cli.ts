@@ -26,6 +26,24 @@ export interface CliResult {
 
 const BOM = "\uFEFF";
 
+const HELP = [
+  "ahkcheck — formatter / linter for AutoHotkey v2 scripts",
+  "",
+  "Usage:",
+  "  ahkcheck [path ...]      check format need + lint findings (no writes)",
+  "  ahkcheck fmt [path ...]  rewrite files with the formatting rules",
+  "  ahkcheck lint [path ...] report lint findings only",
+  "  ahkcheck -h | --help     show this help",
+  "",
+  "<path> accepts files, directories (recursive *.ahk search) and globs.",
+  "Without arguments the current directory is used.",
+  "",
+  "Exit codes:",
+  "  0  success (default/lint: no problems found)",
+  "  1  default mode or lint found problems",
+  "  2  processing error (path, UTF-8, read/write failure, or lexical error in default/fmt)",
+].join("\n");
+
 function readSource(
   path: string,
   display: string,
@@ -40,6 +58,10 @@ function readSource(
 }
 
 export function runCli(argv: string[], cwd: string): CliResult {
+  if (argv.includes("--help") || argv.includes("-h")) {
+    return { exitCode: 0, stdout: HELP.split("\n"), stderr: [] };
+  }
+
   let mode: Mode = "check";
   let pathArgs = argv;
   if (argv.length > 0 && (argv[0] === "fmt" || argv[0] === "lint")) {
