@@ -1,0 +1,30 @@
+{
+  "name": "ahkcheck",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Formatter / linter CLI for AutoHotkey v2 scripts",
+  "bin": {
+    "ahkcheck": "./src/cli.ts"
+  },
+  "type": "module",
+  "main": "./src/cli.ts",
+  "scripts": {
+    "test": "vp test"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "typescript": "~6.0.2",
+    "vite": "npm:@voidzero-dev/vite-plus-core@1.0.0",
+    "vite-plus": "1.0.0"
+  },
+  "overrides": {
+    "vite": "npm:@voidzero-dev/vite-plus-core@1.0.0"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "bun",
+      "version": "1.4.2",
+      "onFail": "download"
+    }
+  }
+}
