@@ -3,19 +3,24 @@
 #SingleInstance Force
 #NoTrayIcon
 
-SetDisplayIdleTimeoutSeconds(1)
+SetScreenLock(true)
 
->!l:: SetDisplayIdleTimeoutSeconds(1)
-+>!l:: SetDisplayIdleTimeoutSeconds(0)
+>!l:: SetScreenLock(true)
++>!l:: SetScreenLock(false)
 
 ^+Delete:: ExitApp()
 
-SetDisplayIdleTimeoutSeconds(seconds) {
-    RunWait(A_ComSpec . " /c powercfg /setacvalueindex SCHEME_CURRENT SUB_VIDEO VIDEOIDLE " . seconds, , "Hide")
-    RunWait(A_ComSpec . " /c powercfg /setdcvalueindex SCHEME_CURRENT SUB_VIDEO VIDEOIDLE " . seconds, , "Hide")
+SetScreenLock(enabled) {
+    timeout := enabled ? 1 : 0
+    RunWait(A_ComSpec . " /c powercfg /setacvalueindex SCHEME_CURRENT SUB_VIDEO VIDEOIDLE " . timeout, , "Hide")
+    RunWait(A_ComSpec . " /c powercfg /setdcvalueindex SCHEME_CURRENT SUB_VIDEO VIDEOIDLE " . timeout, , "Hide")
     RunWait(A_ComSpec . " /c powercfg /setactive SCHEME_CURRENT", , "Hide")
-    label := seconds = 0 ? "off" : seconds . "s"
-    ToolTipEx("Display timeout: " . label, 2000)
+    ; Omitting the request type removes the override.
+    override := enabled ? "PROCESS obs64.exe DISPLAY" : "PROCESS obs64.exe"
+    RunWait(A_ComSpec . " /c powercfg /requestsoverride " . override, , "Hide")
+    timeoutLabel := timeout = 0 ? "off" : timeout . "s"
+    overrideLabel := enabled ? "on" : "off"
+    ToolTipEx("Display timeout: " . timeoutLabel . "`nRequest override: " . overrideLabel, 2000)
 }
 
 ToolTipEx(str, delay := 0) {
