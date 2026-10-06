@@ -87,19 +87,29 @@ describe("cli: tracked reference corpus", () => {
     const result = run([]);
     expect(result.elapsedMs).toBeLessThanOrEqual(5000);
     expect(result.exit).toBe(1);
-    expect(result.stderr).toBe("");
+    expect(result.stdout).toContain("Checking formatting...");
+    expect(result.stderr).toContain("[warn] ");
+    expect(result.stderr).toContain("Run ahkcheck with --write to fix.");
     for (const path of paths)
       expect(readFileSync(join(dir, path)), path).toEqual(originals.get(path));
   });
 
-  it("dogfoods fmt/default/lint and preserves content and idempotence on copies only", () => {
-    const fmt = run(["fmt"]);
-    expect(fmt.exit).toBe(0);
-    expect(fmt.stderr).toBe("");
+  it("dogfoods --write/default/--lint and preserves content and idempotence on copies only", () => {
+    const write = run(["--write"]);
+    expect(write.exit).toBe(0);
+    expect(write.stderr).toBe("");
     const changed = paths.filter(
       (path) => !readFileSync(join(dir, path)).equals(originals.get(path)!),
     );
-    expect(fmt.stdout).toBe(`formatted ${changed.length} files\n`);
+    const writeLines = write.stdout.trimEnd().split("\n");
+    expect(writeLines).toHaveLength(paths.length);
+    for (const path of paths) {
+      const line = writeLines.find((l) => l.startsWith(`${path} `));
+      expect(line, path).toBeDefined();
+      const match = line!.match(/^(\S.+ )\d+ms( \(unchanged\))?$/);
+      expect(match, path).not.toBeNull();
+      expect(match![2] !== undefined, path).toBe(!changed.includes(path));
+    }
     const formatted = new Map(paths.map((path) => [path, readFileSync(join(dir, path))]));
     for (const path of paths) {
       const beforeBytes = originals.get(path)!;
@@ -111,9 +121,17 @@ describe("cli: tracked reference corpus", () => {
       expect(afterFile.text, path).not.toContain("\r\n");
       expect(preservedContent(afterFile.text), path).toEqual(preservedContent(before));
     }
-    expect(run([])).toMatchObject({ exit: 0, stdout: "", stderr: "" });
-    expect(run(["lint"])).toMatchObject({ exit: 0, stdout: "", stderr: "" });
-    expect(run(["fmt"])).toMatchObject({ exit: 0, stdout: "formatted 0 files\n", stderr: "" });
+    expect(run([])).toMatchObject({
+      exit: 0,
+      stdout: "Checking formatting...\nAll matched files use ahkcheck code style!\n",
+      stderr: "",
+    });
+    expect(run(["--lint"])).toMatchObject({ exit: 0, stdout: "", stderr: "" });
+    const again = run(["--write"]);
+    expect(again.exit).toBe(0);
+    expect(again.stdout.split("\n").filter((l) => l.endsWith("(unchanged)"))).toHaveLength(
+      paths.length,
+    );
     for (const path of paths)
       expect(readFileSync(join(dir, path)), path).toEqual(formatted.get(path));
     console.log(

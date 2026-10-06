@@ -3,20 +3,25 @@
  * ahkcheck — formatter / linter for AutoHotkey v2 scripts.
  *
  * Usage:
- *   ahkcheck [path ...]     check format need + lint findings (no writes)
- *   ahkcheck fmt [path ...] rewrite files with the formatting rules
- *   ahkcheck lint [path ...] report lint findings only
+ *   ahkcheck [path ...]          check format need + lint findings (no writes)
+ *   ahkcheck --write [path ...]  rewrite files with the formatting rules (-w)
+ *   ahkcheck --diff [path ...]   print unified diffs of pending formatting
+ *   ahkcheck --lint [path ...]   report lint findings only
+ *   ahkcheck -h | --help         show this help
  *
  * <path> accepts files, directories (recursive *.ahk search) and globs.
- * Without arguments the current directory is used.
+ * Without arguments the current directory is used. Options may appear
+ * anywhere; --write, --diff and --lint are mutually exclusive.
  */
 
+import { performance } from "node:perf_hooks";
+import { unifiedDiff, splitKeepEnds } from "./diff.ts";
 import { joinLines, readAhkFile, splitLines, writeAhkFile, type AhkFile } from "./fileio.ts";
 import { formatSource } from "./format.ts";
 import { lintLines } from "./lint.ts";
 import { expandPaths } from "./paths.ts";
 
-export type Mode = "check" | "fmt" | "lint";
+export type Mode = "check" | "write" | "diff" | "lint";
 
 export interface CliResult {
   exitCode: number;
@@ -30,19 +35,50 @@ const HELP = [
   "ahkcheck — formatter / linter for AutoHotkey v2 scripts",
   "",
   "Usage:",
-  "  ahkcheck [path ...]      check format need + lint findings (no writes)",
-  "  ahkcheck fmt [path ...]  rewrite files with the formatting rules",
-  "  ahkcheck lint [path ...] report lint findings only",
-  "  ahkcheck -h | --help     show this help",
+  "  ahkcheck [path ...]          check format need + lint findings (no writes)",
+  "  ahkcheck --write [path ...]  rewrite files with the formatting rules (-w)",
+  "  ahkcheck --diff [path ...]   print unified diffs of pending formatting",
+  "  ahkcheck --lint [path ...]   report lint findings only",
+  "  ahkcheck -h | --help         show this help",
   "",
   "<path> accepts files, directories (recursive *.ahk search) and globs.",
-  "Without arguments the current directory is used.",
+  "Without arguments the current directory is used. Options may appear anywhere;",
+  "--write, --diff and --lint are mutually exclusive.",
   "",
   "Exit codes:",
-  "  0  success (default/lint: no problems found)",
-  "  1  default mode or lint found problems",
-  "  2  processing error (path, UTF-8, read/write failure, or lexical error in default/fmt)",
+  "  0  success (check/lint/diff: no problems found)",
+  "  1  check, lint or diff found problems",
+  "  2  processing error (path, option conflict, UTF-8, read/write failure,",
+  "     or lexical error in check/write/diff)",
 ].join("\n");
+
+interface ParsedArgs {
+  mode: Mode;
+  paths: string[];
+}
+
+function parseArgs(argv: string[]): { parsed?: ParsedArgs; error?: string } {
+  let mode: Mode | undefined;
+  const paths: string[] = [];
+  for (const arg of argv) {
+    const flag: Mode | undefined =
+      arg === "--write" || arg === "-w"
+        ? "write"
+        : arg === "--diff"
+          ? "diff"
+          : arg === "--lint"
+            ? "lint"
+            : undefined;
+    if (flag !== undefined) {
+      if (mode !== undefined && mode !== flag)
+        return { error: "options --write, --diff and --lint are mutually exclusive" };
+      mode = flag;
+    } else {
+      paths.push(arg);
+    }
+  }
+  return { parsed: { mode: mode ?? "check", paths } };
+}
 
 function readSource(
   path: string,
@@ -52,7 +88,7 @@ function readSource(
   try {
     return { file: readAhkFile(path), failed: false };
   } catch (e) {
-    stderr.push(`${display}: ${(e as Error).message}`);
+    stderr.push(`[error] ${display}: ${(e as Error).message}`);
     return { failed: true };
   }
 }
@@ -62,21 +98,21 @@ export function runCli(argv: string[], cwd: string): CliResult {
     return { exitCode: 0, stdout: HELP.split("\n"), stderr: [] };
   }
 
-  let mode: Mode = "check";
-  let pathArgs = argv;
-  if (argv.length > 0 && (argv[0] === "fmt" || argv[0] === "lint")) {
-    mode = argv[0];
-    pathArgs = argv.slice(1);
+  const { parsed, error } = parseArgs(argv);
+  if (error !== undefined) {
+    return { exitCode: 2, stdout: [], stderr: [`[error] ${error}`] };
   }
+  const mode = parsed!.mode;
 
-  const { files, displays, errors } = expandPaths(pathArgs, cwd);
+  const { files, displays, errors } = expandPaths(parsed!.paths, cwd);
   const stdout: string[] = [];
-  const stderr: string[] = [...errors];
+  const stderr: string[] = errors.map((e) => `[error] ${e}`);
   let hadError = errors.length > 0;
 
   if (mode === "check") {
-    const changedPaths: string[] = [];
-    const findings: string[] = [];
+    stdout.push("Checking formatting...");
+    const warnPaths: string[] = [];
+    let findings = 0;
     for (let i = 0; i < files.length; i++) {
       const display = displays[i]!;
       const { file, failed } = readSource(files[i]!, display, stderr);
@@ -87,25 +123,66 @@ export function runCli(argv: string[], cwd: string): CliResult {
       const src = splitLines(file!.text);
       const fmt = formatSource(src);
       if (fmt.error !== undefined) {
-        stderr.push(`${display}: ${fmt.error}`);
+        stderr.push(`[error] ${display}: ${fmt.error}`);
         hadError = true;
       } else if (joinLines(fmt.lines) !== file!.text) {
-        changedPaths.push(display);
+        warnPaths.push(display);
       }
       for (const f of lintLines(src)) {
-        findings.push(`${display}:${f.line}:${f.col} ${f.rule} ${f.message}`);
+        stdout.push(`${display}:${f.line}:${f.col} ${f.rule} ${f.message}`);
+        findings++;
       }
     }
-    stdout.push(...changedPaths, ...findings);
+    if (warnPaths.length > 0) {
+      for (const p of warnPaths) stderr.push(`[warn] ${p}`);
+      stderr.push(
+        `[warn] Code style issues found in the above ${warnPaths.length === 1 ? "file" : "files"}. Run ahkcheck with --write to fix.`,
+      );
+    } else if (findings === 0 && !hadError) {
+      stdout.push("All matched files use ahkcheck code style!");
+    }
     return {
-      exitCode: hadError ? 2 : changedPaths.length + findings.length > 0 ? 1 : 0,
+      exitCode: hadError ? 2 : warnPaths.length + findings > 0 ? 1 : 0,
       stdout,
       stderr,
     };
   }
 
-  if (mode === "fmt") {
-    let count = 0;
+  if (mode === "write") {
+    for (let i = 0; i < files.length; i++) {
+      const display = displays[i]!;
+      const { file, failed } = readSource(files[i]!, display, stderr);
+      if (failed) {
+        hadError = true;
+        continue;
+      }
+      const started = performance.now();
+      const src = splitLines(file!.text);
+      const fmt = formatSource(src);
+      if (fmt.error !== undefined) {
+        stderr.push(`[error] ${display}: ${fmt.error}`);
+        hadError = true;
+        continue;
+      }
+      const text = joinLines(fmt.lines);
+      const changed = text !== file!.text;
+      if (changed) {
+        try {
+          writeAhkFile(files[i]!, (file!.bom ? BOM : "") + text);
+        } catch (e) {
+          stderr.push(`[error] ${display}: ${(e as Error).message}`);
+          hadError = true;
+          continue;
+        }
+      }
+      const ms = Math.max(0, Math.round(performance.now() - started));
+      stdout.push(`${display} ${ms}ms${changed ? "" : " (unchanged)"}`);
+    }
+    return { exitCode: hadError ? 2 : 0, stdout, stderr };
+  }
+
+  if (mode === "diff") {
+    let differed = false;
     for (let i = 0; i < files.length; i++) {
       const display = displays[i]!;
       const { file, failed } = readSource(files[i]!, display, stderr);
@@ -116,23 +193,17 @@ export function runCli(argv: string[], cwd: string): CliResult {
       const src = splitLines(file!.text);
       const fmt = formatSource(src);
       if (fmt.error !== undefined) {
-        stderr.push(`${display}: ${fmt.error}`);
+        stderr.push(`[error] ${display}: ${fmt.error}`);
         hadError = true;
         continue;
       }
       const text = joinLines(fmt.lines);
       if (text !== file!.text) {
-        try {
-          writeAhkFile(files[i]!, (file!.bom ? BOM : "") + text);
-          count++;
-        } catch (e) {
-          stderr.push(`${display}: ${(e as Error).message}`);
-          hadError = true;
-        }
+        differed = true;
+        stdout.push(...unifiedDiff(splitKeepEnds(file!.text), splitKeepEnds(text), display));
       }
     }
-    stdout.push(`formatted ${count} files`);
-    return { exitCode: hadError ? 2 : 0, stdout, stderr };
+    return { exitCode: hadError ? 2 : differed ? 1 : 0, stdout, stderr };
   }
 
   let total = 0;

@@ -10,11 +10,14 @@ or invalid in AutoHotkey v2. No external dependencies; runs on Bun.
 # Check formatting need + lint findings without writing (exit 1 on problems)
 ahkcheck [path ...]
 
-# Rewrite files with the formatting rules, print the formatted count
-ahkcheck fmt [path ...]
+# Rewrite files with the formatting rules, print each processed file
+ahkcheck --write [path ...]   # short form: -w
+
+# Print unified diffs of pending formatting without writing (exit 1 on diffs)
+ahkcheck --diff [path ...]
 
 # Print lint findings only
-ahkcheck lint [path ...]
+ahkcheck --lint [path ...]
 
 # Print help
 ahkcheck -h | --help
@@ -24,27 +27,43 @@ You can also invoke the same CLI directly by folder path with Bun 1.4.2:
 
 ```console
 bun /path/to/ahkcheck [path ...]
-bun /path/to/ahkcheck fmt [path ...]
-bun /path/to/ahkcheck lint [path ...]
+bun /path/to/ahkcheck --write [path ...]
+bun /path/to/ahkcheck --lint [path ...]
 ```
 
 Both entries have the same arguments, output and exit codes. Relative paths and
 omitted paths refer to the caller's current directory, not the CLI folder.
+Options may appear anywhere; `--write`, `--diff` and `--lint` are mutually
+exclusive.
 
 `<path>` accepts files, directories (searched recursively for `*.ahk`) and
 glob patterns (`*`, `**`, `?`). Without arguments the current directory is
 used. Directory and glob traversal excludes `.git`. Empty directory/glob
 matches and invalid UTF-8 are processing errors.
 
+The check output follows Prettier conventions: `Checking formatting...` and
+the success line go to stdout, unformatted files are listed as `[warn]` lines
+on stderr followed by a summary pointing at `--write`, and lint findings are
+printed as `path:line:col rule-id message` on stdout.
+
 ```console
 $ ahkcheck Main/
-Main/HotKeys/GlobalHotkey.ahk
+Checking formatting...
+[warn] Main/HotKeys/GlobalHotkey.ahk
+[warn] Code style issues found in the above file. Run ahkcheck with --write to fix.
 Main/Modules/Utils.ahk:12:1 no-legacy-assign legacy assignment removed in v2; use ":=" such as "x := 1"
 
-$ ahkcheck fmt Main/
-formatted 2 files
+$ ahkcheck --diff Main/
+--- Main/HotKeys/GlobalHotkey.ahk
++++ Main/HotKeys/GlobalHotkey.ahk
+@@ -121,7 +121,7 @@
+ ...
 
-$ ahkcheck lint Main/ ScreenLock/
+$ ahkcheck --write Main/
+Main/HotKeys/GlobalHotkey.ahk 12ms
+Main/Modules/Utils.ahk 9ms (unchanged)
+
+$ ahkcheck --lint Main/ ScreenLock/
 Main/Modules/Utils.ahk:12:1 no-legacy-assign legacy assignment removed in v2; use ":=" such as "x := 1"
 ```
 
@@ -52,16 +71,20 @@ Main/Modules/Utils.ahk:12:1 no-legacy-assign legacy assignment removed in v2; us
 
 | Code | Meaning |
 | --- | --- |
-| 0 | success (default/lint: no problems found) |
-| 1 | default mode or lint found problems |
-| 2 | processing error (path, UTF-8, read/write failure, or lexical error in default/fmt) |
+| 0 | success (check/lint/diff: no problems found; write: completed) |
+| 1 | check, lint or diff found problems |
+| 2 | processing error (path, option conflict, UTF-8, read/write failure, or lexical error in check/write/diff) |
 
-`fmt` only writes files it could tokenize completely. BOM presence is preserved;
-all line endings become LF, including CRLF-only files and preserved regions.
-Line-ending-only changes count in both default checks and the fmt summary. Processing errors go to stderr, one
-line per error; other files continue, with final exit code 2. Lint continues
-through tokenizable ranges and lexical errors alone do not change its 0/1 exit
-code. The fmt summary is always `formatted N files`, counting changes only.
+`--write` only writes files it could tokenize completely. BOM presence is
+preserved; all line endings become LF, including CRLF-only files and preserved
+regions. Every processed file is listed as `<path> <duration>ms`, with
+`(unchanged)` appended when the content was already correct. Processing errors
+go to stderr, one line per error prefixed with `[error]`; other files
+continue, with final exit code 2. Lint continues through tokenizable ranges
+and lexical errors alone do not change its 0/1 exit code. `--diff` prints a
+unified diff (3-line context, git-style `@@` ranges, `\ No newline at end of
+file` markers) for every file whose formatted result differs, including
+line-ending-only changes and missing final newlines, without writing.
 
 ## Format rules (summary)
 
