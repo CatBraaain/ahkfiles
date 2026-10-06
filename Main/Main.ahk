@@ -4,16 +4,8 @@
 #UseHook
 #Warn All
 
-fullCommandLine := DllCall("GetCommandLine", "str")
-hasRestartSwitch := RegExMatch(fullCommandLine, " /restart(?!\S)")
-shouldRelaunchAsAdmin := not (A_IsAdmin or hasRestartSwitch)
-if shouldRelaunchAsAdmin
-{
-    try
-    {
-        Run '*RunAs "' A_AhkPath '" /restart "' A_ScriptFullPath '"'
-        ExitApp
-    }
+if not A_IsAdmin {
+    ToolTipEx("WARNING: Not running as administrator.", 5000)
 }
 
 #Include "../Env.ahk"
