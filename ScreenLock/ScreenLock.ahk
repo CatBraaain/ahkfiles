@@ -16,8 +16,10 @@ SetScreenLock(enabled) {
     RunWait(A_ComSpec . " /c powercfg /setdcvalueindex SCHEME_CURRENT SUB_VIDEO VIDEOIDLE " . timeout, , "Hide")
     RunWait(A_ComSpec . " /c powercfg /setactive SCHEME_CURRENT", , "Hide")
     ; Omitting the request type removes the override.
-    override := enabled ? "PROCESS obs64.exe DISPLAY" : "PROCESS obs64.exe"
-    RunWait(A_ComSpec . " /c powercfg /requestsoverride " . override, , "Hide")
+    for processName in ["obs64.exe", "msrdc.exe"] {
+        override := enabled ? "PROCESS " . processName . " DISPLAY" : "PROCESS " . processName
+        RunWait(A_ComSpec . " /c powercfg /requestsoverride " . override, , "Hide")
+    }
     timeoutLabel := timeout = 0 ? "off" : timeout . "s"
     overrideLabel := enabled ? "on" : "off"
     ToolTipEx("Display timeout: " . timeoutLabel . "`nRequest override: " . overrideLabel, 2000)
