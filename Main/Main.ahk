@@ -4,6 +4,18 @@
 #UseHook
 #Warn All
 
+fullCommandLine := DllCall("GetCommandLine", "str")
+hasRestartSwitch := RegExMatch(fullCommandLine, " /restart(?!\S)")
+shouldRelaunchAsAdmin := not (A_IsAdmin or hasRestartSwitch)
+if shouldRelaunchAsAdmin
+{
+    try
+    {
+        Run '*RunAs "' A_AhkPath '" /restart "' A_ScriptFullPath '"'
+        ExitApp
+    }
+}
+
 #Include "../Env.ahk"
 
 InstallKeybdHook()
