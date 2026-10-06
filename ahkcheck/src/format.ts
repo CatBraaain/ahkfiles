@@ -398,6 +398,7 @@ function emitLines(infos: LineInfo[]): OutputLine[] {
   const objects: ObjectState = { depth: 0, parens: 0 };
   let depth = 0;
   let hotIf = false;
+  let regionBase = 0;
   let bodyBase = 0;
   let pendingDefinition = false;
   let anchorOrig = 0;
@@ -427,26 +428,34 @@ function emitLines(infos: LineInfo[]): OutputLine[] {
         if (directive) {
           const tokens = lexLine(directive[1]!, { blockComment: false }).toks;
           hotIf = codeToks(tokens).length > 0;
+          // A conditional region lifts every following line one level; a
+          // bare #HotIf ends the region and content returns to column 0.
+          regionBase = hotIf ? 1 : 0;
+          bodyBase = regionBase;
+          push(info.raw.trimStart(), true);
+        } else {
+          push(INDENT.repeat(regionBase) + info.raw.trimStart(), true);
         }
-        push(info.raw.trimStart(), true);
         anchorActive = false;
         break;
       }
-      case "label":
-        push(hasComment(info) ? info.raw.trimStart() : info.raw.trim());
+      case "label": {
+        const text = hasComment(info) ? info.raw.trimStart() : info.raw.trim();
+        push(INDENT.repeat(regionBase) + text);
         anchorActive = false;
         break;
+      }
       case "hotkey": {
         const definition = splitHotDefinition(info.raw)!;
-        const indent = hotIf ? INDENT : "";
+        const indent = INDENT.repeat(regionBase);
         anchorActive = false;
-        bodyBase = hotIf ? 1 : 0;
+        bodyBase = regionBase;
         pendingDefinition = definition.action.trim() === "";
         if (definition.hotstring) {
           push(indent + info.raw.trimStart(), true);
           // Executable hotstrings still introduce a normal multiline body.
           depth += netBraces(info.toks ?? []);
-          if (depth === 0 && !pendingDefinition) bodyBase = 0;
+          if (depth === 0 && !pendingDefinition) bodyBase = regionBase;
           break;
         }
         const tokens = lexLine(definition.action, { blockComment: false }).toks;
@@ -464,13 +473,13 @@ function emitLines(infos: LineInfo[]): OutputLine[] {
           tokens.some((t) => t.kind === "com"),
         );
         depth = Math.max(0, depth + netBraces(protectedTokens));
-        if (depth === 0 && !pendingDefinition) bodyBase = 0;
+        if (depth === 0 && !pendingDefinition) bodyBase = regionBase;
         break;
       }
       case "code": {
         if (pendingDefinition) {
           pendingDefinition = false;
-          if (codeToks(info.toks)[0]?.text !== "{") bodyBase = 0;
+          if (codeToks(info.toks)[0]?.text !== "{") bodyBase = regionBase;
         }
         const beganInObject = objects.depth > 0;
         const all = protectObjects(info.toks ?? [], info.raw, objects, info.cont);
@@ -493,7 +502,7 @@ function emitLines(infos: LineInfo[]): OutputLine[] {
           beganInObject || objects.depth > 0 || hasComment(info),
         );
         depth = Math.max(0, depth + netBraces(code));
-        if (depth === 0) bodyBase = 0;
+        if (depth === 0) bodyBase = regionBase;
         break;
       }
     }

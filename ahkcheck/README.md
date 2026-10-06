@@ -100,9 +100,12 @@ line-ending-only changes and missing final newlines, without writing.
   parts and directive values are never rewritten. Preservation also applies
   to their whitespace and blank lines, overriding ordinary formatting rules
   except LF normalization
-- Directives and labels start at column 0. Active `#HotIf` regions indent
-  hotkey/hotstring definitions one level and multiline bodies two levels;
-  bare `#HotIf` resets definitions to column 0 and bodies to one level
+- Directives and labels start at column 0; `#HotIf` directives always start
+  at column 0. Active (conditional) `#HotIf` regions indent every following
+  line one level — hotkey/hotstring definitions, statements, function
+  definitions, labels, comments and other directives — with multiline bodies
+  two levels. A bare `#HotIf` ends the region: content returns to column 0
+  and bodies to one level
 - Expression continuations retain their indentation relative to the newly
   indented statement. Gaps outside the specified spacing rules stay as written,
   including the gap before an inline hotkey action. OTB brace spacing still applies

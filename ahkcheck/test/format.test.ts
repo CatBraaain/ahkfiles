@@ -473,6 +473,44 @@ describe("format: conditional definitions", () => {
     );
   });
 
+  it("indents statements, comments, labels and directives inside active #HotIf regions", () => {
+    fmtOnce(
+      [
+        '#HotIf WinActive("a")',
+        "global g := 0",
+        "; comment",
+        "#InputLevel 1",
+        "f() {",
+        "return g",
+        "}",
+        "mylabel:",
+        "g := 1",
+        "#HotIf",
+        "g := 2",
+      ].join("\n") + "\n",
+      [
+        '#HotIf WinActive("a")',
+        "    global g := 0",
+        "    ; comment",
+        "    #InputLevel 1",
+        "    f() {",
+        "        return g",
+        "    }",
+        "    mylabel:",
+        "    g := 1",
+        "#HotIf",
+        "g := 2",
+      ].join("\n") + "\n",
+    );
+  });
+
+  it("returns to column 0 between regions and re-indents in the next one", () => {
+    fmtOnce(
+      "#HotIf a\ng := 1\n#HotIf\ng := 2\n#HotIf b\ng := 3\n#HotIf\n",
+      "#HotIf a\n    g := 1\n#HotIf\ng := 2\n#HotIf b\n    g := 3\n#HotIf\n",
+    );
+  });
+
   it("formats multiline hotstring bodies without rewriting definition lines", () => {
     fmtOnce(
       "#HotIf active\n:X:go::\n{\nx:=1\n}\n#HotIf\n",

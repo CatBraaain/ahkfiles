@@ -86,10 +86,11 @@ describe("cli: tracked reference corpus", () => {
     ).toBe(934);
     const result = run([]);
     expect(result.elapsedMs).toBeLessThanOrEqual(5000);
-    expect(result.exit).toBe(1);
-    expect(result.stdout).toContain("Checking formatting...");
-    expect(result.stderr).toContain("[warn] ");
-    expect(result.stderr).toContain("Run ahkcheck with --write to fix.");
+    expect(result.exit).toBe(0);
+    expect(result.stdout).toBe(
+      "Checking formatting...\nAll matched files use ahkcheck code style!\n",
+    );
+    expect(result.stderr).toBe("");
     for (const path of paths)
       expect(readFileSync(join(dir, path)), path).toEqual(originals.get(path));
   });
