@@ -1,14 +1,28 @@
 #Include "WinHook.ahk"
 
 AutoHankaku() {
-    ; Sending Send() on EVENT_SYSTEM_FOREGROUND(WinEventHook) can block new window focus.
-    ; Use ShellHook events to send keys after the window is fully active.
+    ; ShellHook announces the activated window before the activation completes.
+    ; Sending right away can land the key on the old window and cancel the
+    ; switch, so wait until the announced window is actually active first.
     static hankakuHook := ShellHook(
         [
             HSHELL_WINDOWACTIVATED,
             HSHELL_RUDEAPPACTIVATED
         ],
-        () => Send("{vk1D}")
+        SendImeOffWhenActive
     )
     hankakuHook.Enables(true)
+}
+
+SendImeOffWhenActive(hwnd) {
+    static latestHwnd
+    latestHwnd := hwnd
+    ; WinWaitActive returns as soon as the window activates (no fixed delay).
+    ; The 1s timeout only cleans up switches that never complete.
+    if !WinWaitActive("ahk_id " hwnd, , 1) {
+        return
+    }
+    if (latestHwnd == hwnd) {    ; skip when a newer switch superseded this one
+        Send("{vk1D}")
+    }
 }

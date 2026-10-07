@@ -36,7 +36,7 @@ class ShellHook {
             isTargetReceiver := hwnd == ShellHook.ShellHookWindow.Hwnd
             isTargetEvent := Events.Includes(wParam)
             if (!isAhkGui && isTargetReceiver && isTargetEvent) {
-                Callback()
+                Callback(lParam)
             }
         }
         this.CallbackWrapper := CallbackWrapper

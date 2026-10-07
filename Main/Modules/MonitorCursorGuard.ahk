@@ -22,7 +22,9 @@ AutoMonitorCursorGuard(enable := true) {
     }
 }
 
-SetMonitorCursorGuard() {
+SetMonitorCursorGuard(hwnd) {
+    ; hwnd is the window announced by ShellHook, but the monitor is derived
+    ; from the active window to keep the previous behavior.
     index := GetActiveMonitorIndex()
     if (index !== "") {
         MonitorGet(index, &left, &top, &right, &bottom)
