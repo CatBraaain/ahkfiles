@@ -2,13 +2,6 @@
 
 ClickLoopFlag := 0
 
-#HotIf WinActive(" - ahkfiles .*- Visual Studio Code") or WinActive("ahkfiles ahk_exe Zed.exe")
-    ~^s:: {
-        KeyWait("s")
-        Reload()
-        KeyWait("Ctrl")
-    }
-
 #HotIf WinActive(" - Visual Studio Code") or WinActive("ahk_exe Zed.exe")
     ^WheelLeft:: Send("!{Left}")
     ^WheelRight:: Send("!{Right}")

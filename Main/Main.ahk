@@ -33,9 +33,11 @@ KeyHistory(100) ; limit 0 to 500
 #Include "Modules/HotClick.ahk"
 #Include "Modules/MenuTray.ahk"
 #Include "Modules/MonitorCursorGuard.ahk"
+#Include "Modules/AutoReload.ahk"
 
 SetMenuTray()
 ; SetupHotClick()
 StartClipboardHistory()
 AutoMonitorCursorGuard()
 AutoHankaku()
+AutoReload()
