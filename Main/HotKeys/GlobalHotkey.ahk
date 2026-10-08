@@ -2,7 +2,7 @@
 #Include "../../Env.ahk"
 
 ; https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
-#HotIf !WinActive("ahk_class TscShellContainerClass") && !IsGameWindow()
+#HotIf !WinActive("ahk_exe mstsc.exe") && !IsGameWindow()
     [:: Send("{-}")
     ]:: Send("{BS}")
     `;:: return
@@ -45,7 +45,7 @@
     9:: Send("{Numpad9}")
     0:: Send("{Numpad0}")
 
-#HotIf !WinActive("ahk_class TscShellContainerClass") && !IsGameWindow() and GetKeyState("Shift", "P")
+#HotIf !WinActive("ahk_exe mstsc.exe") && !IsGameWindow() and GetKeyState("Shift", "P")
     +1:: Send("{!}")
     +2:: Send("{@}")
     +3:: Send("{#}")
@@ -104,7 +104,7 @@
     +!Down:: Send("+{PgDn}")
     +!Right:: Send("+{End}")
 
-#HotIf !WinActive("ahk_class TscShellContainerClass") && IsTenkeyMode
+#HotIf !WinActive("ahk_exe mstsc.exe") && IsTenkeyMode
     a:: Send("{Numpad1}")
     s:: Send("{Numpad2}")
     d:: Send("{Numpad3}")
@@ -116,7 +116,10 @@
     l:: Send("{Numpad9}")
     `;:: Send("{Numpad0}")
 
-#HotIf !WinActive("ahk_class TscShellContainerClass")
+#HotIf WinActive("ahk_exe mstsc.exe")
+    vk14:: Send("{vkF3}")
+
+#HotIf !WinActive("ahk_exe mstsc.exe")
     F1::Backspace
     F2::Enter
     F3::Delete
