@@ -1,5 +1,5 @@
 StartClipboardHistory() {
-    global ClipboardHistory := [], NextPasteIndex := 0
+    global ClipboardHistory := [], NextPasteIndex := 1
     OnClipboardChange(UpdateClipboardHistory)
     Hotkey("^+v", (HotkeyName) => PasteFromClipboardHistory())
     ; loop 9 {
@@ -14,7 +14,7 @@ UpdateClipboardHistory(DataType) {
 
     global ClipboardHistory, NextPasteIndex
     if (DataType := DATA_TYPE_TEXT) {
-        NextPasteIndex := 0
+        NextPasteIndex := 1
         ClipboardHistory.InsertAt(1, A_Clipboard)
         if (ClipboardHistory.Length > 50) {
             ClipboardHistory.Pop()
