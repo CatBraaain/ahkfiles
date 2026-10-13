@@ -29,15 +29,14 @@ SetDefaultMouseSpeed, 0
 
 ; Each file is included exactly once from here instead of including
 ; dependencies from each file. Function-only files are included before the
-; auto-execute statements; files starting with a hotkey are included after
-; the final Exit so that they end the auto-execute section instead of
-; cutting the initialization short.
+; auto-execute statements; files containing or starting with hotkey
+; definitions are included after the final Exit so that they end or follow
+; the auto-execute section instead of cutting the initialization short.
 #Include %A_ScriptDir%\Modules\WinHook.ahk
 #Include %A_ScriptDir%\Modules\Utils.ahk
 #Include %A_ScriptDir%\Modules\ClipboardHistory.ahk
 #Include %A_ScriptDir%\Modules\AutoHankaku.ahk
 #Include %A_ScriptDir%\Modules\HotClick.ahk
-#Include %A_ScriptDir%\Modules\MenuTray.ahk
 #Include %A_ScriptDir%\Modules\AutoReload.ahk
 
 SetMenuTray()
@@ -61,11 +60,8 @@ SetKeyDelay, 20
 ; files that start with a hotkey definition.
 Exit
 
+#Include %A_ScriptDir%\Modules\MenuTray.ahk
 #Include %A_ScriptDir%\Modules\MonitorCursorGuard.ahk
-#Include %A_ScriptDir%\HotKeys\LocalHotkey.ahk
-#Include %A_ScriptDir%\HotKeys\GlobalHotkey.ahk
-#Include %A_ScriptDir%\HotKeys\MouseHotkey.ahk
-
 #Include %A_ScriptDir%\HotKeys\LocalHotkey.ahk
 #Include %A_ScriptDir%\HotKeys\GlobalHotkey.ahk
 #Include %A_ScriptDir%\HotKeys\MouseHotkey.ahk

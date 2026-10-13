@@ -1,17 +1,4 @@
-﻿SetMenuTray() {
-    ; v1.1 cannot delete or rename standard items (Menu.htm), so the menu is
-    ; rebuilt to match the v2 layout: no Help, no Edit Script, "&Exit".
-    Menu, Tray, NoStandard
-    Menu, Tray, Add, &Open, TrayOpen
-    Menu, Tray, Add, &Window Spy, TrayWindowSpy
-    Menu, Tray, Add, Reload This &Script, TrayReload
-    Menu, Tray, Add, &Suspend Hotkeys, TraySuspend
-    Menu, Tray, Add, &Pause Script, TrayPause
-    Menu, Tray, Add, E&xit, TrayExit
-    Menu, Tray, Icon, %A_ScriptDir%\Assets\AHK.ico
-}
-
-TrayOpen:
+﻿TrayOpen:
     ListLines ; Shows the script's main window.
 return
 
@@ -45,3 +32,16 @@ return
 TrayExit:
     ExitApp
 return
+
+SetMenuTray() {
+    ; v1.1 cannot delete or rename standard items (Menu.htm), so the menu is
+    ; rebuilt to match the v2 layout: no Help, no Edit Script, "&Exit".
+    Menu, Tray, NoStandard
+    Menu, Tray, Add, &Open, TrayOpen
+    Menu, Tray, Add, &Window Spy, TrayWindowSpy
+    Menu, Tray, Add, Reload This &Script, TrayReload
+    Menu, Tray, Add, &Suspend Hotkeys, TraySuspend
+    Menu, Tray, Add, &Pause Script, TrayPause
+    Menu, Tray, Add, E&xit, TrayExit
+    Menu, Tray, Icon, %A_ScriptDir%\Assets\AHK.ico
+}
