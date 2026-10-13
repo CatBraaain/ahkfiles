@@ -1,4 +1,4 @@
-﻿#Include %A_ScriptDir%\Utils.ahk
+﻿#Include %A_ScriptDir%\Modules\Utils.ahk
 
 SetupHotClick() {
     global Coords

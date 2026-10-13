@@ -1,4 +1,4 @@
-﻿#Include %A_ScriptDir%\WinHook.ahk
+﻿#Include %A_ScriptDir%\Modules\WinHook.ahk
 
 AutoHankaku() {
     global HSHELL_WINDOWACTIVATED, HSHELL_RUDEAPPACTIVATED

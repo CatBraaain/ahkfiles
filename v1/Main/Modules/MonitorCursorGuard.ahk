@@ -1,4 +1,4 @@
-﻿#Include %A_ScriptDir%\WinHook.ahk
+﻿#Include %A_ScriptDir%\Modules\WinHook.ahk
 
 ^!c:: {
     static shouldClipCursor := true
