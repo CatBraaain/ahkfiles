@@ -10,8 +10,8 @@ if not A_IsAdmin {
 
 #Include %A_ScriptDir%\..\Env.ahk
 
-InstallKeybdHook
-InstallMouseHook
+#InstallKeybdHook
+#InstallMouseHook
 A_HotkeyInterval := 2000
 A_MaxHotkeysPerInterval := 200
 Process, Priority,, Realtime
@@ -22,7 +22,7 @@ SetNumLockState, AlwaysOn
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
 SetDefaultMouseSpeed, 0
-KeyHistory, 100
+#KeyHistory 100
 
 ; Modules are included before hotkeys because in v1.1 the auto-execute
 ; section ends at the first hotkey definition.
