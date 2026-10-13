@@ -116,9 +116,6 @@
     l:: Send("{Numpad9}")
     `;:: Send("{Numpad0}")
 
-#HotIf WinActive("ahk_exe mstsc.exe")
-    vk14:: Send("{vkF3}")
-
 #HotIf !WinActive("ahk_exe mstsc.exe")
     F1::Backspace
     F2::Enter
