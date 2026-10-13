@@ -1,12 +1,14 @@
 # AGENTS.md
 
-このリポジトリを編集するエージェント向けの指針。Windows デスクトップ用の AutoHotkey v2 スクリプトを対象とし、編集・起動・停止・検証の判断に必要な情報をまとめる。
+このリポジトリを編集するエージェント向けの指針。Windows デスクトップ用の AutoHotkey スクリプトを対象とし、編集・起動・停止・検証の判断に必要な情報をまとめる。v2 がリポジトリ本体、`v1/` 配下が v1.1 版である。
 
 ## 言語とリファレンス
 
-- 対象は AutoHotkey `>=2.0 <3.0`。使用中の正確な版・32/64bit は実行前に確認し、v1 の構文や API を混ぜない。
-- AHK の処理を変更するときは、変更対象の構文・関数・ディレクティブについて [v2 公式リファレンス](https://www.autohotkey.com/docs/v2/)を読む。引数、戻り値、コールバックの契約、適用される版の制約を確認する。構文の入口は [Language](https://www.autohotkey.com/docs/v2/Language.htm)。全文を毎回読む必要はない。
-- 公式ページを取得できない場合はその旨を報告する。仕様上の不確実性が変更の正しさに影響する場合は、手元の v2 ヘルプなどで確認するか、確認できるまでその変更を止める。記憶や既存コードだけを仕様の根拠にしない。
+- リポジトリ本体は AutoHotkey `>=2.0 <3.0`、`v1/` 配下は AutoHotkey `v1.1` を対象とする。使用中の正確な版・32/64bit は実行前に確認し、v1 と v2 の構文や API を混ぜない。
+- AHK の処理を変更するときは、変更対象の構文・関数・ディレクティブについて対応する版の公式リファレンスを読む: 本体は [v2](https://www.autohotkey.com/docs/v2/)、`v1/` 配下は [v1](https://www.autohotkey.com/docs/v1/)。引数、戻り値、コールバックの契約、適用される版の制約を確認する。構文の入口は [Language](https://www.autohotkey.com/docs/v2/Language.htm)（v1 は [Scripting Language](https://www.autohotkey.com/docs/v1/Language.htm)）。全文を毎回読む必要はない。
+- 公式ページを取得できない場合はその旨を報告する。仕様上の不確実性が変更の正しさに影響する場合は、手元の該当版ヘルプなどで確認するか、確認できるまでその変更を止める。記憶や既存コードだけを仕様の根拠にしない。
+- `v1/` 配下の追加規則: `.ahk` は UTF-8 BOM 付きで保存する（[BOM がないと ANSI codepage で解釈される](https://www.autohotkey.com/docs/v1/Scripts.htm#cp)）。相対 `#Include` はメインスクリプトのディレクトリ基準であり、ファイル相対には `%A_LineFile%\..` を使う（[#Include](https://www.autohotkey.com/docs/v1/lib/_Include.htm)）。`ahkcheck` は v2 専用のため `v1/` 配下には使えない。v1.1 の auto-execute は最初のホットキー定義で終了するため、Main は Modules を HotKeys より先に include し、ホットキー定義より後のトップレベル文は実行されない点に注意する。
+- `v1/` は本体と独立に更新する。v2 側の変更を `v1/` へ反映するかは都度判断する。
 
 ## 変更対象の探し方
 
@@ -24,6 +26,7 @@
 | フックと配列拡張 | Main/Modules/WinHook.ahk、Main/Modules/ArrayExtension.ahk |
 | トレイ・クリック補助 | Main/Modules/MenuTray.ahk、Main/Modules/HotClick.ahk |
 | 独立した画面オフ用スクリプト | ScreenLock/ScreenLock.ahk |
+| v1 版の入口 | v1/Main/Main.ahk、v1/ScreenLock/ScreenLock.ahk |
 | 個人設定の契約 | Env.ahk.example |
 
 ## 編集時の境界
@@ -35,7 +38,7 @@
 - ウィンドウタイトルは Main で RegEx モードに設定される。正規表現、日本語、en/em dash、IME 用仮想キーを見た目の類似だけで置換しない。新しいコード・コメントは英語で書き、既存の照合対象や送信文字列は動作上必要な値を維持する。
 - 相対 include と Main/Assets/AHK.ico の参照を保つ。Main はルートの Env.ahk の `EMAIL` を利用する。Env.ahk は Git 管理外で新しい checkout に引き継がれないため、必要なら所有者に Env.ahk.example に沿った準備を依頼する。ScreenLock はこの設定を参照しない。
 - 個人設定は必要性と許可を確認せず読み取り・上書き・別 checkout へのコピーをしない。設定項目の追加時は Env.ahk.example にダミー値で契約を反映し、個人値を文書やコミットへ含めない。
-- 保存形式は対象ファイルに合わせる。現状の追跡テキストは LF、Main/Main.ahk は UTF-8 BOM 付き。一括した BOM・改行変換は行わない。AHK++ の既存整形設定は .vscode/settings.json にある。
+- 保存形式は対象ファイルに合わせる。現状の追跡テキストは LF、Main/Main.ahk と v1/ 配下の .ahk は UTF-8 BOM 付き。一括した BOM・改行変換は行わない。AHK++ の既存整形設定は .vscode/settings.json にある。
 
 ## 実行前の確認
 
@@ -48,7 +51,7 @@ Main/Main.ahk と ScreenLock/ScreenLock.ahk は独立した入口であり、Mai
 
 実行前に次を確認する。
 
-- 対象 checkout と Windows 側のスクリプトパス、使用する v2 実行ファイル・版・32/64bit、管理者権限・UIAccess の要否。これらはリポジトリでは確定していない。`.ahk` の関連付けだけで v2 と判断しない。
+- 対象 checkout と Windows 側のスクリプトパス、使用する AHK 実行ファイル・版・32/64bit（v1 は Unicode/ANSI の区別も）、管理者権限・UIAccess の要否。これらはリポジトリでは確定していない。`.ahk` の関連付けだけで v2 と判断しない。
 - 変更に関係するキーボード配列・IME、アプリ、RDP、モニター配置・DPI、マウスの追加ボタンと期待する操作結果。
 - 停止手段と対象プロセスの識別方法。両入口の `#SingleInstance Force` により既存インスタンスが置き換わる可能性も考慮し、起動・確認操作・副作用について所有者の承認を得る。
 
