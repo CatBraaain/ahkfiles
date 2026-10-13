@@ -10,7 +10,7 @@ ToggleCursorGuard() {
 
 AutoMonitorCursorGuard(enable := true) {
     global HSHELL_WINDOWACTIVATED, HSHELL_MONITORCHANGED, HSHELL_RUDEAPPACTIVATED
-    static cursorGuardHook
+    static cursorGuardHook := ""
     if (cursorGuardHook = "") {
         cursorGuardHook := ShellHook([HSHELL_WINDOWACTIVATED, HSHELL_MONITORCHANGED, HSHELL_RUDEAPPACTIVATED], Func("SetMonitorCursorGuard"))
     }

@@ -118,7 +118,9 @@
     F2::Enter
     F3::Delete
 
-    !vk14::IsTenkeyMode := !IsTenkeyMode
+    !vk14::
+        IsTenkeyMode := !IsTenkeyMode
+    return
     vk14::Send, {vkF3} ; vk14 is CapsLock, vkF3 is ime-toggle
 
     ~LAlt::

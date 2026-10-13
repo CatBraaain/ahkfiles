@@ -101,7 +101,9 @@
         Send, m
     return
     LShift::c
-    ~3::lastWeapon := 3
+    ~3::
+        lastWeapon := 3
+    return
     *q::
         ToggleWeapon()
         KeyWait, q

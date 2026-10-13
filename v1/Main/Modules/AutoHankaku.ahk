@@ -1,6 +1,6 @@
 ﻿AutoHankaku() {
     global HSHELL_WINDOWACTIVATED, HSHELL_RUDEAPPACTIVATED
-    static hankakuHook
+    static hankakuHook := ""
     if (hankakuHook = "") {
         hankakuHook := ShellHook([HSHELL_WINDOWACTIVATED, HSHELL_RUDEAPPACTIVATED], Func("SendImeOffWhenActive"))
         hankakuHook.Enables(true)
@@ -11,7 +11,7 @@
 ; Sending right away can land the key on the old window and cancel the
 ; switch, so wait until the announced window is actually active first.
 SendImeOffWhenActive(hwnd) {
-    static latestHwnd
+    static latestHwnd := ""
     latestHwnd := hwnd
     ; WinWaitActive returns as soon as the window activates (no fixed delay).
     ; The 1s timeout only cleans up switches that never complete.
