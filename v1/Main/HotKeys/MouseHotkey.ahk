@@ -11,8 +11,10 @@ return
 XButton2 Up::
     Send, {LButton Up}{LCtrl Up}
     CoordMode, Mouse, Screen
-    MouseGetPos, MouseX, MouseY
-    if (0 <= MouseX && MouseX <= A_ScreenWidth && 0 <= MouseY && MouseY <= A_ScreenHeight) {
+    ; Label-level variables are global in v1.1; the hk prefix avoids clashing
+    ; with MouseX/MouseY locals inside functions (LocalSameAsGlobal warning).
+    MouseGetPos, hkMouseX, hkMouseY
+    if (0 <= hkMouseX && hkMouseX <= A_ScreenWidth && 0 <= hkMouseY && hkMouseY <= A_ScreenHeight) {
         ClipCursor(true, 0, 0, A_ScreenWidth, A_ScreenHeight)
     } else {
         ClipCursor(false, 0, 0, 0, 0)
