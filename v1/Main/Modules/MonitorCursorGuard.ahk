@@ -1,10 +1,11 @@
 ﻿#Include %A_ScriptDir%\Modules\WinHook.ahk
 
-^!c:: {
-    static shouldClipCursor := true
-    shouldClipCursor := !shouldClipCursor
-    AutoMonitorCursorGuard(shouldClipCursor)
-}
+^!c::
+    ToggleCursorGuard() {
+        static shouldClipCursor := true
+        shouldClipCursor := !shouldClipCursor
+        AutoMonitorCursorGuard(shouldClipCursor)
+    }
 
 AutoMonitorCursorGuard(enable := true) {
     global HSHELL_WINDOWACTIVATED, HSHELL_MONITORCHANGED, HSHELL_RUDEAPPACTIVATED
