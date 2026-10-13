@@ -48,8 +48,11 @@ AutoHankaku()
 AutoReload()
 
 ; Initialized here because in v1.1 top-level assignments after the first
-; hotkey definition do not run at load time.
+; hotkey definition do not run at load time. The same applies to these two
+; variables that v2 initializes inside the HotKeys files.
 IsTenkeyMode := false
+ClickLoopFlag := 0
+lastWeapon := 0
 ; Moved from inside the HotKeys files because in v1.1 top-level statements
 ; between hotkey definitions do not run either.
 SetKeyDelay, 20

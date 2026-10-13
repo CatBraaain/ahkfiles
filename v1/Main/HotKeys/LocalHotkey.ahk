@@ -1,7 +1,4 @@
-﻿ClickLoopFlag := 0
-lastWeapon := 0
-
-#If WinActive(" - Visual Studio Code") or WinActive("ahk_exe Zed.exe")
+﻿#If WinActive(" - Visual Studio Code") or WinActive("ahk_exe Zed.exe")
     ^WheelLeft::Send, !{Left}
     ^WheelRight::Send, !{Right}
     ~^g::Send, {vk1D}
