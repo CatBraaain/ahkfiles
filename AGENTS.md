@@ -27,7 +27,7 @@
 | トレイ・クリック補助 | Main/Modules/MenuTray.ahk、Main/Modules/HotClick.ahk |
 | 独立した画面オフ用スクリプト | ScreenLock/ScreenLock.ahk |
 | v1 版の入口 | v1/Main/Main.ahk、v1/ScreenLock/ScreenLock.ahk |
-| 個人設定の契約 | Env.ahk.example |
+| 個人設定の契約 | Env.ahk.example、v1/Env.ahk.example |
 
 ## 編集時の境界
 
