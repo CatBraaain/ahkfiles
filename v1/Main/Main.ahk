@@ -3,6 +3,9 @@
 #SingleInstance Force
 #UseHook
 #Warn All
+#Persistent
+SetBatchLines, -1
+ListLines, Off
 
 if not A_IsAdmin {
     ToolTipEx("WARNING: Not running as administrator.", 5000)
@@ -12,8 +15,9 @@ if not A_IsAdmin {
 
 #InstallKeybdHook
 #InstallMouseHook
-A_HotkeyInterval := 2000
-A_MaxHotkeysPerInterval := 200
+#HotkeyInterval 2000
+#MaxHotkeysPerInterval 200
+#KeyHistory 100
 Process, Priority,, Realtime
 DetectHiddenWindows, On
 SetWorkingDir, %A_ScriptDir%
@@ -22,10 +26,12 @@ SetNumLockState, AlwaysOn
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
 SetDefaultMouseSpeed, 0
-#KeyHistory 100
 
 ; Modules are included before hotkeys because in v1.1 the auto-execute
-; section ends at the first hotkey definition.
+; section ends at the first hotkey definition. Each file is included exactly
+; once from here instead of including dependencies from each file.
+#Include %A_ScriptDir%\Modules\WinHook.ahk
+#Include %A_ScriptDir%\Modules\Utils.ahk
 #Include %A_ScriptDir%\Modules\ClipboardHistory.ahk
 #Include %A_ScriptDir%\Modules\AutoHankaku.ahk
 #Include %A_ScriptDir%\Modules\HotClick.ahk
@@ -43,6 +49,8 @@ AutoReload()
 ; Initialized here because in v1.1 top-level assignments after the first
 ; hotkey definition do not run at load time.
 IsTenkeyMode := false
+; Moved from inside the HotKeys files because in v1.1 top-level statements
+; between hotkey definitions do not run either.
 SetKeyDelay, 20
 
 #Include %A_ScriptDir%\HotKeys\LocalHotkey.ahk

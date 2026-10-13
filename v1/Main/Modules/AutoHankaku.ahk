@@ -1,6 +1,4 @@
-﻿#Include %A_ScriptDir%\Modules\WinHook.ahk
-
-AutoHankaku() {
+﻿AutoHankaku() {
     global HSHELL_WINDOWACTIVATED, HSHELL_RUDEAPPACTIVATED
     static hankakuHook
     if (hankakuHook = "") {

@@ -1,9 +1,7 @@
-﻿#Include %A_ScriptDir%\Modules\Utils.ahk
-
-SetupHotClick() {
+﻿SetupHotClick() {
     global Coords
     Coords := {}
-    loop 26 {
+    Loop, 26 {
         Hotkey, % "^!" . Chr(A_Index + 96), SetHotClickOnCurrentPlace
         Hotkey, % "^+!" . Chr(A_Index + 96), UnsetHotClick
     }

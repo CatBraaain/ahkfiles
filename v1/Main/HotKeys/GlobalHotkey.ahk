@@ -1,12 +1,9 @@
-﻿#Include %A_ScriptDir%\Modules\Utils.ahk
-#Include %A_ScriptDir%\..\Env.ahk
-
-; https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
-#HotIf !WinActive("ahk_exe mstsc.exe") && !IsGameWindow()
+﻿; https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
+#If !WinActive("ahk_exe mstsc.exe") && !IsGameWindow()
     [::Send, {-}
     ]::Send, {BS}
     `;::return
-    '::Send, ``;
+    '::Send, {`;}
     `; & q::Send, {Q}
     `; & w::Send, {W}
     `; & e::Send, {E}
@@ -45,12 +42,12 @@
     9::Send, {Numpad9}
     0::Send, {Numpad0}
 
-#HotIf !WinActive("ahk_exe mstsc.exe") && !IsGameWindow() and GetKeyState("Shift", "P")
+#If !WinActive("ahk_exe mstsc.exe") && !IsGameWindow() and GetKeyState("Shift", "P")
     +1::Send, {!}
     +2::Send, {@}
     +3::Send, {#}
     +4::Send, {$}
-    +5::Send, ``%
+    +5::Send, {`%}
     +6::Send, {^}
     +7::Send, {&}
     +8::Send, {*}
@@ -64,8 +61,8 @@
     +y::Send, {}}
     +u::Send, {[}
     +i::Send, {]}
-    +o::Send, "
-    +p::Send, '
+    +o::Send, {"}
+    +p::Send, {'}
     +[::Send, {_}
     +]::Send, {BS}
     +a::Send, ^{Left}
@@ -81,7 +78,7 @@
     +z::Send, {Click}
     +x::Send, {BS}
     +c::Send, {Enter}
-    +v::Send, ``%
+    +v::Send, {`%}
     +b::Send, {^}
     +n::Send, {&}
     +m::Send, {*}
@@ -104,7 +101,7 @@
     +!Down::Send, +{PgDn}
     +!Right::Send, +{End}
 
-#HotIf !WinActive("ahk_exe mstsc.exe") && IsTenkeyMode
+#If !WinActive("ahk_exe mstsc.exe") && IsTenkeyMode
     a::Send, {Numpad1}
     s::Send, {Numpad2}
     d::Send, {Numpad3}
@@ -116,7 +113,7 @@
     l::Send, {Numpad9}
     `;::Send, {Numpad0}
 
-#HotIf !WinActive("ahk_exe mstsc.exe")
+#If !WinActive("ahk_exe mstsc.exe")
     F1::Backspace
     F2::Enter
     F3::Delete
@@ -167,4 +164,4 @@
     return
     #InputLevel 0
 
-#HotIf
+#If

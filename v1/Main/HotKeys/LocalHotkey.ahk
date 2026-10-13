@@ -1,9 +1,7 @@
-﻿#Include %A_ScriptDir%\Modules\Utils.ahk
-
-ClickLoopFlag := 0
+﻿ClickLoopFlag := 0
 lastWeapon := 0
 
-#HotIf WinActive(" - Visual Studio Code") or WinActive("ahk_exe Zed.exe")
+#If WinActive(" - Visual Studio Code") or WinActive("ahk_exe Zed.exe")
     ^WheelLeft::Send, !{Left}
     ^WheelRight::Send, !{Right}
     ~^g::Send, {vk1D}
@@ -15,11 +13,11 @@ lastWeapon := 0
     ~!a::return
     ~!+a::return
 
-#HotIf WinActive(" – GIMP")
+#If WinActive(" – GIMP")
     ^Tab::Send, {.}
     ^+Tab::Send, {`,}
 
-#HotIf WinActive("diep.io - Google Chrome") or WinActive("arras.io - Google Chrome")
+#If WinActive("diep.io - Google Chrome") or WinActive("arras.io - Google Chrome")
     ^s::return
     q::e
 
@@ -30,7 +28,7 @@ lastWeapon := 0
     LAlt & s::!s
     LAlt & d::!d
 
-#HotIf WinActive("diep.io - Google Chrome")
+#If WinActive("diep.io - Google Chrome")
     ~LAlt::
         SendEvent, {m Up}
         ToolTip, % "F1::12277707 overload,hybrid"
@@ -42,13 +40,26 @@ lastWeapon := 0
         ToolTip
     return
 
+    ; SetKeyDelay is applied from the auto-execute section in v1.1 (Main.ahk),
+    ; because top-level statements between hotkeys never run here.
+    DiepStatus(inputstr) {
+        Sleep, 50
+        str := "{Blind}{U Down}"
+        Loop, Parse, inputstr
+        {
+            str .= A_LoopField . "0"
+        }
+        str .= "{U Up}"
+        SendEvent, %str%
+        SendEvent, {m Down}{l Down}
+    }
     <!F1::DiepStatus("565688888885656565656444444432132") ; 12277707 overload,hybrid
     <!F2::DiepStatus("565688888885675675675675677713232") ; 12207777 rocketeer,tritrapper
     <!F3::DiepStatus("565688888885656565656444444777777") ; 00067767 triplet
     <!F4::DiepStatus("565688888565656565677777774444432") ; 01157775 sprayer,spread
     <!F5::DiepStatus("565688888885656565656444444477777") ; 00077757 sniper
 
-#HotIf WinActive("arras.io - Google Chrome")
+#If WinActive("arras.io - Google Chrome")
     ~LAlt::
         SendEvent, {m Up}
         ToolTip, % "F1::3309999000"
@@ -68,13 +79,13 @@ lastWeapon := 0
     <!F5::SendEvent, {3 4}{4 8}{5 8}{6 8}{7 9}{8 5} 	; 0048889500
     <!F6::SendEvent, {3 3}{4 9}{5 9}{6 9}{7 9}{8 3} 	; 0039999300
 
-#HotIf WinActive("JigsawPuzzles.io - Google Chrome")
+#If WinActive("JigsawPuzzles.io - Google Chrome")
     a::Left
     w::Up
     s::Down
     d::Right
 
-#HotIf WinActive("Tanks 3D - Google Chrome")
+#If WinActive("Tanks 3D - Google Chrome")
     q::
         Send, m
         KeyWait, q
@@ -86,7 +97,7 @@ lastWeapon := 0
         Send, m
     return
 
-#HotIf WinActive("Redcoats.io - Google Chrome|Salty Seas - Google Chrome")
+#If WinActive("Redcoats.io - Google Chrome|Salty Seas - Google Chrome")
     Tab::
         Send, m
         KeyWait, Tab
@@ -113,7 +124,7 @@ lastWeapon := 0
         }
     }
 
-#HotIf WinActive("ahk_exe chrome.exe")
+#If WinActive("ahk_exe chrome.exe")
     ^t::
     ^l::
     ^n::
@@ -163,7 +174,7 @@ lastWeapon := 0
         }
         return
 
-#HotIf WinActive("ahk_exe chrome.exe") or ClickLoopFlag
+#If WinActive("ahk_exe chrome.exe") or ClickLoopFlag
     !RButton::
         ClickLoopFlag := 0
         ToolTip, !RButton
@@ -171,7 +182,7 @@ lastWeapon := 0
         ToolTip
     return
 
-#HotIf IsGameWindow()
+#If IsGameWindow()
     ~1::return
     ~2::return
     ~3::return
@@ -232,7 +243,7 @@ lastWeapon := 0
     ~LAlt::return
     ~^Space::return
 
-#HotIf WinActive("Windows Sandbox")
+#If WinActive("Windows Sandbox")
     ~LAlt::return
 
-#HotIf
+#If

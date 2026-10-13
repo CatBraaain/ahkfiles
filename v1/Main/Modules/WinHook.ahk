@@ -1,19 +1,24 @@
-﻿ShellHookMsgId := DllCall("RegisterWindowMessage", "Str", "SHELLHOOK", "UInt")
+﻿#Include %A_ScriptDir%\Modules\ArrayExtension.ahk
+
+ShellHookMsgId := DllCall("RegisterWindowMessage", "Str", "SHELLHOOK", "UInt")
 DllCall("RegisterShellHookWindow", "UInt", A_ScriptHwnd)
 
 class ShellHookCallback {
     __New(Events, Callback) {
         this.Events := Events
         this.Callback := Callback
-        OnExit(this.Shutdown.Bind(this))
+        ; Bind the handler with ObjBindMethod (the documented v1.1 pattern) so
+        ; that Enables() can unregister the exact same BoundFunc object.
+        this.BoundProc := ObjBindMethod(this, "HandleMessage")
+        OnExit(ObjBindMethod(this, "Shutdown"))
     }
 
-    Shutdown(self) {
-        self.Enables(false)
+    Shutdown(Reason) {
+        this.Enables(false)
         return ""
     }
 
-    Call(wParam, lParam, msg, hwnd) {
+    HandleMessage(wParam, lParam, msg, hwnd) {
         winQuery := "ahk_id " . lParam
         WinGetTitle, winTitle, %winQuery%
         if (ErrorLevel) {
@@ -33,7 +38,7 @@ class ShellHookCallback {
 
     Enables(enable := true) {
         global ShellHookMsgId
-        OnMessage(ShellHookMsgId, this, enable ? 1 : 0)
+        OnMessage(ShellHookMsgId, this.BoundProc, enable ? 1 : 0)
     }
 }
 

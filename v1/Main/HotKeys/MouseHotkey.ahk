@@ -1,7 +1,4 @@
-﻿#Include %A_ScriptDir%\Modules\Utils.ahk
-#Include %A_ScriptDir%\Modules\MonitorCursorGuard.ahk
-
-XButton1::
+﻿XButton1::
     Send, ^w
     CloseSaveDialog()
 return

@@ -1,11 +1,12 @@
-﻿#Include %A_ScriptDir%\Modules\WinHook.ahk
+﻿^!c::
+    ToggleCursorGuard()
+return
 
-^!c::
-    ToggleCursorGuard() {
-        static shouldClipCursor := true
-        shouldClipCursor := !shouldClipCursor
-        AutoMonitorCursorGuard(shouldClipCursor)
-    }
+ToggleCursorGuard() {
+    static shouldClipCursor := true
+    shouldClipCursor := !shouldClipCursor
+    AutoMonitorCursorGuard(shouldClipCursor)
+}
 
 AutoMonitorCursorGuard(enable := true) {
     global HSHELL_WINDOWACTIVATED, HSHELL_MONITORCHANGED, HSHELL_RUDEAPPACTIVATED
@@ -33,19 +34,20 @@ SetMonitorCursorGuard(hwnd) {
 
 GetActiveMonitorIndex() {
     SysGet, monitorCount, MonitorCount
-    loop %monitorCount% {
+    Loop, %monitorCount% {
         MonitorGetCoords(A_Index, left, top, right, bottom)
         WinGetPos, x, y, w, h, A
         if (ErrorLevel) {
             continue
         }
         center := {"x": x + w / 2, "y": y + h / 2}
-        isWindowCenterInMonitor := (
-            left <= center["x"]
+        ; v1.1 continues an expression only when the next line starts with an
+        ; operator such as && or ||, so keep each continuation line prefixed.
+        isWindowCenterInMonitor := true
+            && left <= center["x"]
             && center["x"] <= right
             && top <= center["y"]
             && center["y"] < bottom
-        )
         if (isWindowCenterInMonitor) {
             return A_Index
         }
