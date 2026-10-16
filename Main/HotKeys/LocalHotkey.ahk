@@ -149,21 +149,6 @@ ClickLoopFlag := 0
     ^+b:: Send("^+o") ; bookmark manager
     ~^r:: CloseSaveDialog()
 
-    ^s:: {
-        A_Clipboard := ""
-        Send("^c")
-        Send("^t")
-        ClipWait()
-        Send("^v{Enter}")
-    }
-
-    ^+s:: {
-        Send("^t")
-        Send("{vk1D}")
-        Send("chrome://settings/searchEngines")
-        Send("{Enter}")
-    }
-
     F7:: return ; Disables cursor browsing
 
     !LButton:: {
